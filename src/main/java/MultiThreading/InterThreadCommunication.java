@@ -50,10 +50,12 @@ public class InterThreadCommunication {
 
         Thread thread1 = new Thread(() -> {
             customer.withDraw(95000);
+        });
+        Thread thread2 = new Thread(() -> {
             customer.deposite(20000);
         });
-
         executor.execute(thread1);
+        executor.execute(thread2);
 
         executor.shutdown();
 
