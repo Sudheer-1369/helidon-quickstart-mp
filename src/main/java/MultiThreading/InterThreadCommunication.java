@@ -1,21 +1,25 @@
-package MultiThreading;
+/*
+ * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
+ */
 
+package MultiThreading;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-class Customer{
+class Customer {
     private int amount;
 
     public Customer(int amount) {
         this.amount = amount;
     }
 
-    public synchronized void withDraw(int amount){
+    public synchronized void withDraw(int amount) {
 
         System.out.println("Ready to withDraw");
 
-        if (this.amount<amount){
+        if (this.amount < amount) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -25,7 +29,7 @@ class Customer{
         System.out.println("Amount withdrawn");
     }
 
-    public synchronized void deposite(int amount){
+    public synchronized void deposite(int amount) {
 
         System.out.println("Ready to deposit the money");
 
@@ -35,7 +39,8 @@ class Customer{
     }
 
 }
-public class InterThreadCommunication{
+
+public class InterThreadCommunication {
 
     static Customer customer = new Customer(50000);
 
@@ -43,15 +48,24 @@ public class InterThreadCommunication{
 
         ExecutorService executor = Executors.newCachedThreadPool();
 
-        Thread thread1 = new Thread(()->{
+        Thread thread1 = new Thread(() -> {
             customer.withDraw(95000);
         });
-        Thread thread2 = new Thread(()->{
+        Thread thread2 = new Thread(() -> {
             customer.deposite(20000);
         });
         executor.execute(thread1);
         executor.execute(thread2);
 
         executor.shutdown();
+
+        try {
+            if (executor.awaitTermination(10, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executor.shutdown();
+            Thread.currentThread().interrupt();
+        }
     }
 }
