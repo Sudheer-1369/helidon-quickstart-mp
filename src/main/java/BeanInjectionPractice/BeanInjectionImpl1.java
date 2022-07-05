@@ -4,6 +4,9 @@
 
 package BeanInjectionPractice;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class BeanInjectionImpl1 implements BeanInjection {
 
     @Override
