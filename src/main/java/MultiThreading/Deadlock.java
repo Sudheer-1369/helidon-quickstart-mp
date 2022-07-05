@@ -40,8 +40,8 @@ class Shared {
 
 
 class Threadx1 extends Thread {
-    private Shared s1;
-    private Shared s2;
+    private final Shared s1;
+    private final Shared s2;
 
 
     public Threadx1(Shared s1, Shared s2) {
@@ -60,8 +60,8 @@ class Threadx1 extends Thread {
 
 
 class Threadx2 extends Thread {
-    private Shared s1;
-    private Shared s2;
+    private final Shared s1;
+    private final Shared s2;
 
 
     public Threadx2(Shared s1, Shared s2) {

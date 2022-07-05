@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class RebalanceListner implements ConsumerRebalanceListener {
 
-    private KafkaConsumer consumer;
-    private Map<TopicPartition, OffsetAndMetadata> currentOffSets = new HashMap<>();
+    private final KafkaConsumer consumer;
+    private final Map<TopicPartition, OffsetAndMetadata> currentOffSets = new HashMap<>();
 
     public RebalanceListner(KafkaConsumer consumer) {
         this.consumer = consumer;

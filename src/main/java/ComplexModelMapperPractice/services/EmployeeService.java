@@ -9,6 +9,6 @@ import ComplexModelMapperPractice.models.Employee;
 
 public interface EmployeeService {
 
-    public Employee updateEmployee(Employee employee) throws DaoException;
+    Employee updateEmployee(Employee employee) throws DaoException;
 
 }

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 class MultiThreadDemoT extends Thread {
 
-    private int i;
+    private final int i;
 
     MultiThreadDemoT(int i) {
         this.i = i;

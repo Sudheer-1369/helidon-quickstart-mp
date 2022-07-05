@@ -15,6 +15,6 @@ public class InterceptorTest {
     @Test
     public void testInterceptor() throws Exception {
 
-        interceptorCheck.divide(1,0);
+        interceptorCheck.divide(1, 0);
     }
 }

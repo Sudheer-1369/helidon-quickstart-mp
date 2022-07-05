@@ -23,16 +23,16 @@ public class StaticTest {
         StaticTest.i = i;
     }
 
+    public static int getTheNumber() {
+        return 10;
+    }
+
     public int getJ() {
         return j;
     }
 
     public void setJ(int j) {
         this.j = j;
-    }
-
-    public static int getTheNumber() {
-        return 10;
     }
 }
 

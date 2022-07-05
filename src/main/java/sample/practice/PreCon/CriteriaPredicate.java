@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CriteriaPredicate {
 
-    private static EntityManagerFactory entityManagerFactory;
+    private static final EntityManagerFactory entityManagerFactory;
     private static EntityManager entityManager;
 
     static {

@@ -11,19 +11,19 @@ import org.testcontainers.containers.KafkaContainer;
 
 public class KafkaContainerResolver implements ParameterResolver {
 
-  @Override
-  public boolean supportsParameter(
-      ParameterContext parameterContext, ExtensionContext extensionContext)
-      throws ParameterResolutionException {
+    @Override
+    public boolean supportsParameter(
+            ParameterContext parameterContext, ExtensionContext extensionContext)
+            throws ParameterResolutionException {
 
-    return parameterContext.getParameter().getType() == KafkaContainer.class;
-  }
+        return parameterContext.getParameter().getType() == KafkaContainer.class;
+    }
 
-  @Override
-  public Object resolveParameter(
-      ParameterContext parameterContext, ExtensionContext extensionContext)
-      throws ParameterResolutionException {
+    @Override
+    public Object resolveParameter(
+            ParameterContext parameterContext, ExtensionContext extensionContext)
+            throws ParameterResolutionException {
 
-    return KafkaContainerExtension.kafkaContainer;
-  }
+        return KafkaContainerExtension.kafkaContainer;
+    }
 }

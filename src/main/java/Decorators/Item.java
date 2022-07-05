@@ -17,7 +17,7 @@ public interface Item {
     @Decorator
     abstract class ItemDecorator implements Item {
 
-        private Item item;
+        private final Item item;
 
         @Inject
         protected ItemDecorator(@Delegate Item item) {

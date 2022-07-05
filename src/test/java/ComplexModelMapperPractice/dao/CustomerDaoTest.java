@@ -13,7 +13,7 @@ public class CustomerDaoTest {
     private CustomerDao customerDao;
 
     @Test
-    public void testEntitManager() throws DaoException{
+    public void testEntitManager() throws DaoException {
         customerDao.printEntityManager();
     }
 

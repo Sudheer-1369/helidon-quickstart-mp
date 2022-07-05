@@ -4,9 +4,9 @@
 
 package MultiThreading.ThreadInterception;
 
-class Interception1 implements Runnable{
+class Interception1 implements Runnable {
 
-    public void run(){
+    public void run() {
         System.out.println("Inside the Interception1 thread");
         try {
             Thread.sleep(1000);
@@ -15,13 +15,14 @@ class Interception1 implements Runnable{
         }
     }
 }
+
 public class SleepInterception {
 
     public static void main(String[] args) {
         Thread thread = new Thread(new Interception1());
         thread.start();
         thread.interrupt();
-        System.out.println(Thread.currentThread().getPriority()+"----"+ thread.getPriority());
+        System.out.println(Thread.currentThread().getPriority() + "----" + thread.getPriority());
         System.out.println("Inside the sleepInterception main method");
     }
 }
