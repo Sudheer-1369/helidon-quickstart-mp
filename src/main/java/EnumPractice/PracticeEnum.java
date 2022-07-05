@@ -16,6 +16,8 @@ enum OrderByDirection {
     greater(">"),
     lesser("<");
 
+    public static final Map<String, OrderByDirection> LOOKUP =
+            EnumSet.allOf(OrderByDirection.class).stream().collect(Collectors.toMap(OrderByDirection::getOper, Function.identity()));
     private final String oper;
 
     OrderByDirection(String oper) {
@@ -25,9 +27,6 @@ enum OrderByDirection {
     public String getOper() {
         return oper;
     }
-
-    public static final Map<String, OrderByDirection> LOOKUP =
-            EnumSet.allOf(OrderByDirection.class).stream().collect(Collectors.toMap(OrderByDirection::getOper, Function.identity()));
 //            EnumSet.allOf(OrderByDirection.class).stream()
 //                    .collect(Collectors.toMap(OrderByDirection::getOper, Function.identity()));
 }

@@ -8,25 +8,28 @@ import org.eclipse.microprofile.config.spi.ConfigSource;
 import java.util.Collections;
 import java.util.Map;
 
-/** Flyweight to designate an empty config source. */
+/**
+ * Flyweight to designate an empty config source.
+ */
 public final class EmptyConfigSource implements ConfigSource {
 
-  static final ConfigSource EMPTY_CONFIG_SOURCE = new EmptyConfigSource();
+    static final ConfigSource EMPTY_CONFIG_SOURCE = new EmptyConfigSource();
 
-  @Override
-  public Map<String, String> getProperties() {
-    return Collections.emptyMap();
-  }
+    private EmptyConfigSource() {
+    }
 
-  @Override
-  public String getValue(String propertyName) {
-    return null;
-  }
+    @Override
+    public Map<String, String> getProperties() {
+        return Collections.emptyMap();
+    }
 
-  @Override
-  public String getName() {
-    return null;
-  }
+    @Override
+    public String getValue(String propertyName) {
+        return null;
+    }
 
-  private EmptyConfigSource() {}
+    @Override
+    public String getName() {
+        return null;
+    }
 }

@@ -20,7 +20,7 @@ public class StoreServiceImpl implements StoreService {
     @Inject
     private StoreDao storeDao;
 
-    private ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper = new ModelMapper();
 
     public Store getStoreById(final long id) throws DaoException {
         TraStore traStore = null;

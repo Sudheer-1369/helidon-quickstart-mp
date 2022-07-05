@@ -18,10 +18,9 @@ import javax.transaction.Transactional;
 @ApplicationScoped
 public class EmployeeServiceImpl implements EmployeeService {
 
+    ModelMapper mapper = new ModelMapper();
     @Inject
     private EmployeeDao employeeDao;
-
-    ModelMapper mapper = new ModelMapper();
 
     @Transactional
     public Employee updateEmployee(Employee employee) throws DaoException {

@@ -29,7 +29,7 @@ public class StoreDaoImpl implements StoreDao {
 
     private EntityManager entityManager;
 
-    private int pageSize = 2;
+    private final int pageSize = 2;
 
     {
         entityManagerFactory = Persistence.createEntityManagerFactory("ORCL");

@@ -50,14 +50,14 @@ public class SimpleExample {
         Assertions.setDescriptionConsumer(descriptor);
         BigInteger bigInteger = new BigInteger("123342");
         assertThat(bigInteger).as("Checking the bigInteger").isGreaterThan(new BigInteger("20000"));
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     @Test
     @DisplayName("Overriding an error message")
-    void testOverrideError(){
+    void testOverrideError() {
         String str = "Sudheer";
-        assertThat(str).withFailMessage("The name should be %s",str).isEqualTo("Mounika");
+        assertThat(str).withFailMessage("The name should be %s", str).isEqualTo("Mounika");
 
     }
 

@@ -22,14 +22,14 @@ import static org.apache.kafka.clients.admin.AdminClientConfig.BOOTSTRAP_SERVERS
 @ExtendWith(KafkaContainerExtension.class)
 class KafkaContainerExtensionTest {
 
-  @Test
-  @Disabled("enable to verify KafkaContainerExtension sanity")
-  @DisplayName("should be able to start Kafka container with some topics")
-  void kafkaWithTopics(KafkaContainer container) throws ExecutionException, InterruptedException {
+    @Test
+    @Disabled("enable to verify KafkaContainerExtension sanity")
+    @DisplayName("should be able to start Kafka container with some topics")
+    void kafkaWithTopics(KafkaContainer container) throws ExecutionException, InterruptedException {
 
-    try (var client =
-        AdminClient.create(Map.of(BOOTSTRAP_SERVERS_CONFIG, container.getBootstrapServers()))) {
-      Assertions.assertThat(client.listTopics().names().get()).contains("transmission.received");
+        try (var client =
+                     AdminClient.create(Map.of(BOOTSTRAP_SERVERS_CONFIG, container.getBootstrapServers()))) {
+            Assertions.assertThat(client.listTopics().names().get()).contains("transmission.received");
+        }
     }
-  }
 }

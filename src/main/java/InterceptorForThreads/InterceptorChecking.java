@@ -11,7 +11,7 @@ import javax.inject.Inject;
 class InterceptorCheckings {
 
     @AroundThread
-    public long divide()  {
+    public long divide() {
         return (long) 10 / 0;
     }
 }
@@ -20,7 +20,7 @@ class InterceptorCheckings {
  * This wont work that means the interceptor will not be invoked since
  * "Interceptors will only be invoked when the CDI bean method is called using its proxy" i.e an interceptor will only be invoked only when it is called from an injected bean.
  */
-public class InterceptorChecking{
+public class InterceptorChecking {
     @Inject
     private InterceptorCheckings checkings;
 

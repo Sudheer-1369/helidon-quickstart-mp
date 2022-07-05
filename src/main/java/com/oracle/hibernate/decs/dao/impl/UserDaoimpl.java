@@ -20,20 +20,21 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class UserDaoimpl implements UserDao {
 
-    private static Logger logger = Logger.getLogger(UserDaoimpl.class.getName());
+    private static final Logger logger = Logger.getLogger(UserDaoimpl.class.getName());
 
     //@PersistenceUnit(unitName = "ORCL")
     //EntityManagerFactory entityManagerFactory ;
     // @PersistenceContext(unitName = "ORCL", type = PersistenceContextType.TRANSACTION)
     // private EntityManager entityManager;
 
-    private static EntityManagerFactory entityManagerFactory;
-    // @PersistenceContext(unitName = "ORCL")
-    private EntityManager entityManager;
+    private static final EntityManagerFactory entityManagerFactory;
 
     static {
         entityManagerFactory = Persistence.createEntityManagerFactory("ORCL");
     }
+
+    // @PersistenceContext(unitName = "ORCL")
+    private EntityManager entityManager;
 
     @Transactional
     public void addUser(User user) throws DaoException {

@@ -9,6 +9,6 @@ import org.modelmapper.ModelMapper;
 
 public class CommonsUtil {
 
-    private ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper = new ModelMapper();
 
 }

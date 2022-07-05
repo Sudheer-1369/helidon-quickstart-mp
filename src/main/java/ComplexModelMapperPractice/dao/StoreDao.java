@@ -11,16 +11,16 @@ import java.util.List;
 
 public interface StoreDao {
 
-    public TraStore addStore(TraStore traStore) throws DaoException;
+    TraStore addStore(TraStore traStore) throws DaoException;
 
-    public TraStore getStoreById(long id) throws DaoException;
+    TraStore getStoreById(long id) throws DaoException;
 
-    public List<TraStore> getAllTraStores(int page, List<String> params) throws DaoException;
+    List<TraStore> getAllTraStores(int page, List<String> params) throws DaoException;
 
-    public TraStore getStoreByCode(String code) throws DaoException;
+    TraStore getStoreByCode(String code) throws DaoException;
 
-    public void updateStore(TraStore traStore) throws DaoException;
+    void updateStore(TraStore traStore) throws DaoException;
 
-    public void deleteStore(long id) throws DaoException;
+    void deleteStore(long id) throws DaoException;
 
 }

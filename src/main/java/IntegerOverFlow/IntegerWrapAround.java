@@ -14,15 +14,15 @@ public class IntegerWrapAround {
     public static void main(String[] args) {
 
         System.out.println("OverFlow can be seen here");
-        int max = Integer.MAX_VALUE-1;
-        for(int i =0;i<4;i++){
-            System.out.println(max+i);
+        int max = Integer.MAX_VALUE - 1;
+        for (int i = 0; i < 4; i++) {
+            System.out.println(max + i);
         }
 
         System.out.println("Underflow can be here");
-        int min = Integer.MIN_VALUE+1;
-        for(int i = 0 ;i<4;i++){
-            System.out.println(min-i);
+        int min = Integer.MIN_VALUE + 1;
+        for (int i = 0; i < 4; i++) {
+            System.out.println(min - i);
         }
 
         System.out.println(BigInteger.TEN);

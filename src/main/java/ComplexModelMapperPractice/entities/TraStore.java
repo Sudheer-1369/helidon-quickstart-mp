@@ -20,22 +20,18 @@ import java.util.List;
 @ApplicationScoped
 public class TraStore {
 
+    @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<TraEmployee> employeeList;
+    @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<TraCustomer> customerList;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private long id;
-
     @Column(name = "CODE")
     private String code;
-
     @Column(name = "STORELINE_NUMBER")
     private String storeLineNumber;
-
-    @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<TraEmployee> employeeList;
-
-    @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<TraCustomer> customerList;
 
     public String toString() {
         return "Store[id:" + id + ", code:" + code + ", storeLineNumber:" + storeLineNumber + "]";

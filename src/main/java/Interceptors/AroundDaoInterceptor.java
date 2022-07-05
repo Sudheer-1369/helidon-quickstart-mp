@@ -27,8 +27,7 @@ public class AroundDaoInterceptor {
         } catch (ArithmeticException e) {
             System.out.println("ArithmeticException is being handled");
             return 0L;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             return "Exception is Handled";
         }

@@ -19,12 +19,12 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddUser() throws DaoException {
-        logger.info("userDao Checking "+userDao);
+        logger.info("userDao Checking " + userDao);
 
-        User user1 = new User("Sudheer","Sudheerpatnana45", Date.valueOf("1997-09-04"));
-        User user2 = new User("Mounika","MounikaBhogi545",Date.valueOf("1998-05-18"));
-        User user3 = new User("Venkata Manikanta","VenkataManikanta99",Date.valueOf("1993-07-18"));
-        User user4 = new User("Patnana Manoja","ManojaPatnana63",Date.valueOf("1998-11-22"));
+        User user1 = new User("Sudheer", "Sudheerpatnana45", Date.valueOf("1997-09-04"));
+        User user2 = new User("Mounika", "MounikaBhogi545", Date.valueOf("1998-05-18"));
+        User user3 = new User("Venkata Manikanta", "VenkataManikanta99", Date.valueOf("1993-07-18"));
+        User user4 = new User("Patnana Manoja", "ManojaPatnana63", Date.valueOf("1998-11-22"));
 
         userDao.addUser(user1);
         userDao.addUser(user2);

@@ -9,7 +9,7 @@ import javax.inject.Inject;
 @HelidonTest
 public class DecoratorTest {
 
-    private Item item;
+    private final Item item;
 
     @Inject
     public DecoratorTest(Item item) {
@@ -17,12 +17,12 @@ public class DecoratorTest {
     }
 
     @Test
-    public void testDecorator(){
+    public void testDecorator() {
         item.fetch(1);
     }
 
     @Test
-    public void testDraw(){
-        item.draw(0,1);
+    public void testDraw() {
+        item.draw(0, 1);
     }
 }

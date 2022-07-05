@@ -17,7 +17,7 @@ public class BeanInjectionPracticeTest {
      * implementing class to inject in such cases we should not use the interface for the injection use the implementing class for injection
      */
     @Test
-    public void testBeanInjection(){
+    public void testBeanInjection() {
         beanInjection.addBean();
     }
 }

@@ -34,6 +34,7 @@ class Mthread implements Runnable {
 
     }
 }
+
 public class ThreadPoolPractice2 {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {

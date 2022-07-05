@@ -11,18 +11,18 @@ import java.util.List;
 
 public interface CustomerDao {
 
-    public void printEntityManager() throws DaoException;
+    void printEntityManager() throws DaoException;
 
-    public TraCustomer addCustomer(TraCustomer traCustomer) throws DaoException;
+    TraCustomer addCustomer(TraCustomer traCustomer) throws DaoException;
 
-    public TraCustomer getCustomerById(long id) throws DaoException;
+    TraCustomer getCustomerById(long id) throws DaoException;
 
-    public List<TraCustomer> getCustomersByFirstName(String firstName) throws DaoException;
+    List<TraCustomer> getCustomersByFirstName(String firstName) throws DaoException;
 
-    public List<TraCustomer> getAllCustomer(int page) throws DaoException;
+    List<TraCustomer> getAllCustomer(int page) throws DaoException;
 
-    public void updateCustomer(TraCustomer traCustomer) throws DaoException;
+    void updateCustomer(TraCustomer traCustomer) throws DaoException;
 
-    public void deleteCustomerById(long id) throws DaoException;
+    void deleteCustomerById(long id) throws DaoException;
 
 }

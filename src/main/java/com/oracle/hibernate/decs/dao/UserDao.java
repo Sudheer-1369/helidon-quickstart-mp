@@ -11,16 +11,16 @@ import java.util.List;
 
 public interface UserDao {
 
-    public void addUser(User user) throws DaoException;
+    void addUser(User user) throws DaoException;
 
-    public User getUserById(long userId) throws DaoException;
+    User getUserById(long userId) throws DaoException;
 
-    public List<User> getAllUsers() throws DaoException;
+    List<User> getAllUsers() throws DaoException;
 
-    public void updateUser(User user) throws DaoException;
+    void updateUser(User user) throws DaoException;
 
-    public void deleteUserById(long userId) throws DaoException;
+    void deleteUserById(long userId) throws DaoException;
 
-    public void deleteUserByCode(String userCode) throws DaoException;
+    void deleteUserByCode(String userCode) throws DaoException;
 
 }

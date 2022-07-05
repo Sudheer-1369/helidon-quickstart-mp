@@ -22,9 +22,9 @@ class Sender {
 }
 
 class SyncSend implements Runnable {
-    private Sender sender;
+    private final Sender sender;
 
-    private String msg;
+    private final String msg;
 
     public SyncSend(Sender sender, String msg) {
         this.sender = sender;

@@ -26,12 +26,11 @@ import java.util.regex.Pattern;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private static EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
 
     {
         entityManagerFactory = Persistence.createEntityManagerFactory("ORCL");
     }
-
-    private EntityManager entityManager;
 
     @Transactional
     public TraEmployee addEmployee(TraEmployee traEmployee) throws DaoException {
