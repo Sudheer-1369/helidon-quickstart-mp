@@ -3,6 +3,7 @@ package com.oracle.hibernate.decs.dao;
 import com.oracle.hibernate.decs.common.exceptions.DaoException;
 import com.oracle.hibernate.decs.entities.User;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -17,6 +18,10 @@ public class UserDaoImplTest {
     @Inject
     private UserDao userDao;
 
+    @Inject
+    @ConfigProperty(name = "app.greeting")
+    String greeeting;
+
     @Test
     public void testAddUser() throws DaoException {
         logger.info("userDao Checking " + userDao);
@@ -30,6 +35,13 @@ public class UserDaoImplTest {
         userDao.addUser(user2);
         userDao.addUser(user3);
         userDao.addUser(user4);
+
+    }
+
+    @Test
+    void testGeneral(){
+
+        System.out.println(greeeting);
     }
 
 }
