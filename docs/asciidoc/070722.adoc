@@ -1,0 +1,49 @@
+= 7th July 2022
+
+== Restful Services today
+* While trying to create a restful service we need to firstly work on the data model/ object model.Using the object model we need to finalise the set of attributed for each object or table and need to establish the relations between the tables i.e onetoone,manytoone,onetomany,manytomany.
+* Once a datamodel/objectmodel is finalised we need to create Java objects as entity using hibernate or eclipselink,before that a database schema should be created and all the database tables should be created,after creating the tables we need to create the java objects where each database column is an attribute and establish the realtions.
+* Similarly configure Model classes,The first ones are the entity classes.The entity classes are for interacting with the database i.e these represents the Java Object classes for the existing the database records.The second ones Model classes are the classes that are used for representing the data to the UI since we dont need to populate all the data(all the columns from database) to the user we need to transform the Entity Object to Model Object and this can be done using MapStruct class which will generate a java code for creating mappers for mapping from one Java class object to other java class object.
+* After the models and entity classes are created we need to establish the connection with the database using the prev learnt persistence.xml and microprofile-config.properties files
+* Once all are set we divide creating the whole service into 3 layers :
+** DaoLayer : For interacting with the database mostly using entitymanager
+** Service layer : For performing all the business rules or may be for mapping the entity object to model object and serving the next layer
+** Api layer : This is the layer where we perform some crucial operations for establishing the interaction with the clients
+
+== Desiging Restful Services
+* Object Model:
+ ** As mentioned firstly we need to get a clear picture of the datamodel and create the datamodel/objectmodel required for the service and create respective java classes for model classes and entity classes.
+* Model the URIs:
+ ** In here each URI represent a resource and now we need to create different operations/methods and tag each URI to a method/operation.
+** We create different URIs for tagging to different operation in order to perform different services
+** Examples are:
+*** /orders - represent the all the orders
+*** /orders/{id} - represent individual order
+*** Like this many more URIs can be created.
+
+NOTE: By attaching a query parameter the URI doesnt changes since the query parameters are not mandatory,but by changing the path a URI becomdes completely different.
+
+* Define Data Format :
+** The client and the serveer has to decide which data format they want to support and can define the schema accordingly but based on my observation in the project a schema is not seperately defined
+
+* Assigning HTTP Methods:
+** We cannot assign the HTTP methods to what ever URI&method we want, since HTTP methods serve certain purpose for example a HTTP GET method doesnot have the right or cannot the change the state of the server so GET method should be assigned to the operation/resource that is used for fetching the data from the server.
+
+NOTE: We should not change purpose of the HTTP methods since they are developed based on the Restful architecture principals and changing them would make the clients confuse and operations more complex.
+
+** For example we placed and order and we want to cancel the order which means we should not delete the order from the database but change the state to cancel, the immediate thought we might get is add a query parameter uri?cancel=true nd when it is true we will not delete the order but change the new added cancel attribute to cancelled state but this will violate the purpose of the Delete method since the order is not deleted.We need to come up with a better solution to work on this problems
+
+** GET : Is only for fetching the data
+** PUT : It is for updating and inserting the data but put always needs an Id attribute which sometimes the server genrates so its not always possible to creta  a resource using the PUT method
+** POST : The post method is used for creating an object and is non-idempotent.
+** DELETE : The delete operation is for deleting the resource or record from the system
+** PATCH : The patch operation simply applies the patches instead of updating the whole object like put , we need to pass the Id of the object in the message body in case of patch.
+
+== English
+1. Corpulent : Obese
+2. Embezzle : misappropriate
+3. Vent : hole
+4. August : Dignified
+5. Canny : Clever
+6.  propensity : natural tendency to behave
+7. Illicit : Illegal or against govt rules and regulations

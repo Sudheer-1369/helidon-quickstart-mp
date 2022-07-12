@@ -1,0 +1,70 @@
+= 6th July 2022
+
+=== RestApis
+-> Today learned about the Rest Apis and their importance.URL: Rest Apis : From https://dennis-xlc.gitbooks.io/restful-java-with-jax-rs-2-0-2rd-edition/content/en/part1/chapter1/introduction_to_rest.html
+
+-> Q: What is a stateless application?
+
+-> Ans: A stateless application is an application that doesnot store the client data generated in one session to use in the next session with that client.Ex: Some search engines where while making a search if interrupted need to start from the scratch.
+The opposite of a stateful stateless application is a stateful application which use the prev client data or history in order to process the current work.Ex: Banking system
+
+* The Set of following architectural principals are called REpresentation State Transfer(REST) :
+** Addressable Resources : Each resource should be addressable or fetched using a URI
+** A Uniform and contrained Interface : Need to use a well defined set of methods to fetch/manipulate the resources
+** REpresentation-Oriented : different services communicate using differnt formate so we the one that is built on Rest should support different formats like JSON,HTML,XML etc
+** Communication Statelessly : should support stateless communication
+** HyperMedia as Engine of Application state : i.e it should support hyperlinks
+
+*HTTP : HTTP is a synchronous request/response based application network protocol used for distributed, collaborative, document-based systems.
+
+The HyperText Transfer Protocol (HTTP) is a standard communication protocol with well-defined constraints. HTTP is the communication protocol that powers most of our everyday interactions on the internet:Streaming a video,web browser loading a page.
+
+IMPORTANT: Both HTTP and Rest are different.HTTP exhibits the RESTful qualities so a RESTful application need not use HTTP but HTTP will be a good starting point to use the REST since it exhibits RESTful qualities/principles.Finally, While many people continue to use the terms REST and HTTP interchangeably, the truth is that they are different things. REST refers to a set of attributes of a particular architectural style, while HTTP is a well-defined protocol that happens to exhibit many features of a RESTful system.
+
+=== Briefly discussing the Rest architectural principals :
+* Addressable Resources:
+** Each resource or object of the application should be available through a specific URI.
+** URI Format : scheme://subdomain/host.domain.topdomain/path?query#fragment:
+
+*** scheme : this represents the protocol that is used for communication,most of the applications use http for communications , some other protocols are FTP for file transfer.
+*** host : is the DNS port or the IP address which is followed by the port number together will represent the location of the resource on the web.
+*** domain represents the ip address and topdomain examples are .com for commercial sites,.org for organisations
+*** path : once the location of the object/top resource are located on the web inside the main resource we need to find the resource we want to fetch/update/delete etc simpky think of path as a directory list of a file.The path is string delimitted by "/".
+*** ? : this is the optional query string that is it seperates the query string from the path of the resource.
+*** query : query is a string that represents a set of parameters which are key-value pairs.ex : last_name=sudheer&firstname=patnana -- this represent two query params.
+*** fragment :  The fragment is usually used to point to a certain place in the document you are querying.
+
+** Uniform and constrained Interface :
+We need to maintane a uniform interface that uses a particular set of methods and using these methods we can perform almost all the required operations.
+The proper example is Http : which uses the particular set of methods namely :
+***Get : Used for fetching the data from the server ,this method is idempotent and safe.Idempotent mean that how many time u perform the get operation on the server the state of the server will not change.
+*** PUT : Used for updating the state of a resource, we need to pass the information as body and when put is used the complete resource present on the service with the given Id/uniquething is replaced by the complete body given.Put is also idempotent
+*** Delete : Used for deleting the resource from the server.It is also idempotent.
+*** Post : It is used for creating a new resource in the server side .It is a non-idempotent method
+*** Patch : It is used for making the patch works for the already present resource.we will procide the Id inside the body and the patches are done there.
+*** Head : This method is similar to Get but will only fetch then response code and the header parameters.
+
+** REpresentation-Oriented :
+*** As per my understanding the a representation means the format of the data.In Rest there will be exchange between the data between the server/application and the client
+so simply there is exchange of representation between client and the server.The application should support the REpresentation-Oriented principal which means it should allow
+data to be exchanged in any format like XML,JSON,HTML etc.
+*** The main headers here are :
+****As you correctly note, [red]#the Accept# header is used by HTTP clients to tell the server what content types they'll accept. The server will then send back a response, which will include a [red]#Content-Type# header telling the client what the content type of the returned content actually is.
+
+**** However, as you may have noticed, HTTP requests can also contain Content-Type headers. Why? Well, think about POST or PUT requests. With those request types, the client is actually sending a bunch of data to the server as part of the request, and the Content-Type header tells the server what the data actually is (and thus determines how the server will parse it).
+
+** Stateless communication :
+Storing the client information and processing it everytime is a tideous process which mean when a client req arrives the server has to search for the prev stored client information and based on the info the server has to perfrorm a set of actions for validation etc which consumer time so the client should store the session information and pass it with eqch req but this makes the client fats but now we can use Ajax, Flex etc as middle tier for
+processing the cleint information which makes us to enjoy the stateless communcation benefits.
+
+** HyperMedia As The Engine of Applicatio state :
+which means the data formats should support the Hypermedia which means the hyperlinks so it will reduce the effor and time.
+
+Ex. If in amazon we want to fetch the list of books/items it will load for whole life time to fetch all the details and load which unnecessary as well so we can load a few items and then can provide
+hyperlinks for prev and next list of objects which feasible.
+
+== Other than Rest Apis
+** for most of the time i tried working on setting up the database, previous the database connection was set when all the properties are provided in the persistence.xml file but when i tried to fill the details in the microprofile.properties and then refer those in the persistence.xml file in order to support the CDI implementation but that thing is not working need to check this and make a poc on this.
+** Also Noticed that in order to implement few CDI injections we need to add few maven dependencies
+
+

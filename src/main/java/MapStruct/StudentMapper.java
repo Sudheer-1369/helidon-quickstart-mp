@@ -14,12 +14,12 @@ public interface StudentMapper {
 
     @Mapping(target = "name", source = "studentName", defaultValue = "Sudheer")
     @Mapping(target = "phnNo", expression = "java(getBytesFromPhnNoString(student.getPhnNo()))")
-    StudentEntity entityToModel(Student student);
+    StudentsEntity entityToModel(Student student);
 
     @Mapping(target = "studentName", source = "name", defaultValue = "sudheer")
     @Mapping(target = "phnNo", expression = "java(getStringPhnNoFromBytes(studentEntity.getPhnNo()))")
     @Mapping(target = "fee", constant = "2000")
-    Student modelToEntity(StudentEntity studentEntity);
+    Student modelToEntity(StudentsEntity studentEntity);
 
 
     default String getStringPhnNoFromBytes(byte[] bytes) {
