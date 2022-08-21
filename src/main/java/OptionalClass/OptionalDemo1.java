@@ -7,6 +7,8 @@ package OptionalClass;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,6 +18,8 @@ public class OptionalDemo1 {
         return "Sudheer kumar patnana";
     }
 
+    public static final Logger logger = Logger.getLogger(OptionalDemo1.class.getName());
+    
     public static void main(String[] args) {
 
         String[] str = new String[5];
@@ -23,29 +27,42 @@ public class OptionalDemo1 {
         str[1] = "Sudheer Loves Mounika";
 
         Optional<String> empty = Optional.empty();
-        System.out.println(empty);
+        logger.log(Level.INFO, String.format("The Obtained Optional is %s", empty));
 
         Optional<String> value = Optional.of(str[1]);
-        System.out.println(value.get());
-        System.out.println(value.hashCode());
-        System.out.println(value.isPresent());
-        System.out.println(value.isEmpty());
+        logger.log(Level.INFO, String.format("The Obtained Optional1 is %s", value));
+        logger.log(Level.INFO, String.format("The value in the option is %s", value.get()));
+        logger.log(Level.INFO, String.format("The Hashcode value is %s",value.hashCode()));
+        logger.log(Level.INFO, String.format("The existence value is %s",value.isPresent()));
+        logger.log(Level.INFO, String.format("The Check value is %s",value.isEmpty()));
 
-        String defaultValue = Optional.ofNullable((String) null).orElse("Sudheer");
-        System.out.println(defaultValue);
+        String defaultValue = Optional.ofNullable("Mounika").orElse("Sudheer");
+        logger.log(Level.INFO, String.format("The default/value1 is %s",defaultValue));
 
         defaultValue = Optional.ofNullable(str[1]).orElseGet(OptionalDemo1::getDefault);
-        System.out.println(defaultValue);
+        if(!defaultValue.isEmpty()) {
+            logger.log(Level.INFO, String.format("The default/value2 is %s", defaultValue));
+        }
 
-        defaultValue = Optional.ofNullable(str[1]).orElseThrow(IllegalArgumentException::new);
-        System.out.println(defaultValue);
+        Optional<String> op = Optional.empty();
+        try {
+            logger.log(Level.INFO, String.format("The optional throws the error %s", op.orElseThrow(IllegalArgumentException::new)));
+        }
+        catch (Exception e){
+            logger.log(Level.INFO,"The error/exception message is "+e.getMessage());
+        }
+
+        Optional<String> op1 = Optional.of("Sudheer");
+        String output= op.map(s->s+" Kumar Patnana").orElse("Patnana Sudheer Kumar And Mounika");
+        logger.log(Level.INFO, output);
+
 
         List<String> companyNames = Arrays.asList(
                 "paypal", "oracle", "", "microsoft", "", "apple");
         Optional<List<String>> listOptional = Optional.ofNullable(companyNames);
 
         System.out.println(listOptional);
-        System.out.println(listOptional.map(List::size).get());
+        System.out.println(listOptional.map(List::size).orElse(20));
 
         List<Integer> integerList = Arrays.asList(1, 2, 3, 4, 5, 6);
         Optional<List<Integer>> optionalList = Optional.of(integerList);
@@ -54,13 +71,15 @@ public class OptionalDemo1 {
 
         System.out.println(integers);
 
-        List<Optional<Integer>> optionalList1 = Arrays.asList(Optional.of(1), Optional.of(2), Optional.of(3));
-        List<Integer> integers1 = optionalList1.stream().map(Optional::get).filter(p -> p < 10).collect(Collectors.toList());
-        System.out.println(integers1);
+
+        List<Optional<Integer>> optionals = Arrays.asList(Optional.of(1),Optional.of(2),Optional.of(3));
+        List<Integer> integersList = optionals.stream().map(Optional::get).filter(p->p<22).collect(Collectors.toList());
+        System.out.println(integersList);
 
 //        Optional<String> nullCheck = null;
 //        System.out.println(nullCheck.get());  // Will throw nullPointer exception
-
-        Stream<Integer> stringStream = optionalList1.stream().flatMap(o -> o.isPresent() ? Stream.of(o.get()) : Stream.empty());
+//
+        Stream<Integer> stringStream = optionals.stream().flatMap(o -> o.isPresent() ? Stream.of(o.get()) : Stream.empty());
+        System.out.println(stringStream);
     }
 }

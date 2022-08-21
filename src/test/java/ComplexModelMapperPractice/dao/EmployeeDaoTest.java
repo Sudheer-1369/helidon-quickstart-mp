@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import util.EntityUtil;
 
 import javax.inject.Inject;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.logging.Logger;
 
 @HelidonTest
@@ -23,7 +25,7 @@ public class EmployeeDaoTest {
     @Test
     public void testAddEmployee() throws DaoException {
 
-        TraEmployee traEmployee = EntityUtil.getTraEmployee("Sudheer", "Patnana", 25, "8919624673", 15000000);
+        TraEmployee traEmployee = EntityUtil.getTraEmployee("Sudheer", "Patnana", 25, "8919624673", 15000000,new Timestamp(new Date().getTime()));
         TraStore traStore = storeDao.getStoreById(4L);
         traEmployee.setTraStore(traStore);
 
@@ -36,7 +38,7 @@ public class EmployeeDaoTest {
     public void testUpdateEmployee() throws DaoException {
         TraEmployee traEmployee = employeeDao.getEmployeeById(1L);
         //traEmployee.setTraStore(storeDao.getStoreById(4L));
-        traEmployee.setStoreId(1L);
+//        traEmployee.setStoreId(1L);
         logger.info("Before Update employee is : " + traEmployee);
         employeeDao.updateEmployee(traEmployee);
         logger.info("just after Update employee is : " + traEmployee);

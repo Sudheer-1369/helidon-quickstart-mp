@@ -4,6 +4,7 @@ import ComplexModelMapperPractice.entities.TraEmployee;
 import ComplexModelMapperPractice.entities.TraStore;
 
 import javax.inject.Inject;
+import java.sql.Timestamp;
 
 public class EntityUtil {
 
@@ -17,13 +18,14 @@ public class EntityUtil {
         return traStore;
     }
 
-    public static TraEmployee getTraEmployee(String firstName, String lastName, int age, String landLineNumber, long salary) {
+    public static TraEmployee getTraEmployee(String firstName, String lastName, int age, String landLineNumber, long salary, Timestamp timestamp) {
         TraEmployee traEmployee = new TraEmployee();
         traEmployee.setFirstName(firstName);
         traEmployee.setLastName(lastName);
         traEmployee.setAge(age);
         traEmployee.setLandLineNumber(landLineNumber);
         traEmployee.setSalary(salary);
+        traEmployee.setTimeStamp(timestamp);
 
         return traEmployee;
     }
