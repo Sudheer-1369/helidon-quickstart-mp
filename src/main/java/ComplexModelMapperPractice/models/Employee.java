@@ -19,6 +19,9 @@ public class Employee {
     private int age;
     private long salary;
     private String landLineNumber;
+
+    private String joiningDate;
+
     private Store store;
 
     public String toString() {
