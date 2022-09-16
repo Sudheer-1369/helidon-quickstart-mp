@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "COMPANY")
+@NamedQuery(name = "getFew", query = "select e.name, e.phoneNumber from COMPANY e")
 public class CompanyEntity implements BaseEntity<Long> {
 
     @Id
@@ -22,7 +23,7 @@ public class CompanyEntity implements BaseEntity<Long> {
     private String phoneNumber;
 
     @JoinColumn(name = "COMPANY_ID")
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EmployeeEntity> employeeEntities;
 
     public CompanyEntity(Long id, String name, String phoneNumber, List<EmployeeEntity> employees) {

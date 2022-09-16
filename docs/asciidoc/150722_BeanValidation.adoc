@@ -1,0 +1,21 @@
+= Bean Validation
+
+* Not all data can be stored in the database
+
+
+//Without knowing what you mean by DTO or Entity, I'm going to make some assumptions, and then I can answer.
+//
+//    DTO — An object that represents data passed to the server from the client
+//    Entity — A business logic class mapped to a persistent data store
+//
+//Entities should perform validation. And you should validate the DTOs. The difference lies in what happens when invalid data is encountered.
+//
+//If invalid data is passed to an Entity's methods, or you try to initialize a new entity with invalid state, the Entity itself should throw exceptions. A validation failure that isn't caught should crash the thread.
+//
+//DTOs can and should be passed invalid data, and initialized with invalid state. Another set of classes should look at the current state of the DTOs to ensure that passing this information down to your Entities will not cause exceptions to be thrown. Detecting a failed validation rule should not crash the application, and instead should push a message into a collection that will eventually be shown to the end user where they will be given a chance to correct their data and attempt the business operation again.
+//
+//Validating the DTOs is tantamount to performing pre-checks on the data before initializing new Entities, or calling methods on existing Entities ensuring business rules are being followed prior to the execution of those rules.
+//
+//
+//
+//@Valid agrument

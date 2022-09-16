@@ -26,18 +26,6 @@ import static org.assertj.core.api.Assertions.tuple;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EmployeeResourceTest {
 
-    private WebTarget target;
-
-    @Inject
-    public EmployeeResourceTest(WebTarget target) {
-        this.target = target;
-    }
-
-    private String lastReadPayload;
-    private DocumentContext lastReadDocumentContext;
-    private boolean responseRead;
-
-
     private static final Configuration JSON_PATH =
             Configuration.builder()
                     .options(
@@ -46,11 +34,20 @@ public class EmployeeResourceTest {
                             // Let us just deal with empty lists
                             Option.SUPPRESS_EXCEPTIONS)
                     .build();
+    private WebTarget target;
+    private String lastReadPayload;
+    private DocumentContext lastReadDocumentContext;
+    private boolean responseRead;
 
+
+    @Inject
+    public EmployeeResourceTest(WebTarget target) {
+        this.target = target;
+    }
 
     @Test
     @Order(1)
-    void testAddEmployee(){
+    void testAddEmployee() {
 
         Employee employee = new Employee();
         employee.setLastName("Thadala");
@@ -59,26 +56,26 @@ public class EmployeeResourceTest {
         employee.setSalary(2200000);
         employee.setJoiningDate("2021-01-01");
 
-        try(var r = target.path("employee").request().post(Entity.json(employee))){
+        try (var r = target.path("employee").request().post(Entity.json(employee))) {
 
-            assertThat(query(r,"$")).isNotNull().extracting("lastName","age").containsExactly(tuple("Thadala", 24));
+            assertThat(query(r, "$")).isNotNull().extracting("lastName", "age").containsExactly(tuple("Thadala", 24));
         }
     }
 
     @Test
     @Order(2)
-    void testGetEmployee(){
+    void testGetEmployee() {
 
-        try(var r = target.path("employee").path("20").request().get()){
+        try (var r = target.path("employee").path("20").request().get()) {
 
-            assertThat(query(r,"$")).isNotNull().extracting("lastName","age").containsExactly(tuple("Thadala", 24));
+            assertThat(query(r, "$")).isNotNull().extracting("lastName", "age").containsExactly(tuple("Thadala", 24));
 
         }
     }
 
     @Test
     @Order(3)
-    void testUpdateEmployee(){
+    void testUpdateEmployee() {
 
         Employee employee = new Employee();
         employee.setLastName("Kanakala");
@@ -87,8 +84,8 @@ public class EmployeeResourceTest {
         employee.setSalary(2200000);
         employee.setJoiningDate("2021-01-01 10:10:10.10");
 
-        try(var r = target.path("employee").path("9").request().put(Entity.json(employee))){
-            assertThat(query(r,"$")).isNotNull().extracting("firstName","age").containsExactly(tuple("Ayyagoru", 23));
+        try (var r = target.path("employee").path("9").request().put(Entity.json(employee))) {
+            assertThat(query(r, "$")).isNotNull().extracting("firstName", "age").containsExactly(tuple("Ayyagoru", 23));
 
         }
     }
@@ -121,8 +118,8 @@ public class EmployeeResourceTest {
 
     @Test
     @Order(5)
-    public void testDeleteCompany(){
-        try(var r = target.path("employee").path("20").request().delete()){
+    public void testDeleteCompany() {
+        try (var r = target.path("employee").path("20").request().delete()) {
 
             assertThat(r.getStatusInfo().toEnum()).isEqualTo(Response.Status.NO_CONTENT);
         }

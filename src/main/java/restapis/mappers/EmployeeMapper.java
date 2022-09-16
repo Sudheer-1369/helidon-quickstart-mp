@@ -11,7 +11,7 @@ import restapis.entities.EmployeeEntity;
 import java.util.List;
 
 @Mapper(componentModel = "cdi")
-public interface EmployeeMapper extends BaseMapper<EmployeeEntity, Employee>{
+public interface EmployeeMapper extends BaseMapper<EmployeeEntity, Employee> {
 
     @Mapping(target = "joiningDate", ignore = true)
     Employee entityToDto(EmployeeEntity entity);
@@ -24,5 +24,5 @@ public interface EmployeeMapper extends BaseMapper<EmployeeEntity, Employee>{
     List<EmployeeEntity> dtoListToEntityList(List<Employee> dtoList);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void merge(EmployeeEntity source,@MappingTarget EmployeeEntity target);
+    void merge(EmployeeEntity source, @MappingTarget EmployeeEntity target);
 }

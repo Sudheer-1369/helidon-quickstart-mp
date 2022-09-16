@@ -62,7 +62,7 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public static class TaskBuilder{
+    public static class TaskBuilder {
 
         private long id;
         private String summary = "";
@@ -108,8 +108,8 @@ public class Task {
             return this;
         }
 
-        public Task getTask(){
-            return new Task(id,summary,description,done,dueDate);
+        public Task getTask() {
+            return new Task(id, summary, description, done, dueDate);
         }
     }
 }

@@ -1,6 +1,7 @@
 package restapispractice.dao;
 
 import io.helidon.microprofile.tests.junit5.HelidonTest;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.*;
 import restapis.entities.CompanyEntity;
 import restapis.implementations.dao.CompanyDao;
@@ -26,26 +27,27 @@ public class CompanyDaoTest {
     @Order(1)
     void testCreateCompany() {
         CompanyEntity company = new CompanyEntity();
-        company.setName("Apple India Pvt Ltd");
-        company.setPhoneNumber("9493615809");
+        company.setName("Google India Pvt Ltd");
+        company.setPhoneNumber("9573558432");
 
         CompanyEntity company1 = companyDao.create(company);
 
-        assertThat(company1).extracting("name").isEqualTo("Apple India Pvt Ltd");
+        assertThat(company1).extracting("name").isEqualTo("Google India Pvt Ltd");
     }
 
     @Test
     @DisplayName("Should be able to find the entity with the given id")
     @Order(2)
-    void testFindCompany(){
+    void testFindCompany() {
         CompanyEntity company = companyDao.findById(2L);
-        assertThat(company).extracting("name").isEqualTo("Oracle India Pvt Ltd");
+//        assertThat(company).extracting("name").isEqualTo("Oracle India Pvt Ltd");
+        assertThat(company).isNull();
     }
 
     @Test
     @DisplayName("Should be able to update the Company")
     @Order(3)
-    void testUpdateCompany(){
+    void testUpdateCompany() {
         CompanyEntity company = new CompanyEntity();
         company.setId(2L);
         company.setName("Oracle India Pvt Ltd");
@@ -58,11 +60,23 @@ public class CompanyDaoTest {
     @Test
     @DisplayName("Should be able to delete the existing company")
     @Order(4)
-    void testDeleteCompany(){
+    void testDeleteCompany() {
 
         companyDao.deleteById(5L);
         CompanyEntity company = companyDao.findById(5L);
         assertThat(company).isNull();
+    }
+
+    @Test
+    @DisplayName("Should be able to get few")
+    @Order(5)
+    void testGetFew() {
+
+        var companyEntityList = companyDao.getFew();
+
+        assertThat(companyEntityList).extracting("name", "phoneNumber")
+                .contains(Tuple.tuple("Apple India Pvt Ltd", "9493615809"));
+
     }
 
 }

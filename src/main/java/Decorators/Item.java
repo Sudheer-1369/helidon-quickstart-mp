@@ -29,9 +29,10 @@ public interface Item {
             item.draw(x, y);
         }
 
-//        public void fetch(int x) {
-//            item.fetch(x);
-//            System.out.println("Inside the fetch method of decorator");
-//        }
+        public void fetch(int x) {
+            item.fetch(x);
+            System.out.println("Inside the fetch method of decorator");
+        }
     }
+
 }

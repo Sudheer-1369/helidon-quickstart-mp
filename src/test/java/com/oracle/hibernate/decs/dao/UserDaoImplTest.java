@@ -14,13 +14,11 @@ import java.util.logging.Logger;
 public class UserDaoImplTest {
 
     Logger logger = Logger.getLogger(UserDaoImplTest.class.getName());
-
-    @Inject
-    private UserDao userDao;
-
     @Inject
     @ConfigProperty(name = "app.greeting")
     String greeeting;
+    @Inject
+    private UserDao userDao;
 
     @Test
     public void testAddUser() throws DaoException {
@@ -39,7 +37,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    void testGeneral(){
+    void testGeneral() {
 
         System.out.println(greeeting);
     }

@@ -25,7 +25,7 @@ public class EmployeeDaoTest {
     @Test
     public void testAddEmployee() throws DaoException {
 
-        TraEmployee traEmployee = EntityUtil.getTraEmployee("Sudheer", "Patnana", 25, "8919624673", 15000000,new Timestamp(new Date().getTime()));
+        TraEmployee traEmployee = EntityUtil.getTraEmployee("Sudheer", "Patnana", 25, "8919624673", 15000000, new Timestamp(new Date().getTime()));
         TraStore traStore = storeDao.getStoreById(4L);
         traEmployee.setTraStore(traStore);
 

@@ -3,6 +3,7 @@
 == H2DBSetUp
 
 - Firstly add the required maven dependency :
+
 ----
   <dependency>
   <groupId>com.h2database</groupId>
@@ -12,12 +13,14 @@
 ----
 
 - Once added, in the microprofile-config.properties add all the properties required for getting a database connection or connecting to an in-memory database or an docker container for any related database like:
+
 ----
 javax.sql.DataSource.decsDS.connectionFactoryClassName=org.h2.jdbcx.JdbcDataSource // <1>
 javax.sql.DataSource.decsDS.URL=jdbc:h2:mem:DECS_DB;INIT=RUNSCRIPT FROM 'classpath:decs_h2.ddl' // <2>
 javax.sql.DataSource.decsDS.user=sa2 // <3>
 javax.sql.DataSource.decsDS.password="" // <4>
 ----
+
 1. This is a factory for connection objects for connecting to the in-memory database or oracle container or a database
 2. It is the URL that provides the way for identifying the database location and helps us to connect to the database
 3. username to connect to the database
@@ -28,9 +31,8 @@ IMPORTANT: If one want to make a connection with the database they can either de
 IMPORTANT: What you typically do is define the datasource in the microprofile properties and then refer to that in the persistence.xml.Your persistence.xml is not a vehicle to try and declare CDI beans.
 
 === Junit5 Extensions
-* Sometimes we need to extend the behaviour of a test class or a method present in the test case like for example before starting a method or before starting of all the methods
-we want to perform some operations like setting up a database or during runtime we need to resolve some parameters so inorder to avoid doing those in the testcase and to make the
-code look clean the Junit 5 extensions are introduced and we have primiraly some extensions :
+
+* Sometimes we need to extend the behaviour of a test class or a method present in the test case like for example before starting a method or before starting of all the methods we want to perform some operations like setting up a database or during runtime we need to resolve some parameters so inorder to avoid doing those in the testcase and to make the code look clean the Junit 5 extensions are introduced and we have primiraly some extensions :
 ** testInstancePostProcessing : extends TestInstancePostProcessor interface and overrides its methods which takes the testclass instance to perform the operation
 ** conditionaltestExecution : extends ExecutionCondition interface and overrides its methods which checks for few conditions and permits the tests to run or not based on the conditions described in the method
 ** lifeCycleCallbacks : extends the interfaces BeforeAllCallback,AfterAllCallback,BeforeEachCallback,AfterEachCallback and overrides those respective methods and so that the test class that extends this extension will perform the operations based on the lifecycles mentioned in the extension class
@@ -42,22 +44,27 @@ code look clean the Junit 5 extensions are introduced and we have primiraly some
 
 1. For reference on how a database has been cleared and how the test data has been loaded u can check the package Jan because the code is written by Jan.
 * First one is the AbstractBaseDBResetExtension in which a database connection has been established by using the HelidonContainer class and the DataSource class.
+
 ----
 var dataSource = HelidonContainer.instance().start().select(DataSoruce.class).get();
 ----
+
 -> This will start the current helidon container and select the datasource present/defined in the persistence.xml file and microprofile-config.properties file and load the dataSource in the variable.
 
 -> Once loaded, the Connection object is created from the dataSource object and the queries are executed after fetching the connection object and statement object.Since this is an abstract class we simply define all the required methods for clearing all the database tables.
+
 ----
 Connection connection = dataSource.getConnection()
 ----
 
 -> The H2DBResetExtension extends the AbstractBaseDbResetExtension and implements its methods by fetching the Statement Object from the connection and executing all the queries that can clear the existing database.This extension is called for every test case.
+
 ----
 Statement statement = connection.createStatement()
 ----
 
 -> Currently for unitTesting we are using H2DataBase so in order to connect to the database in the test/resources/Meta-INF folder we create another microprofile-config.properties file and due to precedence for unittesting these properties are used for establishing connection to the H2DataBase.
+
 ----
 Executing the queries:
 statement.executeUpdate(String.format("Select * from %s",table_name))
@@ -65,6 +72,7 @@ statement.executeUpdate(String.format("Select * from %s",table_name))
 
 * Now coming to DBSetupTestExtension we use this class to load the data to the database.
 ** Firstly we need to get the className which represents the entity for which we are testing so context.getClass() will give the current claas but inorder to get the testClass we call the method context.getTestClass() which will return the testclass name on which the extension is used.
+
 ----
 beforeEach(ExtensionContext context){ // <1>
 Option<Class<?>> testClass = context.getTestClass(); <2>
@@ -73,6 +81,7 @@ var candidate = testClass.map(this::liquibaseResource).orElse(null) <3>
 testClass.map(c->c.getResource(candidate)).ifPresent(i->runLiquibaseScript(dataSource,candidate,context) <4>
 }
 ----
+
 1. The Extension class extends the beforeEachExtension it overrides the beforeEachMethod which has parameter ExtensionContext.
 2. Deriving the TestClass name on which the extension is used.
 3. Deriving the path where the file is located and this is a string.
@@ -96,9 +105,11 @@ private void runLiquibase(DataSource dataSource, ExtensionContext context, Strin
         }
     }
 ----
+
 The Above Script will run the liquibase script and load the data into the database
 
 === English
+
 1. Retrofit : Fit/Add something that didnt have is when manufactured.
 2. Emulate : Match or suprass,typically by imitation.
 3. Ubiquitous : Present/Found everywhere.

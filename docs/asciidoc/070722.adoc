@@ -1,6 +1,7 @@
 = 7th July 2022
 
 == Restful Services today
+
 * While trying to create a restful service we need to firstly work on the data model/ object model.Using the object model we need to finalise the set of attributed for each object or table and need to establish the relations between the tables i.e onetoone,manytoone,onetomany,manytomany.
 * Once a datamodel/objectmodel is finalised we need to create Java objects as entity using hibernate or eclipselink,before that a database schema should be created and all the database tables should be created,after creating the tables we need to create the java objects where each database column is an attribute and establish the realtions.
 * Similarly configure Model classes,The first ones are the entity classes.The entity classes are for interacting with the database i.e these represents the Java Object classes for the existing the database records.The second ones Model classes are the classes that are used for representing the data to the UI since we dont need to populate all the data(all the columns from database) to the user we need to transform the Entity Object to Model Object and this can be done using MapStruct class which will generate a java code for creating mappers for mapping from one Java class object to other java class object.
@@ -11,10 +12,11 @@
 ** Api layer : This is the layer where we perform some crucial operations for establishing the interaction with the clients
 
 == Desiging Restful Services
+
 * Object Model:
- ** As mentioned firstly we need to get a clear picture of the datamodel and create the datamodel/objectmodel required for the service and create respective java classes for model classes and entity classes.
+** As mentioned firstly we need to get a clear picture of the datamodel and create the datamodel/objectmodel required for the service and create respective java classes for model classes and entity classes.
 * Model the URIs:
- ** In here each URI represent a resource and now we need to create different operations/methods and tag each URI to a method/operation.
+** In here each URI represent a resource and now we need to create different operations/methods and tag each URI to a method/operation.
 ** We create different URIs for tagging to different operation in order to perform different services
 ** Examples are:
 *** /orders - represent the all the orders
@@ -34,16 +36,17 @@ NOTE: We should not change purpose of the HTTP methods since they are developed 
 ** For example we placed and order and we want to cancel the order which means we should not delete the order from the database but change the state to cancel, the immediate thought we might get is add a query parameter uri?cancel=true nd when it is true we will not delete the order but change the new added cancel attribute to cancelled state but this will violate the purpose of the Delete method since the order is not deleted.We need to come up with a better solution to work on this problems
 
 ** GET : Is only for fetching the data
-** PUT : It is for updating and inserting the data but put always needs an Id attribute which sometimes the server genrates so its not always possible to creta  a resource using the PUT method
+** PUT : It is for updating and inserting the data but put always needs an Id attribute which sometimes the server genrates so its not always possible to creta a resource using the PUT method
 ** POST : The post method is used for creating an object and is non-idempotent.
 ** DELETE : The delete operation is for deleting the resource or record from the system
 ** PATCH : The patch operation simply applies the patches instead of updating the whole object like put , we need to pass the Id of the object in the message body in case of patch.
 
 == English
+
 1. Corpulent : Obese
 2. Embezzle : misappropriate
 3. Vent : hole
 4. August : Dignified
 5. Canny : Clever
-6.  propensity : natural tendency to behave
+6. propensity : natural tendency to behave
 7. Illicit : Illegal or against govt rules and regulations

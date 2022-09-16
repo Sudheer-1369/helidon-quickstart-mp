@@ -26,10 +26,8 @@ import java.util.regex.Pattern;
 public class StoreDaoImpl implements StoreDao {
 
     private static EntityManagerFactory entityManagerFactory;
-
-    private EntityManager entityManager;
-
     private final int pageSize = 2;
+    private EntityManager entityManager;
 
     {
         entityManagerFactory = Persistence.createEntityManagerFactory("ORCL");

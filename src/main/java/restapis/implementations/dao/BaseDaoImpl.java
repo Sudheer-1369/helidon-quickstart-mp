@@ -16,16 +16,14 @@ import java.util.List;
 
 public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implements BaseDao<I, E> {
 
-    private static final EntityManagerFactory entityManagerFactory;
+    public static final EntityManagerFactory entityManagerFactory;
 
     static {
         entityManagerFactory = Persistence.createEntityManagerFactory("DECS");
     }
 
-
-    private EntityManager entityManager;
-
     private final Class<E> entityType;
+    protected EntityManager entityManager;
 
     public BaseDaoImpl(Class<E> entityType) {
         this.entityType = entityType;
@@ -67,7 +65,7 @@ public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implem
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        E responseEntity =  entityManager.find(entityType, id);
+        E responseEntity = entityManager.find(entityType, id);
 
         entityManager.close();
 
@@ -79,7 +77,7 @@ public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implem
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.remove(entityManager.getReference(entityType,id));
+        entityManager.remove(entityManager.getReference(entityType, id));
         entityManager.getTransaction().commit();
 
         entityManager.close();
@@ -87,6 +85,7 @@ public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implem
 
     /**
      * TODO Include the param page.
+     *
      * @return
      */
     public List<E> findAll() throws NoSuchFieldException {

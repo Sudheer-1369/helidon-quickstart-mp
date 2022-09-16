@@ -1,0 +1,30 @@
+= Random Important Things
+
+* MapStruct uses the assignment that it can find for the collection mapping.
+In order to achieve what you want you will have to define a custom method where you are going to ignore the data field explicitly and then use @IterableMapping(qualifiedBy) or @IterableMapping(qualifiedByName) to select the required method.
+
+----
+public interface AssigmentFileMapper {
+
+    AssigmentFileDTO assigmentFileToAssigmentFileDTO(AssigmentFile assigmentFile);
+
+    AssigmentFile assigmentFileDTOToAssigmentFile(AssigmentFileDTO assigmentFileDTO);
+
+    @IterableMapping(qualifiedByName="mapWithoutData")
+    List<AssigmentFileDTO> assigmentFilesToAssigmentFileDTOs(List<AssigmentFile> assigmentFiles);
+
+    List<AssigmentFile> assigmentFileDTOsToAssigmentFiles(List<AssigmentFileDTO> assigmentFileDTOs);
+
+    @Named("mapWithoutData")
+    @Mapping(target = "data", ignore = true)
+    AssignmentFileDto mapWithouData(AssignmentFile source)
+
+}
+----
+
+* Annotation members expect constant expressions (and a few other things like enums and Class literals).
+
+Ex: @Path("company") --  the value(company) should be constant.
+
+* Entity Mapped to More Than One Database Table
+** The @SecondaryTable annotation is used to specify the secondary table.

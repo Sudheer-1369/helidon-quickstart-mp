@@ -25,7 +25,7 @@ public class CompanyServiceTest {
 
     @Test
     @Order(1)
-    void testAddCompany(){
+    void testAddCompany() {
         Company company = new Company();
         company.setName("Linoy Technologies");
         company.setPhoneNumber("12345678");
@@ -38,7 +38,7 @@ public class CompanyServiceTest {
 
     @Test
     @Order(3)
-    void testUpdateCompany(){
+    void testUpdateCompany() {
         Company company = new Company();
 
         company.setId(10L);
@@ -54,7 +54,7 @@ public class CompanyServiceTest {
 
     @Test
     @Order(4)
-    void testPartialUpdate(){
+    void testPartialUpdate() {
         Company company = new Company();
 
         company.setId(11L);
@@ -69,7 +69,7 @@ public class CompanyServiceTest {
 
     @Test
     @Order(2)
-    void testFetchCompany(){
+    void testFetchCompany() {
         Company company = companyService.get(10L);
         assertThat(company).extracting("name").isEqualTo("Linoy Technologies India Pvt Ltd");
         assertThat(company).extracting("phoneNumber").isEqualTo("1234567890");
@@ -77,10 +77,16 @@ public class CompanyServiceTest {
 
     @Test
     @Order(5)
-    void testDeleteCompany(){
+    void testDeleteCompany() {
         companyService.delete(10L);
         Company company = companyService.get(10L);
 
         assertThat(company).isNull();
+    }
+
+    @Test
+    void testGetFew() {
+        var companies = companyService.getFew();
+        System.out.println(companies.get(0).toString());
     }
 }

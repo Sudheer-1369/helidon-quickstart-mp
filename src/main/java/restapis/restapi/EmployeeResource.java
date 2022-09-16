@@ -24,7 +24,7 @@ import static restapis.restapi.EmployeeResource.PATH;
 @Path(PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class EmployeeResource extends BaseResourceImpl<Employee,Long, EmployeeService>{
+public class EmployeeResource extends BaseResourceImpl<Employee, Long, EmployeeService> {
 
 
     public static final String PATH = "employee";
@@ -35,7 +35,7 @@ public class EmployeeResource extends BaseResourceImpl<Employee,Long, EmployeeSe
     }
 
     @POST
-    public Response createEmployee(Employee employee){
+    public Response createEmployee(Employee employee) {
 
         return post(employee);
     }
@@ -43,27 +43,27 @@ public class EmployeeResource extends BaseResourceImpl<Employee,Long, EmployeeSe
 
     @GET
     @Path("{id}")
-    public Response getById(@PathParam("id") Long id){
+    public Response getById(@PathParam("id") Long id) {
 
         return get(id);
     }
 
     @PATCH
-    public Response update(Employee employee){
+    public Response update(Employee employee) {
 
         return patch(employee);
     }
 
     @PUT
     @Path("{id}")
-    public Response replace(@PathParam("id") Long id, Employee employee){
+    public Response replace(@PathParam("id") Long id, Employee employee) {
 
         return put(id, employee);
     }
 
     @DELETE
     @Path("{id}")
-    public Response deleteById(@PathParam("id") Long id){
+    public Response deleteById(@PathParam("id") Long id) {
 
         return delete(id);
     }
