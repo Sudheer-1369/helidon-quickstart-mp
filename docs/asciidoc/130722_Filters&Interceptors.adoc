@@ -1,0 +1,253 @@
+= Jersey. Filters and Interceptors
+
+[Black]*Intro:*
+
+* Filters and Interceptors are used on both sides: client side and server side.The filters are primarily used for modifying the URIS,headers and other parameters of both request and response.Interceptors are used primarily for the modification of the entities.Filters can also be used for Entity modification but are not preferred over interceptor.
+
+== Filters
+
+* The main purpose of the filters are for modifying the request/response headers.For example like adding any extra header parameter to all the requests or responses we can use filters.
+
+* ServerSide filters:
+** ContainerRequestFilter
+** ContainerResponseFilter
+
+* ClientSide Filters:
+** ClientRequestFilter
+** ClientResponseFilter
+
+=== Server Filters
+
+* *Example showing ContainerResponseFilter*
+
+----
+public class PoweredByResponseFilter implements ContainerResponseFilter{
+
+@Override
+public void filter(ContainerRequestContext request,ContainerResponseContext response){
+response.getHeaders().add("header_param_name","header_param_value")
+}
+}
+----
+
+* The above code shows an exampls of ContainerResponseFilter which is implemented after the server matches the request resource method, implement the method and then produces the response,to that response the filter is applied and the header is added.The filter is applied for each and every response even if the resource method is not found.In the filter must me registered as provider in order to implement on all the response.
+* The other parameter ContainerRequestContext cannot be modified it can be read only since the request modified and we in the environment of Response.
+
+* *Example showing ContainerRequestFilter*
+
+----
+public class MyClass implement ContainerRequestFilter{
+public void filter(ContainerRequestContext request){
+final SecurityContext securityContext = request.getSecurityContext();
+if(securityContext == null || securityContext.isUserInRole("privileged")){
+requestContext.abortWith(Response.status(Response.status.UNAUTHORIZED).entity("User cannot access").build();
+}
+}
+}
+----
+
+* Unlike the ContainerResponseFilter the ContainerRequestFilter method dont have two parameters since the request is still in the Request environment and there is not response environment created yet.
+* Using this filter after registering it as a provider before the request hits the server we can check whether the user is authorized or not if the user is not authorised using the filter method we can send the reposne and send it to the client.
+
+IMPORTANT: The Request filter is run after request matching is done and before the resource method is run.
+
+* There might arise a situation where we want to apply a filter before the request matching.[yellow]**The Request matching method is the process of findind a resource method that should be executed base on the REQUEST URI**.
+* In the situation where we want a request filter to be run before the request matching method we can use the annotation *@PreMatching* on top of the filter which makes the request filter to be applied before the request matching.
+* One of the situation where we need to use the prematching request filter is when we want to make all the put methods into post methods which is better demonstrated with the example below.
+
+----
+@PreMathching
+public class MyClass implement ContainerRequestFiler{
+public void filter(ContainerRequestContext request){
+if(request.getMethod().equals("PUT"){
+request.setMethod("POST");
+}
+}
+}
+----
+
+-> Simply a ContainerResponseFilter is used for modifying the Reponse object that is generated after running the resource method by using the filter method which contains the params: ContainerRequestContext and ContainerResponseContext among which only the ContainerResponseContext can be modified since the ContainerRequest environment is already crossed and only the properties of that environmane can be read.
+
+-> And a ContainerRequestFilter is used for modifying the parameters of the request like headers,modifying the URI and also changing the HTTP methods before hitting the resoure method.
+
+-> For Referring the methods related to ContainerRequestContext and ContainerResponseContext please do refer :
+
+1. https://jakartaee.github.io/rest/apidocs/2.1.6/javax/ws/rs/container/ContainerResponseContext.html[ContainerResponseContext]
+
+2. https://jakartaee.github.io/rest/apidocs/2.1.6/javax/ws/rs/container/ContainerRequestContext.html[ContainerRequestContext]
+
+-> From the above two we can the containerResponseContext conains all the things related to the Reponse simply its the response.But according to my understanding once all the modifications are done on the containerResponseContext or containerRequestContext there is messagebodywriter for writing the response or the request.
+
+== Client Filters
+
+* These filters are similar to the server side filters but these act on the client side.Inorder to come out from the client side the request must come through the client Client request filter if it is registerd and in order for the response from the servers to reach the client it must pass through the clinetResponse filter
+
+=== Example showing ClientRequestFilter
+
+----
+public class CheckRequestFilter implements ClientRequestFilter{
+public void filter(ClientRequestContext request){
+if(request.getHeaders().get("client-Name")==null){
+request.abortWith(Response.status(Response.status.BAD_REQUEST).entity("client-name header must be specified").build();
+}}}
+----
+
+* To summarize the workflow, for any client request invoked from the client API the client request filters (ClientRequestFilter) are executed that could manipulate the request.
+If not aborted, the outgoing request is then physically sent over to the server side and once a response is received back from the server the client response filters (ClientResponseFilter) are executed that might again manipulate the returned response.
+Finally the response is passed back to the code that invoked the request.
+If the request was aborted in any client request filter then the client/server communication is skipped and the aborted response is used in the response filters.
+
+== Interceptors
+
+* The interceptors are also available on both server and client side.The primary intent of the filters is to manipulate the request and response parameters like HTTP headers,URIs and the HTTP methods and also sometimes the entities but the interceptors sole purpose is to manipulate the request/response entity body
+
+* Types of interceptors :
+** ReaderInterceptor : These are used for manipulating the inbound entity streams.Those that are coming to the server from the client req and those coming to the client in the form of server response
+** WriterInterceptor : These are used for manipulating the oubound entity streams.Those that client writes inorder to send to server and those that the server write to form a response.
+
+-> These interceptors are executed before the messagebody reader and writers are executed.
+
+*Example code for writerInterceptor*
+
+****
+public class GZIPWriterInterceptor implements WriterInterceptor {
+
+    @Override
+    public void aroundWriteTo(WriterInterceptorContext context)
+                    throws IOException, WebApplicationException {
+        final OutputStream outputStream = context.getOutputStream();
+        context.setOutputStream(new GZIPOutputStream(outputStream));
+        context.proceed();
+    }
+}
+****
+
+* The interceptor gets an outputstream from the writerInterceptorContext and set a new one whichb is a GZIP wrapper of the original output stream.
+
+* The interceptor gets an output stream from the WriterInterceptorContext and sets a new one which is a GZIP wrapper of the original output stream.
+After all interceptors are executed the output stream lastly set to the WriterInterceptorContext will be used for serialization of the entity.
+In the example above the entity bytes will be written to the GZIPOutputStream which will compress the stream data and write them to the original output stream.
+The original stream is always the stream which writes the data to the "wire".
+When the interceptor is used on the server, the original output stream is the stream into which writes data to the underlying server container stream that sends the response to the client.
+
+* Once an interceptor wraps the datastreams that is after providing or manipulating the entity stream it is the responsibility of the interceptor to call either the next interceptor or the message body reader so inorder to do so the interceptor should call the [red]*context.proceed()* method which will call the next interceptor or the message body writer or the reader.Therefore every interceptor must call the proceed() method otherwise the entity would not be written.
+
+* Incase of the reader and writer interceptor the last context.proceed() method will call the message body reader or writer but in case of normal interceptors like invocation interceptors the contect.proceed() method will call the method on which this interceptor is called.
+* when you always want to add a new header to a response no matter what, use filters as interceptors might not be executed when no entity is present.
+Interceptors should modify properties only for entity serialization and deserialization purposes.
+
+*Example of a ReaderInterceptor*
+
+****
+public class GZIPReaderInterceptor implements ReaderInterceptor {
+
+    @Override
+    public Object aroundReadFrom(ReaderInterceptorContext context)
+                    throws IOException, WebApplicationException {
+        final InputStream originalInputStream = context.getInputStream();
+        context.setInputStream(new GZIPInputStream(originalInputStream));
+        return context.proceed();
+    }
+}
+****
+
+* Explanation : The GZIPReaderInterceptor wraps the original input stream with the GZIPInputStream.
+All further reads from the entity stream will cause that data will be decompressed by this stream.
+The interceptor method aroundReadFrom() must return an entity.
+The entity is returned from the proceed method of the ReaderInterceptorContext.
+The proceed method internally calls the wrapped interceptor which must also return an entity.
+The proceed method invoked from the last interceptor in the chain calls message body reader which deserializes the entity end returns it.
+Every interceptor can change this entity if there is a need but in the most cases interceptors will just return the entity as returned from the proceed method.
+
+== Filter and interceptor execution order
+
+* Let's look closer at the context of execution of filters and interceptors.
+The following steps describes scenario where a JAX-RS client makes a POST request to the server.
+The server receives an entity and sends a response back with the same entity.
+GZIP reader and writer interceptors are registered on the client and the server.
+Also filters are registered on client and server which change the headers of request and response :
+1. Client request invoked: The POST request with attached entity is built on the client and invoked.
+2. ClientRequestFilters: client request filters are executed on the client and they manipulate the request headers.
+3. Client WriterInterceptor: As the request contains an entity, writer interceptor registered on the client is executed before a MessageBodyWriter is executed.
+It wraps the entity output stream with the GZipOutputStream.
+4. Client MessageBodyWriter: message body writer is executed on the client which serializes the entity into the new GZipOutput stream.
+This stream zips the data and sends it to the "wire".
+5. Server: server receives a request.
+Data of the entity is compressed which means that pure read from the entity input stream would return compressed data.
+6. Server pre-matching ContainerRequestFilters: ContainerRequestFilters are executed that can manipulate resource method matching process.
+7. Server: matching: resource method matching is done.
+8. Server: post-matching ContainerRequestFilters: ContainerRequestFilters post matching filters are executed.
+This include execution of all global filters (without name binding) and filters name-bound to the matched method.
+9. Server ReaderInterceptor: reader interceptors are executed on the server.
+The GZIPReaderInterceptor wraps the input stream (the stream from the "wire") into the GZipInputStream and set it to context.
+10. Server MessageBodyReader: server message body reader is executed and it deserializes the entity from new GZipInputStream (get from the context).
+This means the reader will read unzipped data and not the compressed data from the "wire".
+11. Server resource method is executed: the deserialized entity object is passed to the matched resource method as a parameter.
+The method returns this entity as a response entity.
+12. Server ContainerResponseFilters are executed: response filters are executed on the server and they manipulate the response headers.
+This include all global bound filters (without name binding) and all filters name-bound to the resource method.
+13. Server WriterInterceptor: is executed on the server.
+It wraps the original output stream with a new GZIPOuptutStream.
+The original stream is the stream that "goes to the wire" (output stream for response from the underlying server container).
+14. Server MessageBodyWriter: message body writer is executed on the server which serializes the entity into the GZIPOutputStream.
+This stream compresses the data and writes it to the original stream which sends this compressed data back to the client.
+15. Client receives the response: the response contains compressed entity data.
+16. Client ClientResponseFilters: client response filters are executed and they manipulate the response headers.
+17. Client response is returned: the javax.ws.rs.core.Response is returned from the request invocation.
+18. Client code calls response.readEntity(): read entity is executed on the client to extract the entity from the response.
+19. Client ReaderInterceptor: the client reader interceptor is executed when readEntity(Class) is called.
+The interceptor wraps the entity input stream with GZIPInputStream.
+This will decompress the data from the original input stream.
+20. Client MessageBodyReaders: client message body reader is invoked which reads decompressed data from GZIPInputStream and deserializes the entity.
+21. Client: The entity is returned from the readEntity().
+
+=== Name Binding
+
+* Filters and interceptors can be name-bound.
+Name binding is a concept that allows to say to a JAX-RS runtime that a specific filter or interceptor will be executed only for a specific resource method.
+When a filter or an interceptor is limited only to a specific resource method we say that it is name-bound.
+Filters and interceptors that do not have such a limitation are called global.
+
+* Filter or interceptor can be assigned to a resource method using the @NameBinding annotation.
+The annotation is used as meta annotation for other user implemented annotations that are applied to a providers and resource methods.
+See the following example:
+
+****
+@NameBinding @Retention(RetentionPolicy.RUNTIME) public @interface Compress {}
+
+
+@Path("helloworld") public class HelloWorldResource {
+
+    @GET
+    @Produces("text/plain")
+    public String getHello() {
+        return "Hello World!";
+    }
+
+    @GET
+    @Path("too-much-data")
+    @Compress
+    public String getVeryLongString() {
+        String str = ... // very long string
+        return str;
+    }
+}
+
+// interceptor will be executed only when resource methods
+// annotated with @Compress annotation will be executed
+ @Compress
+ public class GZIPWriterInterceptor implements WriterInterceptor {
+ @Override
+ public void aroundWriteTo(WriterInterceptorContext context)
+ throws IOException, WebApplicationException {
+ final OutputStream outputStream = context.getOutputStream();
+ context.setOutputStream(new GZIPOutputStream(outputStream));
+ context.proceed();
+}
+}
+
+****
+
+IMPORTANT: The Abover mentioned name binding and the interceptors topic is similar to the one that Jan implemented but the one Jan used in the project is Invocation interceptor.
+
+NOTE: When more than one annotation is binded on to an interceptor method then the interceptor method works for the resource method only when both the annotations are mentioned on the resource method.

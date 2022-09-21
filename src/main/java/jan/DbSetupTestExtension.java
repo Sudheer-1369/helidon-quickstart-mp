@@ -6,10 +6,11 @@ package jan;
 
 
 //import com.mysql.cj.jdbc.JdbcConnection;
-import liquibase.database.jvm.JdbcConnection;
+
 import io.helidon.microprofile.cdi.HelidonContainer;
 import liquibase.Liquibase;
 import liquibase.Scope;
+import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import liquibase.ui.LoggerUIService;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -18,7 +19,6 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import javax.sql.DataSource;
 import java.util.Map;
 import java.util.Optional;
-
 
 
 /**
@@ -30,7 +30,7 @@ import java.util.Optional;
  *     Test class: ExceptionDefinitionDaoTest.class, this extension will look for
  *     Candidate Liquibase: /setup/ExceptionDefinitionDaoTest.xml
  * </pre>
- *
+ * <p>
  * The /setup location should be located in /src/test/resources. Expected use is to list this
  * extension in the JUnit5 test <strong>after</strong> an extension that clears/recreates the
  * original database. For example as is done in {@link H2DbResetExtension}.
@@ -38,6 +38,7 @@ import java.util.Optional;
 public class DbSetupTestExtension implements BeforeEachCallback {
 
     private final System.Logger logger = System.getLogger(getClass().getName());
+
     @Override
     public void beforeEach(ExtensionContext context) {
 

@@ -1,0 +1,70 @@
+= Client Apis
+
+* Jersey is amn open source framework for developing the RESTFul Webservices.We will be developing the rest apis / Restful services using the jersery framework but in order to test those we cannot simply test those using postman or a web browser since sometimes we need to pass payload or headers along with the URI it is not possible through Web browser and also the client dont use the Postman.
+* So in order to perform any client operations mostly in order to test the apis by acting as a client we cannot use postman which comes under manual testing so we need an api support in order perform these operations.
+* JAX-RS provides us with the the client api using which we can configure all our requirements like headerparams,queryparams, and we can also send the the request body.
+* Internally Java JDK comes up with HttpUrlConnection connector which is helpful for connecting with the application and resource,the Jersey implementations binds the HttpUrlConnection and HTTP services and makes it easy to write the code and implement the client services.
+
+[Black]*Steps for using the client api:*
+
+* Create an instance of Client
+
+----
+Client client = ClientBuilder.newClient();
+----
+
+* Create a WebTarget : A resource target identified by the resource URI.
+** A webtarget is used for creating a target by using the URI i.e it is useful for making an URI work simply this can act as a postman or a webbrowser.
+
+----
+WebTarget webTarget = client.target("http://localhost:8082/....");
+----
+* This will create a webtarget that currently pointing to the provided url.
+
+IMPORTANT: Instead of manually creating a webtarget we can actually Inject the webtarget using the Inject annotation,this will create a webTarget that will point to the place where server started i.e if the server started on http://localhost:63463 then the injected web target points to that location.
+
+* In order to add more path to the generated webtarget we can use WebTarget.path(String path) this will create another webtarget pointing to actualUri+uri.
+
+* Once a webtarget is created we need to create an invocation builder in order to invoke the requests onto the target.
+
+----
+Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON)
+----
+
+** Inside the request method we can give the mediatype and it will contribute under "accept" header.
+* Using the invocation builder created from the webTarget we can invoke the HTTP methods like get,post,put delete etc.
+** For the post and put operations we need to pass the payload along with the request,so inorder to send the payload along with the request uri refer the below code
+
+----
+Response response
+  = invocationBuilder
+  .post(Entity.entity(employee, MediaType.APPLICATION_JSON);
+----
+
+* Finally a simple REST Client :
+
+----
+public class RestClient {
+
+    private static final String REST_URI
+      = "http://localhost:8082/spring-jersey/resources/employees";
+
+    private Client client = ClientBuilder.newClient();
+
+    public Employee getJsonEmployee(int id) {
+        return client
+          .target(REST_URI)
+          .path(String.valueOf(id))
+          .request(MediaType.APPLICATION_JSON)
+          .get(Employee.class);
+    }
+
+ public Response createJsonEmployee(Employee   emp) {
+    return client
+      .target(REST_URI)
+      .request(MediaType.APPLICATION_JSON)
+      .post(Entity.entity(emp, MediaType.APPLICATION_JSON));
+ }
+}
+
+----

@@ -6,7 +6,7 @@ package restapis.implementations.dao;
 
 import javax.validation.Valid;
 
-public interface BaseDao<I , E >{
+public interface BaseDao<I, E> {
 
     E create(@Valid E entity);
 

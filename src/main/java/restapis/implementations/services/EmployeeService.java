@@ -13,7 +13,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class EmployeeService extends AbstractCrudService<Long, EmployeeEntity, Employee, EmployeeMapper, EmployeeDao>{
+public class EmployeeService extends AbstractCrudService<Long, EmployeeEntity, Employee, EmployeeMapper, EmployeeDao> {
 
     @Inject
     public EmployeeService(EmployeeMapper mapper, EmployeeDao dao) {

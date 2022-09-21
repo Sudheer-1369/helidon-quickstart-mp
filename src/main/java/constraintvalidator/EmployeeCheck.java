@@ -12,7 +12,7 @@ public interface EmployeeCheck {
 
     Date getDateOfBirth();
 
-    default boolean validateDates(){
+    default boolean validateDates() {
         return getDateOfBirth().before(getJoiningDate());
     }
 

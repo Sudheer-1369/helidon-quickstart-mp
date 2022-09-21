@@ -21,8 +21,8 @@ public abstract class AbstractCrudService
                 T extends BaseDao<I, E>>
         implements BaseService<I, D> {
 
-    private final M mapper;
-    private final T dao;
+    protected final M mapper;
+    protected final T dao;
 
     protected AbstractCrudService(M mapper, T dao) {
         this.dao = dao;

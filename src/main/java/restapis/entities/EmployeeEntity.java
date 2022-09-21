@@ -15,7 +15,7 @@ public class EmployeeEntity implements BaseEntity<Long> {
     @Column(name = "EMPLOYEE_ID")
     private Long id;
 
-    @Column(name = "COMPANY_ID",insertable = false, updatable = false)
+    @Column(name = "COMPANY_ID", insertable = false, updatable = false)
     private Long companyId;
     @Column(name = "LAST_NAME")
     private String lastName;

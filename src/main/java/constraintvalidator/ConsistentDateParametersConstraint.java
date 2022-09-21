@@ -10,7 +10,7 @@ import java.lang.annotation.Annotation;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class ConsistentDateParametersConstraint<A extends Annotation, T extends Employee> implements ConstraintValidator<A,T> {
+public abstract class ConsistentDateParametersConstraint<A extends Annotation, T extends Employee> implements ConstraintValidator<A, T> {
 
 
     Logger logger = Logger.getLogger(ConsistentDateParametersConstraint.class.getName());

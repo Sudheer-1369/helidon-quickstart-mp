@@ -22,35 +22,37 @@ public class StudentMain {
         try (Jsonb jsonb = JsonbBuilder.create()) {
 
 
-
             Student student = new Student(motLastName, "Sudheer", 25, 20, "12-A");
 
             String jsonStudent = jsonb.toJson(student);
 
             logger.log(Logger.Level.INFO, String.format("The Json representation of the student object is %s", jsonStudent));
 
-            Student student1 = jsonb.fromJson(jsonStudent,Student.class);
+            Student student1 = jsonb.fromJson(jsonStudent, Student.class);
 
             logger.log(Logger.Level.INFO, String.format("The Student representation from json is %s", student1));
 
 
         }
 
-        try(Jsonb jsonb = JsonbBuilder.create()){
+        try (Jsonb jsonb = JsonbBuilder.create()) {
             Student student = new Student(motLastName, "Sudheer", 25, 20, "12-A");
             Student student1 = new Student("Bhogi", "Mounika", 24, 20, "12-A");
             Student student2 = new Student(motLastName, "Manoja", 23, 20, "12-A");
             Student student3 = new Student("Podugu", "Venkat", 29, 20, "12-A");
 
             List<Student> list = new ArrayList<>();
-            list.add(student);list.add(student1);list.add(student2);list.add(student3);
+            list.add(student);
+            list.add(student1);
+            list.add(student2);
+            list.add(student3);
 
             String jsonStudentArray = jsonb.toJson(list);
 
-            logger.log(Logger.Level.INFO,String.format("The Json rep of student list is %s",jsonStudentArray));
+            logger.log(Logger.Level.INFO, String.format("The Json rep of student list is %s", jsonStudentArray));
 
-            List<Student> list1 = jsonb.fromJson(jsonStudentArray,List.class);
-            logger.log(Logger.Level.INFO,String.format("The student list from json is %s",list1));
+            List<Student> list1 = jsonb.fromJson(jsonStudentArray, List.class);
+            logger.log(Logger.Level.INFO, String.format("The student list from json is %s", list1));
         }
 
     }

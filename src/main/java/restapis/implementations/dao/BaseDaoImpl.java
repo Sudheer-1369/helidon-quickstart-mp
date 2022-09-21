@@ -4,33 +4,34 @@
 
 package restapis.implementations.dao;
 
+import org.hibernate.Session;
 import restapis.entities.BaseEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
 
-public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implements BaseDao<I, E> {
+public abstract class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implements BaseDao<I, E> {
 
-    private static final EntityManagerFactory entityManagerFactory;
+    public static final EntityManagerFactory entityManagerFactory;
 
     static {
         entityManagerFactory = Persistence.createEntityManagerFactory("DECS");
     }
 
-
-    private EntityManager entityManager;
-
     private final Class<E> entityType;
+    protected EntityManager entityManager;
 
     public BaseDaoImpl(Class<E> entityType) {
         this.entityType = entityType;
     }
-
 
     @Override
     public E create(@Valid E entity) {
@@ -67,7 +68,7 @@ public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implem
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        E responseEntity =  entityManager.find(entityType, id);
+        E responseEntity = entityManager.find(entityType, id);
 
         entityManager.close();
 
@@ -79,19 +80,31 @@ public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implem
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.remove(entityManager.getReference(entityType,id));
+        entityManager.remove(entityManager.getReference(entityType, id));
         entityManager.getTransaction().commit();
 
         entityManager.close();
     }
 
-    /**
-     * TODO Include the param page.
-     * @return
-     */
     public List<E> findAll() throws NoSuchFieldException {
 
-        return new ArrayList<>();
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        var filter = entityManager.unwrap(Session.class).enableFilter("newbranches");
+        filter.setParameter("openingDate", Timestamp.valueOf("2020-09-04 10:10:10.0"));
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<E> cq = cb.createQuery(entityType);
+        Root<E> root = cq.from(entityType);
+
+        cq.select(root);
+
+        var list =  entityManager.createQuery(cq).getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return list;
     }
 
 }

@@ -17,10 +17,9 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class StoreServiceImpl implements StoreService {
 
+    private final ModelMapper mapper = new ModelMapper();
     @Inject
     private StoreDao storeDao;
-
-    private final ModelMapper mapper = new ModelMapper();
 
     public Store getStoreById(final long id) throws DaoException {
         TraStore traStore = null;

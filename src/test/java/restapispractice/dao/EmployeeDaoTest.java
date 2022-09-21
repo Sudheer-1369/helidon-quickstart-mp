@@ -30,7 +30,7 @@ public class EmployeeDaoTest {
 
     @Test
     @Order(1)
-    void testCreateEmployee(){
+    void testCreateEmployee() {
         EmployeeEntity employeeEntity = new EmployeeEntity();
 //        employeeEntity.setAge(28);
         employeeEntity.setFirstName("Manikanta");
@@ -44,7 +44,7 @@ public class EmployeeDaoTest {
 
     @Test
     @Order(2)
-    void testGetEmployee(){
+    void testGetEmployee() {
         EmployeeEntity employeeEntity = employeeDao.findById(2L);
         System.out.println(employeeEntity);
         assertThat(employeeEntity).isNotNull();
@@ -53,7 +53,7 @@ public class EmployeeDaoTest {
 
     @Test
     @Order(3)
-    void testUpdateEmployee(){
+    void testUpdateEmployee() {
 
         CompanyEntity company = new CompanyEntity();
         company.setName("Google India Pvt Ltd");
@@ -78,7 +78,7 @@ public class EmployeeDaoTest {
 
     @Test
     @Order(4)
-    void testDeleteEmployee(){
+    void testDeleteEmployee() {
         employeeDao.deleteById(3L);
         assertThat("1").isNotNull();
     }

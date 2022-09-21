@@ -12,7 +12,9 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-/** JUnit5 extension that when applied to a class will reset H2 database state to 'empty'. */
+/**
+ * JUnit5 extension that when applied to a class will reset H2 database state to 'empty'.
+ */
 public class H2DbResetExtension extends AbstractBaseDBRResetExtension {
     private static final String SQL_DISABLE_REFERENTIAL_INTEGRITY = "SET REFERENTIAL_INTEGRITY FALSE";
     private static final String SQL_ENABLE_REFERENTIAL_INTEGRITY = "SET REFERENTIAL_INTEGRITY TRUE";

@@ -9,7 +9,7 @@ import restapis.entities.BaseEntity;
 
 import java.util.List;
 
-public interface BaseMapper<E extends BaseEntity<?>, D extends BaseDto<?>>{
+public interface BaseMapper<E extends BaseEntity<?>, D extends BaseDto<?>> {
 
     D entityToDto(E dto);
 

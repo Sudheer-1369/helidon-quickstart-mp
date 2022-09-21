@@ -6,7 +6,7 @@ package restapis.restapi;
 
 import javax.ws.rs.core.Response;
 
-public interface BaseResource<D,I> {
+public interface BaseResource<D, I> {
 
     Response post(D dto);
 

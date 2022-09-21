@@ -1,4 +1,4 @@
-package DecoratorTest;
+package decoratorTest;
 
 import Decorators.Item;
 import io.helidon.microprofile.tests.junit5.HelidonTest;

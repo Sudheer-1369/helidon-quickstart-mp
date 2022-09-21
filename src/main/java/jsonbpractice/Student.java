@@ -15,7 +15,7 @@ import javax.json.bind.annotation.JsonbTransient;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonbPropertyOrder({"lastName","firstName","age","section,fee"})
+@JsonbPropertyOrder({"lastName", "firstName", "age", "section,fee"})
 public class Student {
 
 

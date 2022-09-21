@@ -1,0 +1,10 @@
+* Store a class type in a variable public class ContainerTest<T>
+{
+private Class<T> tClass; public ContainerTest(Class<T> tClass) {
+this.tCLass = tClass; }
+
+    public void doSomething()
+    {
+        //access tClass here
+    }
+}

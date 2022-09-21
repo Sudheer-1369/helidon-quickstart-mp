@@ -22,14 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @HelidonTest
 class ConstrainValidatorTest {
 
-    @Inject
-    private WebTarget target;
-
-    private String lastReadPayload;
-    private DocumentContext lastReadDocumentContext;
-    private boolean responseRead;
-
-
     private static final Configuration JSON_PATH =
             Configuration.builder()
                     .options(
@@ -38,32 +30,37 @@ class ConstrainValidatorTest {
                             // Let us just deal with empty lists
                             Option.SUPPRESS_EXCEPTIONS)
                     .build();
+    @Inject
+    private WebTarget target;
+    private String lastReadPayload;
+    private DocumentContext lastReadDocumentContext;
+    private boolean responseRead;
 
     @Test
     @DisplayName("Should be able to create an Employee")
-    void createEmployee(){
+    void createEmployee() {
         Employee employee = new Employee();
         employee.setAge(25);
         employee.setDateOfBirth(Date.valueOf("1997-09-04"));
         employee.setJoiningDate(Date.valueOf("2020-09-04"));
 
-        try (var r = target.path("employee").request().post(Entity.json(employee))){
+        try (var r = target.path("employee").request().post(Entity.json(employee))) {
 
-            assertThat(query(r,"$")).isNotNull().extracting("dateOfBirth").map(Object::toString).containsExactly("1997-09-03Z");
+            assertThat(query(r, "$")).isNotNull().extracting("dateOfBirth").map(Object::toString).containsExactly("1997-09-03Z");
         }
     }
 
     @Test
     @DisplayName("Should be able to create an Employee with validation error")
-    void createEmployeeWithValidationError(){
+    void createEmployeeWithValidationError() {
         Employee employee = new Employee();
         employee.setAge(25);
         employee.setJoiningDate(Date.valueOf("1997-09-04"));
         employee.setDateOfBirth(Date.valueOf("2020-09-04"));
 
-        try (var r = target.path("employee").request().post(Entity.json(employee))){
+        try (var r = target.path("employee").request().post(Entity.json(employee))) {
 
-            assertThat(query(r,"$")).isNotNull().extracting("message").containsExactly("The Date of birth should always be before the date of joining");
+            assertThat(query(r, "$")).isNotNull().extracting("message").containsExactly("The Date of birth should always be before the date of joining");
         }
     }
 

@@ -5,8 +5,8 @@
 package restapis.mappers;
 
 import org.mapstruct.*;
-import restapis.entities.CompanyEntity;
 import restapis.dto.Company;
+import restapis.entities.CompanyEntity;
 
 import java.util.List;
 
@@ -24,6 +24,6 @@ public interface CompanyMapper extends BaseMapper<CompanyEntity, Company> {
     List<CompanyEntity> dtoListToEntityList(List<Company> dtoList);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void merge(CompanyEntity source,@MappingTarget CompanyEntity target);
+    void merge(CompanyEntity source, @MappingTarget CompanyEntity target);
 
 }

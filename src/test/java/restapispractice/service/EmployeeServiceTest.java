@@ -25,7 +25,7 @@ class EmployeeServiceTest {
 
     @Test
     @Order(1)
-    void testAddEmployee(){
+    void testAddEmployee() {
 
         Employee employee = new Employee();
         employee.setLastName("Kanakala");
@@ -42,7 +42,7 @@ class EmployeeServiceTest {
 
     @Test
     @Order(2)
-    void testGetEmployee(){
+    void testGetEmployee() {
         Employee employee = employeeService.get(9L);
         assertThat(employee).isNotNull();
         assertThat(employee).extracting("lastName").isEqualTo("Kanakala");
@@ -51,7 +51,7 @@ class EmployeeServiceTest {
 
     @Test
     @Order(3)
-    void updateEmployee(){
+    void updateEmployee() {
 
         Employee employee = new Employee();
         employee.setId(9L);
@@ -69,7 +69,7 @@ class EmployeeServiceTest {
 
     @Test
     @Order(4)
-    void partialUpdateEmployee(){
+    void partialUpdateEmployee() {
         Employee employee = new Employee();
         employee.setId(9L);
         employee.setAge(26);

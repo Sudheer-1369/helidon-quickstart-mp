@@ -22,11 +22,11 @@ public class DbExtension implements BeforeAllCallback {
 
         Connection connection = datasource.getConnection();
 
-        Statement statement =  connection.createStatement();
+        Statement statement = connection.createStatement();
 
         ResultSet resultSet = statement.executeQuery("SELECT * FROM INFORMATION_SCHEMA");
 
-        while(resultSet.next()){
+        while (resultSet.next()) {
             System.out.println(resultSet);
         }
 

@@ -22,9 +22,6 @@ public class TraEmployee {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "TRA_STORE_ID", nullable = false, updatable = false, insertable = false)
-    private long storeId;
-
     @Column(name = "FIRST_NAME")
     private String firstName;
 
@@ -40,11 +37,14 @@ public class TraEmployee {
     @Column(name = "LANDLINE_NUMBER")
     private String landLineNumber;
 
+    @Column(name = "JOINING_DATE")
+    private java.sql.Timestamp timeStamp;
+
     @ManyToOne
     @JoinColumn(name = "TRA_STORE_ID")
     private TraStore traStore;
 
     public String toString() {
-        return "Employee[id: " + id + " firstName:" + firstName + " lastName:" + lastName + " age:" + age + " salary:" + salary + " landLineNumber:" + landLineNumber + " storeId:" + storeId + "]";
+        return "Employee[id: " + id + " firstName:" + firstName + " lastName:" + lastName + " age:" + age + " salary:" + salary + " landLineNumber:" + landLineNumber + "]";
     }
 }

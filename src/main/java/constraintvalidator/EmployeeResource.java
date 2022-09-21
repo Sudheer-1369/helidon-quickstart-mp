@@ -18,9 +18,9 @@ public class EmployeeResource {
 
 
     @POST
-    public Response createEmployee(@Valid Employee employee){
+    public Response createEmployee(@Valid Employee employee) {
 
-        logger.log(Level.INFO,"Employee: "+employee+" got created");
+        logger.log(Level.INFO, "Employee: " + employee + " got created");
 
         return Response.ok(employee).build();
     }

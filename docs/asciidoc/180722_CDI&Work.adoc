@@ -1,0 +1,8 @@
+1.CDI Injection
+
+2.InversionOfControl
+
+3.@Qualifier : while creating custom qualifers and also for differentiating the different beans of same type of object.
+https://www.baeldung.com/java-ee-cdi#:~:text=CDI%20(Contexts%20and%20Dependency%20Injection)%20is%20a%20standard%20dependency%20injection,in%20a%20type%2Dsafe%20way[qualifier reference]
+
+
