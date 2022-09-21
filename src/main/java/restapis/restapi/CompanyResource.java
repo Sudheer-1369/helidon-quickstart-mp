@@ -74,7 +74,13 @@ public class CompanyResource extends BaseResourceImpl<Company, Long, CompanyServ
 
         var objects = service.getFew();
 
-        return objects.isEmpty() ? Response.noContent().build() : Response.ok(objects.get(0)).build();
+        return objects.isEmpty() ? Response.noContent().build() : Response.ok(objects).build();
     }
 
+    @GET
+    @Path("/recentCompanies")
+    public Response getNewCompanies(){
+
+        return null;
+    }
 }

@@ -19,31 +19,12 @@ public class CompanyDao extends BaseDaoImpl<Long, CompanyEntity> {
     private static final String FUNCTIONING_COMPANY_LIST = "functioningCompanyList";
     private static final String query = "select e.company_id as id,e.phone_number as phoneNumber,e.COMPANY_NAME as name from company e";
 
-//    @Override
-//    public List<CompanyEntity> findAll() throws NoSuchFieldException {
-//
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<CompanyEntity> cq = cb.createQuery(CompanyEntity.class);
-//        Root<CompanyEntity> root = cq.from(CompanyEntity.class);
-//
-//        Predicate predicate = cb.equal(root.get("phoneNumber"),"Sudheer");
-//
-////        cq.select()
-//        cq.where(predicate);
-//
-//        TypedQuery<CompanyEntity> tq = entityManager.createQuery(cq);
-//
-//        List<CompanyEntity> companyEntities = tq.getResultList();
-//
-//        return companyEntities;
-//    }
-
     public CompanyDao() {
         super(CompanyEntity.class);
     }
 
     @PostConstruct
-    void intialize() {
+    void initialize() {
         entityManager = entityManagerFactory.createEntityManager();
         var nativeQuery = entityManager.createNativeQuery(query);
         entityManager.getEntityManagerFactory().addNamedQuery(FUNCTIONING_COMPANY_LIST, nativeQuery);
@@ -62,5 +43,12 @@ public class CompanyDao extends BaseDaoImpl<Long, CompanyEntity> {
                 .getResultList();
     }
 
+    public List<?> getNewCompanies() throws NoSuchFieldException {
+//        entityManager.getTransaction().begin();
+//
+//        var filter = entityManager.unwrap(Session.class).enableFilter("new-branches");
+//        filter.setParameter("openingDate", Timestamp.valueOf("2029-09-04 10:10:10.0"));
 
+        return findAll();
+    }
 }

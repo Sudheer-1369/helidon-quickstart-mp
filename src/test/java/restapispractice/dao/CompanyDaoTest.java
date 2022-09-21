@@ -7,6 +7,7 @@ import restapis.entities.CompanyEntity;
 import restapis.implementations.dao.CompanyDao;
 
 import javax.inject.Inject;
+import java.sql.Timestamp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,12 +28,12 @@ public class CompanyDaoTest {
     @Order(1)
     void testCreateCompany() {
         CompanyEntity company = new CompanyEntity();
-        company.setName("Google India Pvt Ltd");
+        company.setName("Kantar India Pvt Ltd");
         company.setPhoneNumber("9573558432");
-
+        company.setOpeningDate(Timestamp.valueOf("2017-09-04 10:10:10.0"));
         CompanyEntity company1 = companyDao.create(company);
 
-        assertThat(company1).extracting("name").isEqualTo("Google India Pvt Ltd");
+        assertThat(company1).extracting("name").isEqualTo("Kantar India Pvt Ltd");
     }
 
     @Test
@@ -79,4 +80,20 @@ public class CompanyDaoTest {
 
     }
 
+    @Test
+    void testFindAll() throws NoSuchFieldException {
+
+        var companyList = companyDao.findAll();
+
+        for (CompanyEntity ce : companyList){
+            System.out.println(ce.toString());
+        }
+    }
+
+    @Test
+    void testFindNewCompanies() throws NoSuchFieldException {
+        var companyList = companyDao.getNewCompanies();
+        assertThat(companyList).hasSize(3).extracting("name")
+                .contains("Apple India Pvt Ltd", "Google India Pvt Ltd", "EMARS INDIA PVT LTD");
+    }
 }

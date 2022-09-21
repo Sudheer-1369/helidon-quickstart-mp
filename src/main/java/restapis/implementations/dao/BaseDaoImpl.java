@@ -4,17 +4,21 @@
 
 package restapis.implementations.dao;
 
+import org.hibernate.Session;
 import restapis.entities.BaseEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
 
-public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implements BaseDao<I, E> {
+public abstract class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implements BaseDao<I, E> {
 
     public static final EntityManagerFactory entityManagerFactory;
 
@@ -28,7 +32,6 @@ public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implem
     public BaseDaoImpl(Class<E> entityType) {
         this.entityType = entityType;
     }
-
 
     @Override
     public E create(@Valid E entity) {
@@ -83,14 +86,25 @@ public class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implem
         entityManager.close();
     }
 
-    /**
-     * TODO Include the param page.
-     *
-     * @return
-     */
     public List<E> findAll() throws NoSuchFieldException {
 
-        return new ArrayList<>();
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        var filter = entityManager.unwrap(Session.class).enableFilter("newbranches");
+        filter.setParameter("openingDate", Timestamp.valueOf("2020-09-04 10:10:10.0"));
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<E> cq = cb.createQuery(entityType);
+        Root<E> root = cq.from(entityType);
+
+        cq.select(root);
+
+        var list =  entityManager.createQuery(cq).getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return list;
     }
 
 }

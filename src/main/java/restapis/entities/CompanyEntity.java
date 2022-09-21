@@ -4,11 +4,19 @@
 
 package restapis.entities;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity(name = "COMPANY")
 @NamedQuery(name = "getFew", query = "select e.name, e.phoneNumber from COMPANY e")
+@FilterDef(name = "newbranches", parameters = @ParamDef(name = "openingDate", type = "timestamp"))
+@Filter(name = "newbranches", condition = "OPENING_DATE >= :openingDate")
 public class CompanyEntity implements BaseEntity<Long> {
 
     @Id
@@ -22,15 +30,20 @@ public class CompanyEntity implements BaseEntity<Long> {
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
+    @Column(name = "OPENING_DATE")
+    @NotNull(message = "The opening date is mandatory")
+    private Timestamp openingDate;
+
     @JoinColumn(name = "COMPANY_ID")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EmployeeEntity> employeeEntities;
 
-    public CompanyEntity(Long id, String name, String phoneNumber, List<EmployeeEntity> employees) {
+    public CompanyEntity(Long id, String name, String phoneNumber, Timestamp openingDate, List<EmployeeEntity> employeeEntities) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.employeeEntities = employees;
+        this.openingDate = openingDate;
+        this.employeeEntities = employeeEntities;
     }
 
     public CompanyEntity() {
@@ -68,12 +81,21 @@ public class CompanyEntity implements BaseEntity<Long> {
         this.employeeEntities = employees;
     }
 
+    public Timestamp getOpeningDate() {
+        return openingDate;
+    }
+
+    public void setOpeningDate(Timestamp openingDate) {
+        this.openingDate = openingDate;
+    }
+
     @Override
     public String toString() {
         return "CompanyEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", openingDate='"+openingDate+'\''+
                 '}';
     }
 }
