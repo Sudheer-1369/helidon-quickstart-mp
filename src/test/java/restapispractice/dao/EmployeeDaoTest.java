@@ -39,6 +39,7 @@ public class EmployeeDaoTest {
         employeeEntity.setJoiningDate(Timestamp.valueOf("2016-09-04 10:10:10.0"));
 
         EmployeeEntity employeeEntity1 = employeeDao.create(employeeEntity);
+        System.out.println(employeeEntity1);
         assertThat(employeeEntity1).isNotNull();
     }
 

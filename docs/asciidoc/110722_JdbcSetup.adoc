@@ -211,6 +211,7 @@ Note: After inserting a row with the ResultSet.insertRow, you should move the cu
 ----
 
 === Closing the connections
+
 * When you are finished using a Connection, Statement, or ResultSet object, call its close method to immediately release the resources it's using.
 
 NOTE: Alternatively, use a try-with-resources statement to automatically close Connection, Statement, and ResultSet objects, regardless of whether an SQLException has been thrown i.e : try (Statement stmt = con.createStatement()) ,whether there is an exception or not the statement resource will be closed when the try block terminates.All the resources Statement,Connection,ResultSet when used inside the try will be closed when the try terminates.

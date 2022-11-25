@@ -2,7 +2,7 @@
  * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
  */
 
-package restapis.support;
+package restapis.runtimesupport.test;
 
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.DocumentContext;

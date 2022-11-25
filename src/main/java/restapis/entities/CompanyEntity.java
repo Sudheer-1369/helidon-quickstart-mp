@@ -27,7 +27,7 @@ public class CompanyEntity implements BaseEntity<Long> {
     @Column(name = "COMPANY_NAME")
     private String name;
 
-    @Column(name = "PHONE_NUMBER")
+    @Column(name = "PHONE_NUMBER", updatable = false)
     private String phoneNumber;
 
     @Column(name = "OPENING_DATE")
@@ -95,7 +95,7 @@ public class CompanyEntity implements BaseEntity<Long> {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", openingDate='"+openingDate+'\''+
+                ", openingDate='" + openingDate + '\'' +
                 '}';
     }
 }

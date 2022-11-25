@@ -7,9 +7,10 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import restapis.YesNo;
 import restapis.dto.Company;
-import restapis.support.JsonContextParameterResolver;
-import restapis.support.JsonContextParameterResolver.JSONContext;
+import restapis.runtimesupport.test.JsonContextParameterResolver;
+import restapis.runtimesupport.test.JsonContextParameterResolver.JSONContext;
 
 import javax.inject.Inject;
 import javax.ws.rs.client.Entity;
@@ -114,8 +115,32 @@ public class CompanyResourceTest {
         try (var r = target.path("company").path("functioningCompanies").request().get()) {
             assertThat(r.getStatusInfo().toEnum()).isEqualTo(Response.Status.OK);
             assertThat(context.top(r))
-                    .extracting("name","phoneNumber")
+                    .extracting("name", "phoneNumber")
                     .contains(Tuple.tuple("Apple India Pvt Ltd", "9493615809"));
+        }
+    }
+
+
+    @Test
+    @Order(6)
+    void testJersey(JSONContext context){
+        try (var r = target.path("company").path("jerseyTest").request().get()){
+
+            System.out.println(context.top(r));
+        }
+    }
+
+    @Test
+    @Order(7)
+    void testValidate(JSONContext context){
+        Company company = new Company();
+
+        company.setName("EMARS INDIA PVT LTD");
+        company.setPhoneNumber("9676253817");
+        company.setSkipDuplicates(YesNo.YES);
+        try (var r = target.path("company").path("validateCompanies").request().post(Entity.json(company))){
+            System.out.println(context.top(r));
+
         }
     }
 }

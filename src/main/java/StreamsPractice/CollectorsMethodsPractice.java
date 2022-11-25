@@ -31,7 +31,7 @@ public class CollectorsMethodsPractice {
         Set<Employee> employeeSet = employeeList.stream().filter(s -> s.age > 20).collect(Collectors.toSet());
         System.out.println(employeeSet);
 
-        //Concatinate to a string
+        //Concatenate to a string
         String joined = employeeList.stream().map(Employee::getName).collect(Collectors.joining(", "));
         System.out.println(joined);
 
@@ -39,19 +39,19 @@ public class CollectorsMethodsPractice {
         int totalSalary = employeeList.stream().map(Employee::getSalary).reduce(0, (a, b) -> a + b);
         System.out.println("method-1 salary is " + totalSalary);
 
-        totalSalary = employeeList.stream().map(Employee::getSalary).mapToInt(Integer::intValue).sum();
+        totalSalary = employeeList.stream().mapToInt(Employee::getSalary).sum();
         System.out.println("method-2 salary is " + totalSalary);
 
         totalSalary = employeeList.stream().collect(Collectors.summingInt(Employee::getSalary));
         System.out.println("method-3 salary is " + totalSalary);
 
         //avg
-        OptionalDouble avgSalary = employeeList.stream().map(Employee::getSalary).mapToDouble(Integer::intValue).average();
+        OptionalDouble avgSalary = employeeList.stream().mapToInt(Employee::getSalary).average();
         System.out.println(avgSalary.getAsDouble());
 
         //Grouping
         Map<String, List<Employee>> byDept = employeeList.stream().collect(Collectors.groupingBy(Employee::getDept));
-        System.out.println("Grouping by departmen is " + byDept);
+        System.out.println("Grouping by department is " + byDept);
 
         Map<Boolean, List<Employee>> bySalaryLevel = employeeList.stream().collect(Collectors.partitioningBy(s -> s.getSalary() >= 25));
         System.out.println("Partitioning based on salaries " + bySalaryLevel);
