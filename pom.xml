@@ -364,8 +364,8 @@
                             <version>1.4.2.Final</version>
                         </path>
                     </annotationProcessorPaths>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>

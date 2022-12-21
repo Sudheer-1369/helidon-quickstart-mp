@@ -12,15 +12,16 @@ import java.io.ByteArrayInputStream;
 
 public class StAXParserPractice2 {
 
-    private static final String payload = """
-            <person>
-             <name>Sudheer</name>
-             <g>
-              <gender/>
-             </g>
-             <dob>19970904</dob>
-            </person>`
-            """;
+    private static final String PAYLOAD = "sudheer";
+//            """
+//            <person>
+//             <name>Sudheer</name>
+//             <g>
+//              <gender/>
+//             </g>
+//             <dob>19970904</dob>
+//            </person>`
+//            """;
 
     /**
      * 1 - start
@@ -33,7 +34,7 @@ public class StAXParserPractice2 {
     public static void main(String[] args) throws XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLEventReader reader = factory
-                .createXMLEventReader(new ByteArrayInputStream(payload.getBytes()));
+                .createXMLEventReader(new ByteArrayInputStream(PAYLOAD.getBytes()));
 
         while (reader.hasNext()){
             XMLEvent event = reader.nextEvent();

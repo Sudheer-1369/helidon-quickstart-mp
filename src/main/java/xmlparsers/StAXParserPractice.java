@@ -13,13 +13,14 @@ import java.io.ByteArrayInputStream;
 
 public class StAXParserPractice {
 
-    static String payload = """
-            <person>
-             <name>Sudheer</name>
-             <gender>Male</gender>
-             <dob>19970904</dob>
-            </person>
-            """;
+    static String payload = "sudheer";
+//            """
+//            <person>
+//             <name>Sudheer</name>
+//             <gender>Male</gender>
+//             <dob>19970904</dob>
+//            </person>
+//            """;
 
     public static void main(String[] args) throws XMLStreamException {
 
