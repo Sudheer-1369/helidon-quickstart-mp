@@ -2,7 +2,7 @@
  * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
  */
 
-package BeanInjectionPractice;
+package beaninjectionpractice;
 
 import javax.enterprise.context.ApplicationScoped;
 

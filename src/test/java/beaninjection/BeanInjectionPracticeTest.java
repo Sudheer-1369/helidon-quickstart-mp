@@ -1,6 +1,6 @@
 package beaninjection;
 
-import BeanInjectionPractice.BeanInjection;
+import beaninjectionpractice.BeanInjection;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import org.junit.jupiter.api.Test;
 
