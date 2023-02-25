@@ -9,7 +9,7 @@ import restapis.YesNo;
 public class Prac {
 
     public static void main(String[] args) {
-        Class classType = YesNo.class;
+        Class<YesNo> classType = YesNo.class;
         System.out.println(classType.getSimpleName());
     }
 }

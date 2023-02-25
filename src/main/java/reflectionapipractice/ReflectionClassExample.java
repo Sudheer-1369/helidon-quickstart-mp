@@ -15,7 +15,7 @@ public class ReflectionClassExample {
     private static final Logger logger = Logger.getLogger(ReflectionClassExample.class.getName());
 
     public static void main(String[] args) {
-        Class rentCar = RentCar.class;
+        Class<RentCar> rentCar = RentCar.class;
         int i = 0;
         try {
             String rentalCarPackage = rentCar.getName();
@@ -35,7 +35,7 @@ public class ReflectionClassExample {
                 System.out.println((i++) + "--" + constructor);
             }
 
-            Constructor constructor = rentCar.getConstructor(Integer.TYPE);
+            Constructor<RentCar> constructor = rentCar.getConstructor(Integer.TYPE);
             System.out.println("The cons with integer as parameter is " + constructor);
 
             Method[] methods = rentCar.getMethods();
@@ -66,7 +66,7 @@ public class ReflectionClassExample {
                 System.out.println("Fieldname is: " + fieldname);
 
                 // get public field type
-                Object fieldType = field.getType();
+                Class<?> fieldType = field.getType();
                 System.out.println("Type of field " + fieldname + " is: "
                         + fieldType);
 

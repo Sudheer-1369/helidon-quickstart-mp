@@ -41,9 +41,9 @@ public class CastUtil {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T uncheckedCast(Object o) {
+    public static <T> T uncheckedCast(T o) {
 
-        return (T) o;
+        return o;
     }
 }
 

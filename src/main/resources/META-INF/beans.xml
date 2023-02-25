@@ -11,7 +11,7 @@
        bean-discovery-mode="annotated">
     <decorators>
         <class>
-            Decorators.Item$ItemDecorator
+            decorators.Item$ItemDecorator
         </class>
     </decorators>
 </beans>
