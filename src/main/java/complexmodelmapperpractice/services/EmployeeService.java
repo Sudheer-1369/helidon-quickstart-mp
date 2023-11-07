@@ -4,7 +4,7 @@
 
 package complexmodelmapperpractice.services;
 
-import complexmodelmapperpractice.CommonExceptions.DaoException;
+import complexmodelmapperpractice.commonexceptions.DaoException;
 import complexmodelmapperpractice.models.Employee;
 
 public interface EmployeeService {

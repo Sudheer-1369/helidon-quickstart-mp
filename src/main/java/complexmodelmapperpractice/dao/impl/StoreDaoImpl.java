@@ -4,7 +4,7 @@
 
 package complexmodelmapperpractice.dao.impl;
 
-import complexmodelmapperpractice.CommonExceptions.DaoException;
+import complexmodelmapperpractice.commonexceptions.DaoException;
 import complexmodelmapperpractice.dao.StoreDao;
 import complexmodelmapperpractice.entities.TraStore;
 import java.util.List;

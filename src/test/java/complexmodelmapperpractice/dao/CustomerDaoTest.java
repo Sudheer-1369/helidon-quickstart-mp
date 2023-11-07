@@ -1,6 +1,6 @@
 package complexmodelmapperpractice.dao;
 
-import complexmodelmapperpractice.CommonExceptions.DaoException;
+import complexmodelmapperpractice.commonexceptions.DaoException;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
