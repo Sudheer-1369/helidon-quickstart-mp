@@ -8,8 +8,8 @@ import org.glassfish.jersey.server.ContainerRequest;
 
 public class Options {
 
-    public Options(ContainerRequest request) {
+  public Options(ContainerRequest request) {
 
-        //TODO : Do something with the request
-    }
+    // TODO : Do something with the request
+  }
 }

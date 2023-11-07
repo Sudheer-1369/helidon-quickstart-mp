@@ -1,7 +1,7 @@
 package util;
 
-import ComplexModelMapperPractice.entities.TraEmployee;
-import ComplexModelMapperPractice.entities.TraStore;
+import complexmodelmapperpractice.entities.TraEmployee;
+import complexmodelmapperpractice.entities.TraStore;
 import java.sql.Timestamp;
 import javax.inject.Inject;
 

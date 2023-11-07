@@ -1,17 +1,17 @@
-///*
+/// *
 // * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
 // */
-//package decskafka;
+// package decskafka;
 //
-//import org.eclipse.microprofile.config.spi.ConfigSource;
+// import org.eclipse.microprofile.config.spi.ConfigSource;
 //
-//import java.util.Collections;
-//import java.util.Map;
+// import java.util.Collections;
+// import java.util.Map;
 //
-///**
+/// **
 // * Flyweight to designate an empty config source.
 // */
-//public final class EmptyConfigSource implements ConfigSource {
+// public final class EmptyConfigSource implements ConfigSource {
 //
 //    static final ConfigSource EMPTY_CONFIG_SOURCE = new EmptyConfigSource();
 //
@@ -32,4 +32,4 @@
 //    public String getName() {
 //        return null;
 //    }
-//}
+// }

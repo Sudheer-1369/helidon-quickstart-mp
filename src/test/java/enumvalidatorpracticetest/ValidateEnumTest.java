@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Test;
 @HelidonTest
 public class ValidateEnumTest {
 
-
-
-    @Test
-    public void testCreateCompany(){
-
-    }
+  @Test
+  public void testCreateCompany() {}
 }

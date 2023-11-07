@@ -34,8 +34,8 @@ public class Consumer {
     properties.setProperty(
         ConsumerConfig.GROUP_ID_CONFIG,
         consumerGroupId); // This consumer group might not present in the apache kafka server so we
-                          // need to set the offset point from where the consumer group need to
-                          // consume
+    // need to set the offset point from where the consumer group need to
+    // consume
     properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
     // Create a consumer

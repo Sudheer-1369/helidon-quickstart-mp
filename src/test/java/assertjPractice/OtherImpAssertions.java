@@ -3,11 +3,11 @@ package assertjPractice;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.InstanceOfAssertFactories.STRING;
 
-import StreamsPractice.Employee;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import java.util.ArrayList;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
+import streamspractice.Employee;
 
 @HelidonTest
 public class OtherImpAssertions {

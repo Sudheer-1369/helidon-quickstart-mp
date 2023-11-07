@@ -3,12 +3,12 @@ package assertjPractice;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-import StreamsPractice.Employee;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
+import streamspractice.Employee;
 
 @HelidonTest
 public class ExtractingTesting {

@@ -5,30 +5,28 @@
 package restapis;
 
 public enum YesNo {
+  YES("Y"),
+  NO("N");
 
-    YES("Y"), NO("N");
+  private final String code;
 
-    private final String code;
+  YesNo(String code) {
+    this.code = code;
+  }
 
-    YesNo(String code) {
-        this.code = code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public String getCode() {
-        return code;
-    }
+  Class<? extends YesNo> enumType = YesNo.class;
 
-    Class<? extends YesNo> enumType  = YesNo.class;
+  //    Set<enumType> values = EnumSet.allOf(enumType);
 
-//    Set<enumType> values = EnumSet.allOf(enumType);
-
-//    static YesNo[] yesNos = EnumSet.allOf(YesNo.class).toArray(new YesNo[0]);
-//
-//    public static void main(String[] args) {
-//        for (YesNo yesNo : yesNos){
-//            System.out.println(yesNo.getCode());
-//        }
-//    }
+  //    static YesNo[] yesNos = EnumSet.allOf(YesNo.class).toArray(new YesNo[0]);
+  //
+  //    public static void main(String[] args) {
+  //        for (YesNo yesNo : yesNos){
+  //            System.out.println(yesNo.getCode());
+  //        }
+  //    }
 }
-
-

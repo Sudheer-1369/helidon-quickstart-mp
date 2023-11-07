@@ -13,10 +13,9 @@ import restapis.YesNo;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Company {
-    private Long id;
-    private String name;
-    private String phoneNumber;
+  private Long id;
+  private String name;
+  private String phoneNumber;
 
-    private YesNo skipDuplicates;
-
+  private YesNo skipDuplicates;
 }

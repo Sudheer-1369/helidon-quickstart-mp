@@ -9,11 +9,10 @@ import javax.ws.rs.core.FeatureContext;
 
 public class JerseyExtensionFeature implements Feature {
 
-    @Override
-    public boolean configure(FeatureContext context) {
-        context.register(new OptionsValueBinder());
+  @Override
+  public boolean configure(FeatureContext context) {
+    context.register(new OptionsValueBinder());
 
-
-        return true;
-    }
+    return true;
+  }
 }

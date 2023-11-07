@@ -1,9 +1,9 @@
-///*
+/// *
 // * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
 // */
 //
-//package decskafka;
+// package decskafka;
 //
-//public class SimpleProducer {
+// public class SimpleProducer {
 //
-//}
+// }

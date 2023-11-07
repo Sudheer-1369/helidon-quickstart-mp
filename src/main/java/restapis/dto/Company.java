@@ -20,7 +20,7 @@ public class Company implements BaseDto<Long> {
   private String name;
   private String phoneNumber;
   private List<Employee> employees;
-    @EnumValidator(classType = YesNo.class, message = "Only YesNo No is allowed")
-    private YesNo skipDuplicates;
 
+  @EnumValidator(classType = YesNo.class, message = "Only YesNo No is allowed")
+  private YesNo skipDuplicates;
 }

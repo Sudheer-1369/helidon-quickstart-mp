@@ -10,7 +10,7 @@ import javax.validation.Valid;
 @ApplicationScoped
 public class ValidateCreate {
 
-    public void createCompany(@Valid Company company){
-        System.out.println(company);
-    }
+  public void createCompany(@Valid Company company) {
+    System.out.println(company);
+  }
 }

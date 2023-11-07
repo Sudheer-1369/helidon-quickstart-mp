@@ -1,6 +1,6 @@
 = Random Important Things
 
-* MapStruct uses the assignment that it can find for the collection mapping.
+* mapstruct uses the assignment that it can find for the collection mapping.
 In order to achieve what you want you will have to define a custom method where you are going to ignore the data field explicitly and then use @IterableMapping(qualifiedBy) or @IterableMapping(qualifiedByName) to select the required method.
 
 ----

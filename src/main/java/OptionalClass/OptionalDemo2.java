@@ -8,12 +8,12 @@ import java.util.Optional;
 
 public class OptionalDemo2 {
 
-    public static void main(String[] args){
+  public static void main(String[] args) {
 
-        Optional<String> str = Optional.empty();
+    Optional<String> str = Optional.empty();
 
-        System.out.println(str.isPresent());
+    System.out.println(str.isPresent());
 
-        System.out.println(str == null);
-    }
+    System.out.println(str == null);
+  }
 }

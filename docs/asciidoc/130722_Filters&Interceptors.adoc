@@ -1,8 +1,8 @@
-= Jersey. Filters and Interceptors
+= Jersey. Filters and interceptors
 
 [Black]*Intro:*
 
-* Filters and Interceptors are used on both sides: client side and server side.The filters are primarily used for modifying the URIS,headers and other parameters of both request and response.Interceptors are used primarily for the modification of the entities.Filters can also be used for Entity modification but are not preferred over interceptor.
+* Filters and interceptors are used on both sides: client side and server side.The filters are primarily used for modifying the URIS,headers and other parameters of both request and response.interceptors are used primarily for the modification of the entities.Filters can also be used for Entity modification but are not preferred over interceptor.
 
 == Filters
 
@@ -97,7 +97,7 @@ If not aborted, the outgoing request is then physically sent over to the server 
 Finally the response is passed back to the code that invoked the request.
 If the request was aborted in any client request filter then the client/server communication is skipped and the aborted response is used in the response filters.
 
-== Interceptors
+== interceptors
 
 * The interceptors are also available on both server and client side.The primary intent of the filters is to manipulate the request and response parameters like HTTP headers,URIs and the HTTP methods and also sometimes the entities but the interceptors sole purpose is to manipulate the request/response entity body
 
@@ -134,7 +134,7 @@ When the interceptor is used on the server, the original output stream is the st
 
 * Incase of the reader and writer interceptor the last context.proceed() method will call the message body reader or writer but in case of normal interceptors like invocation interceptors the contect.proceed() method will call the method on which this interceptor is called.
 * when you always want to add a new header to a response no matter what, use filters as interceptors might not be executed when no entity is present.
-Interceptors should modify properties only for entity serialization and deserialization purposes.
+interceptors should modify properties only for entity serialization and deserialization purposes.
 
 *Example of a ReaderInterceptor*
 
