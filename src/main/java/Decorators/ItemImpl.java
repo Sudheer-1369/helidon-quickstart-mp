@@ -9,13 +9,12 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class ItemImpl implements Item {
 
-    @Override
-    public void draw(int x, int y) {
-        System.out.println("Inside ItemImpl ");
-    }
+  @Override
+  public void draw(int x, int y) {
+    System.out.println("Inside ItemImpl ");
+  }
 
-
-    public void fetch(int x) {
-        System.out.println("Inside the ItemImpl fetch method");
-    }
+  public void fetch(int x) {
+    System.out.println("Inside the ItemImpl fetch method");
+  }
 }

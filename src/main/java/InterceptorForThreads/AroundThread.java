@@ -4,13 +4,17 @@
 
 package InterceptorForThreads;
 
-import javax.interceptor.InterceptorBinding;
 import java.lang.annotation.*;
+import javax.interceptor.InterceptorBinding;
 
 @Inherited
 @InterceptorBinding
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR})
+@Target({
+  ElementType.TYPE,
+  ElementType.METHOD,
+  ElementType.FIELD,
+  ElementType.ANNOTATION_TYPE,
+  ElementType.CONSTRUCTOR
+})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AroundThread {
-
-}
+public @interface AroundThread {}

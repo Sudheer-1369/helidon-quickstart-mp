@@ -8,14 +8,14 @@ import javax.validation.Valid;
 
 public interface BaseDao<I, E> {
 
-    E create(@Valid E entity);
+  E create(@Valid E entity);
 
-    E update(@Valid E entity);
+  E update(@Valid E entity);
 
-    E findById(I id);
+  E findById(I id);
 
-    void deleteById(I id);
+  void deleteById(I id);
 
-//    List<E> findAll(int page);
+  //    List<E> findAll(int page);
 
 }

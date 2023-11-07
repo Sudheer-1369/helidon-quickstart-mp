@@ -13,11 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Employee implements BaseDto<Long> {
 
-    private Long id;
-    private String lastName;
-    private String firstName;
-    private Integer age;
-    private Integer salary;
-    private String joiningDate;
-
+  private Long id;
+  private String lastName;
+  private String firstName;
+  private Integer age;
+  private Integer salary;
+  private String joiningDate;
 }

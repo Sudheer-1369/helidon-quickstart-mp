@@ -14,49 +14,49 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Car {
-    private int id;
-    private String price;
-    private String manufacturingDate;
-    private String carBrand;
-    private String name;
+  private int id;
+  private String price;
+  private String manufacturingDate;
+  private String carBrand;
+  private String name;
 
-    public int getId() {
-        return id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getPrice() {
-        return price;
-    }
+  public String getPrice() {
+    return price;
+  }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
+  public void setPrice(String price) {
+    this.price = price;
+  }
 
-    public String getManufacturingDate() {
-        return manufacturingDate;
-    }
+  public String getManufacturingDate() {
+    return manufacturingDate;
+  }
 
-    public void setManufacturingDate(String manufacturingDate) {
-        this.manufacturingDate = manufacturingDate;
-    }
+  public void setManufacturingDate(String manufacturingDate) {
+    this.manufacturingDate = manufacturingDate;
+  }
 
-    public String getCarBrand() {
-        return carBrand;
-    }
+  public String getCarBrand() {
+    return carBrand;
+  }
 
-    public void setCarBrand(String carBrand) {
-        this.carBrand = carBrand;
-    }
+  public void setCarBrand(String carBrand) {
+    this.carBrand = carBrand;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 }

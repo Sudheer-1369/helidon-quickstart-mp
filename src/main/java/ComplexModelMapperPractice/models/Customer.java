@@ -13,14 +13,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Customer {
 
-    private long id;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private String mobileNumber;
-    private Store store;
+  private long id;
+  private String firstName;
+  private String lastName;
+  private int age;
+  private String mobileNumber;
+  private Store store;
 
-    public String toString() {
-        return "Employee[id: " + id + " firstName:" + firstName + " lastName:" + lastName + " age:" + age + " mobileNumber" + mobileNumber + "]";
-    }
+  public String toString() {
+    return "Employee[id: "
+        + id
+        + " firstName:"
+        + firstName
+        + " lastName:"
+        + lastName
+        + " age:"
+        + age
+        + " mobileNumber"
+        + mobileNumber
+        + "]";
+  }
 }

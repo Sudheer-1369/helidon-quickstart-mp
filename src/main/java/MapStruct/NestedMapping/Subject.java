@@ -14,6 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Subject {
-    private String name;
-    private Author author;
+  private String name;
+  private Author author;
 }

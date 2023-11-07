@@ -4,9 +4,9 @@
 
 package restapis.implementations.dao;
 
-import org.hibernate.Session;
-import restapis.entities.BaseEntity;
-
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,97 +14,94 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.List;
+import org.hibernate.Session;
+import restapis.entities.BaseEntity;
 
-public abstract class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>> implements BaseDao<I, E> {
+public abstract class BaseDaoImpl<I extends Serializable, E extends BaseEntity<I>>
+    implements BaseDao<I, E> {
 
-    public static final EntityManagerFactory entityManagerFactory;
+  public static final EntityManagerFactory entityManagerFactory;
 
-    static {
-        entityManagerFactory = Persistence.createEntityManagerFactory("DECS");
-    }
+  static {
+    entityManagerFactory = Persistence.createEntityManagerFactory("DECS");
+  }
 
-    private final Class<E> entityType;
-    protected EntityManager entityManager;
+  private final Class<E> entityType;
+  protected EntityManager entityManager;
 
-    public BaseDaoImpl(Class<E> entityType) {
-        this.entityType = entityType;
-    }
+  public BaseDaoImpl(Class<E> entityType) {
+    this.entityType = entityType;
+  }
 
-    @Override
-    public E create(@Valid E entity) {
+  @Override
+  public E create(@Valid E entity) {
 
-        entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+    entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
 
-        entityManager.persist(entity);
-        entityManager.getTransaction().commit();
+    entityManager.persist(entity);
+    entityManager.getTransaction().commit();
 
-        entityManager.close();
+    entityManager.close();
 
-        return entity;
+    return entity;
+  }
 
-    }
+  @Override
+  public E update(@Valid E entity) {
 
-    @Override
-    public E update(@Valid E entity) {
+    entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
 
-        entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+    E responseEntity = entityManager.merge(entity);
+    entityManager.getTransaction().commit();
 
-        E responseEntity = entityManager.merge(entity);
-        entityManager.getTransaction().commit();
+    entityManager.close();
 
-        entityManager.close();
+    return responseEntity;
+  }
 
-        return responseEntity;
+  @Override
+  public E findById(I id) {
+    entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
 
-    }
+    E responseEntity = entityManager.find(entityType, id);
 
-    @Override
-    public E findById(I id) {
-        entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+    entityManager.close();
 
-        E responseEntity = entityManager.find(entityType, id);
+    return responseEntity;
+  }
 
-        entityManager.close();
+  @Override
+  public void deleteById(I id) {
+    entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
 
-        return responseEntity;
-    }
+    entityManager.remove(entityManager.getReference(entityType, id));
+    entityManager.getTransaction().commit();
 
-    @Override
-    public void deleteById(I id) {
-        entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+    entityManager.close();
+  }
 
-        entityManager.remove(entityManager.getReference(entityType, id));
-        entityManager.getTransaction().commit();
+  public List<E> findAll() throws NoSuchFieldException {
 
-        entityManager.close();
-    }
+    entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
 
-    public List<E> findAll() throws NoSuchFieldException {
+    var filter = entityManager.unwrap(Session.class).enableFilter("newbranches");
+    filter.setParameter("openingDate", Timestamp.valueOf("2020-09-04 10:10:10.0"));
 
-        entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+    CriteriaQuery<E> cq = cb.createQuery(entityType);
+    Root<E> root = cq.from(entityType);
 
-        var filter = entityManager.unwrap(Session.class).enableFilter("newbranches");
-        filter.setParameter("openingDate", Timestamp.valueOf("2020-09-04 10:10:10.0"));
+    cq.select(root);
 
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<E> cq = cb.createQuery(entityType);
-        Root<E> root = cq.from(entityType);
+    var list = entityManager.createQuery(cq).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
 
-        cq.select(root);
-
-        var list =  entityManager.createQuery(cq).getResultList();
-        entityManager.getTransaction().commit();
-        entityManager.close();
-
-        return list;
-    }
-
+    return list;
+  }
 }

@@ -4,21 +4,20 @@
 
 package sample.practice.PreCon.MapPractice;
 
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
 import java.util.Arrays;
 import java.util.Collection;
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
 
 public class MultiValuedMapPractice {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        MultivaluedMap<String, String> mvm = new MultivaluedHashMap<>();
-        mvm.put("fruits", Arrays.asList("apple", "oranges", "watermelon"));
+    MultivaluedMap<String, String> mvm = new MultivaluedHashMap<>();
+    mvm.put("fruits", Arrays.asList("apple", "oranges", "watermelon"));
 
-        Collection<String> values = mvm.get("fruits");
+    Collection<String> values = mvm.get("fruits");
 
-        System.out.println(values);
-    }
-
+    System.out.println(values);
+  }
 }

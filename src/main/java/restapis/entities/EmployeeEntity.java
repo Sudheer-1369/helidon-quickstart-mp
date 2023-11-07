@@ -4,129 +4,151 @@
 
 package restapis.entities;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
+import javax.persistence.*;
 
 @Entity(name = "EMPLOYEE")
 public class EmployeeEntity implements BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "EMPLOYEE_ID")
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "EMPLOYEE_ID")
+  private Long id;
 
-    @Column(name = "COMPANY_ID", insertable = false, updatable = false)
-    private Long companyId;
-    @Column(name = "LAST_NAME")
-    private String lastName;
-    @Column(name = "FIRST_NAME", columnDefinition = "varchar(40) default 'Shrutika'")
-    private String firstName;
-    @Column(name = "AGE", nullable = false)
-    private Integer age;
-    @Column(name = "SALARY")
-    private Integer salary;
-    @Column(name = "JOINING_DATE")
-    private Timestamp joiningDate;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "COMPANY_ID")
-    private CompanyEntity company;
+  @Column(name = "COMPANY_ID", insertable = false, updatable = false)
+  private Long companyId;
 
-    public EmployeeEntity(Long id, Long companyId, String lastName, String firstName, Integer age, Integer salary) {
-        this.id = id;
-        this.companyId = companyId;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.age = age;
-        this.salary = salary;
-    }
+  @Column(name = "LAST_NAME")
+  private String lastName;
 
-    public EmployeeEntity(Long id, String lastName, String firsName, int age, int salary, Timestamp joiningDate, CompanyEntity company) {
-        this.id = id;
-        this.lastName = lastName;
-        this.firstName = firsName;
-        this.age = age;
-        this.salary = salary;
-        this.joiningDate = joiningDate;
-        this.company = company;
-    }
+  @Column(name = "FIRST_NAME", columnDefinition = "varchar(40) default 'Shrutika'")
+  private String firstName;
 
-    public EmployeeEntity() {
-    }
+  @Column(name = "AGE", nullable = false)
+  private Integer age;
 
-    public Long getId() {
-        return id;
-    }
+  @Column(name = "SALARY")
+  private Integer salary;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  @Column(name = "JOINING_DATE")
+  private Timestamp joiningDate;
 
-    public Long getCompanyId() {
-        return companyId;
-    }
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "COMPANY_ID")
+  private CompanyEntity company;
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
+  public EmployeeEntity(
+      Long id, Long companyId, String lastName, String firstName, Integer age, Integer salary) {
+    this.id = id;
+    this.companyId = companyId;
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.age = age;
+    this.salary = salary;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public EmployeeEntity(
+      Long id,
+      String lastName,
+      String firsName,
+      int age,
+      int salary,
+      Timestamp joiningDate,
+      CompanyEntity company) {
+    this.id = id;
+    this.lastName = lastName;
+    this.firstName = firsName;
+    this.age = age;
+    this.salary = salary;
+    this.joiningDate = joiningDate;
+    this.company = company;
+  }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  public EmployeeEntity() {}
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Integer getAge() {
-        return age;
-    }
+  public Long getCompanyId() {
+    return companyId;
+  }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+  public void setCompanyId(Long companyId) {
+    this.companyId = companyId;
+  }
 
-    public Integer getSalary() {
-        return salary;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public void setSalary(Integer salary) {
-        this.salary = salary;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public Timestamp getJoiningDate() {
-        return joiningDate;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public void setJoiningDate(Timestamp joiningDate) {
-        this.joiningDate = joiningDate;
-    }
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-    public CompanyEntity getCompany() {
-        return company;
-    }
+  public Integer getAge() {
+    return age;
+  }
 
-    public void setCompany(CompanyEntity company) {
-        this.company = company;
-    }
+  public void setAge(Integer age) {
+    this.age = age;
+  }
 
-    @Override
-    public String toString() {
-        return "EmployeeEntity{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", firsName='" + firstName + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                ", joiningDate=" + joiningDate +
-                ", company=" + company +
-                '}';
-    }
+  public Integer getSalary() {
+    return salary;
+  }
+
+  public void setSalary(Integer salary) {
+    this.salary = salary;
+  }
+
+  public Timestamp getJoiningDate() {
+    return joiningDate;
+  }
+
+  public void setJoiningDate(Timestamp joiningDate) {
+    this.joiningDate = joiningDate;
+  }
+
+  public CompanyEntity getCompany() {
+    return company;
+  }
+
+  public void setCompany(CompanyEntity company) {
+    this.company = company;
+  }
+
+  @Override
+  public String toString() {
+    return "EmployeeEntity{"
+        + "id="
+        + id
+        + ", lastName='"
+        + lastName
+        + '\''
+        + ", firsName='"
+        + firstName
+        + '\''
+        + ", age="
+        + age
+        + ", salary="
+        + salary
+        + ", joiningDate="
+        + joiningDate
+        + ", company="
+        + company
+        + '}';
+  }
 }

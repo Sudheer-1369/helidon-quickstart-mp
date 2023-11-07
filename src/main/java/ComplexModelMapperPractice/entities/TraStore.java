@@ -4,13 +4,12 @@
 
 package ComplexModelMapperPractice.entities;
 
+import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,20 +19,24 @@ import java.util.List;
 @ApplicationScoped
 public class TraStore {
 
-    @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<TraEmployee> employeeList;
-    @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<TraCustomer> customerList;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private long id;
-    @Column(name = "CODE")
-    private String code;
-    @Column(name = "STORELINE_NUMBER")
-    private String storeLineNumber;
+  @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  List<TraEmployee> employeeList;
 
-    public String toString() {
-        return "Store[id:" + id + ", code:" + code + ", storeLineNumber:" + storeLineNumber + "]";
-    }
+  @OneToMany(mappedBy = "traStore", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  List<TraCustomer> customerList;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "ID")
+  private long id;
+
+  @Column(name = "CODE")
+  private String code;
+
+  @Column(name = "STORELINE_NUMBER")
+  private String storeLineNumber;
+
+  public String toString() {
+    return "Store[id:" + id + ", code:" + code + ", storeLineNumber:" + storeLineNumber + "]";
+  }
 }

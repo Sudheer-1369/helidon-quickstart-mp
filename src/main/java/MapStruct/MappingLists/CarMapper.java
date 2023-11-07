@@ -4,18 +4,17 @@
 
 package MapStruct.MappingLists;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
 import java.util.List;
 import java.util.UUID;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(imports = {UUID.class, String.class})
 public interface CarMapper {
 
-    //    @Mapping(target = "carBrand", source = "brand", defaultValue = "BMW")
-    List<Car> getCarListFromEntityList(List<CarEntity> carEntityList);
+  //    @Mapping(target = "carBrand", source = "brand", defaultValue = "BMW")
+  List<Car> getCarListFromEntityList(List<CarEntity> carEntityList);
 
-    @Mapping(target = "carBrand", source = "brand", defaultValue = "BMW")
-    Car getCarModelFromEntity(CarEntity carEntity);
+  @Mapping(target = "carBrand", source = "brand", defaultValue = "BMW")
+  Car getCarModelFromEntity(CarEntity carEntity);
 }

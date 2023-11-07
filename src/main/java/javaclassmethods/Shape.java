@@ -4,6 +4,4 @@
 
 package javaclassmethods;
 
-public interface Shape {
-}
-
+public interface Shape {}

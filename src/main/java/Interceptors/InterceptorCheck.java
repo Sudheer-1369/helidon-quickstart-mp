@@ -4,15 +4,14 @@
 
 package Interceptors;
 
-
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class InterceptorCheck {
 
-    @AroundDao
-    public long divide(int x, int y) throws Exception {
+  @AroundDao
+  public long divide(int x, int y) throws Exception {
 
-        return (long) x / y;
-    }
+    return (long) x / y;
+  }
 }

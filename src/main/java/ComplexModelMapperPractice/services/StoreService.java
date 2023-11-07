@@ -8,5 +8,5 @@ import ComplexModelMapperPractice.CommonExceptions.DaoException;
 import ComplexModelMapperPractice.models.Store;
 
 public interface StoreService {
-    Store getStoreById(final long id) throws DaoException;
+  Store getStoreById(final long id) throws DaoException;
 }

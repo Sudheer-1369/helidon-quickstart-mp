@@ -7,166 +7,164 @@ package com.oracle.hibernate.decs.dao.impl;
 import com.oracle.hibernate.decs.common.exceptions.DaoException;
 import com.oracle.hibernate.decs.dao.UserDao;
 import com.oracle.hibernate.decs.entities.User;
-
+import java.util.List;
+import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.logging.Logger;
 
 @ApplicationScoped
 public class UserDaoimpl implements UserDao {
 
-    private static final Logger logger = Logger.getLogger(UserDaoimpl.class.getName());
+  private static final Logger logger = Logger.getLogger(UserDaoimpl.class.getName());
 
-    //@PersistenceUnit(unitName = "ORCL")
-    //EntityManagerFactory entityManagerFactory ;
-    // @PersistenceContext(unitName = "ORCL", type = PersistenceContextType.TRANSACTION)
-    // private EntityManager entityManager;
+  // @PersistenceUnit(unitName = "ORCL")
+  // EntityManagerFactory entityManagerFactory ;
+  // @PersistenceContext(unitName = "ORCL", type = PersistenceContextType.TRANSACTION)
+  // private EntityManager entityManager;
 
-    private static final EntityManagerFactory entityManagerFactory;
+  private static final EntityManagerFactory entityManagerFactory;
 
-    static {
-        entityManagerFactory = Persistence.createEntityManagerFactory("ORCL");
+  static {
+    entityManagerFactory = Persistence.createEntityManagerFactory("ORCL");
+  }
+
+  // @PersistenceContext(unitName = "ORCL")
+  private EntityManager entityManager;
+
+  @Transactional
+  public void addUser(User user) throws DaoException {
+    logger.info("EntityManager is : " + entityManager);
+
+    try {
+      entityManager = entityManagerFactory.createEntityManager();
+      entityManager.getTransaction().begin();
+
+      entityManager.persist(user);
+      //  user.setFullName("Patnana Sudheer");
+      entityManager.getTransaction().commit();
+    } catch (Exception e) {
+      logger.info("Exception occurred : " + e.getMessage());
+    } finally {
+      entityManager.close();
+      //  entityManagerFactory.close();
+    }
+  }
+
+  public User getUserById(long userId) throws DaoException {
+
+    User user = null;
+    try {
+      entityManager = entityManagerFactory.createEntityManager();
+      entityManager.getTransaction().begin();
+
+      user = entityManager.find(User.class, userId);
+
+      entityManager.getTransaction().commit();
+
+    } catch (NoResultException e) {
+      return null;
+    } catch (Exception e) {
+      logger.info("Exception Occurred : " + e.getMessage());
+      throw new DaoException("Exception Occurred : " + e.getMessage());
+    } finally {
+      entityManager.close();
+      entityManagerFactory.close();
     }
 
-    // @PersistenceContext(unitName = "ORCL")
-    private EntityManager entityManager;
+    return user;
+  }
 
-    @Transactional
-    public void addUser(User user) throws DaoException {
-        logger.info("EntityManager is : " + entityManager);
+  public User getUserByCode(long userCode) throws DaoException {
 
+    User user = null;
+    try {
+      entityManager = entityManagerFactory.createEntityManager();
+      entityManager.getTransaction().begin();
 
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
+      user = entityManager.find(User.class, userCode);
 
-            entityManager.persist(user);
-            //  user.setFullName("Patnana Sudheer");
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            logger.info("Exception occurred : " + e.getMessage());
-        } finally {
-            entityManager.close();
-            //  entityManagerFactory.close();
-        }
+      entityManager.getTransaction().commit();
 
-
+    } catch (NoResultException e) {
+      return null;
+    } catch (Exception e) {
+      logger.info("Exception Occurred : " + e.getMessage());
+      throw new DaoException("Exception Occurred : " + e.getMessage());
+    } finally {
+      entityManager.close();
+      entityManagerFactory.close();
     }
 
-    public User getUserById(long userId) throws DaoException {
+    return user;
+  }
 
-        User user = null;
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
+  public List<User> getAllUsers() throws DaoException {
 
-            user = entityManager.find(User.class, userId);
+    List<User> userList = null;
+    try {
+      entityManager = entityManagerFactory.createEntityManager();
+      entityManager.getTransaction().begin();
 
-            entityManager.getTransaction().commit();
-
-        } catch (NoResultException e) {
-            return null;
-        } catch (Exception e) {
-            logger.info("Exception Occurred : " + e.getMessage());
-            throw new DaoException("Exception Occurred : " + e.getMessage());
-        } finally {
-            entityManager.close();
-            entityManagerFactory.close();
-        }
-
-        return user;
+      userList = entityManager.createNamedQuery("findAllUsers").getResultList();
+    } catch (NoResultException e) {
+      return userList;
+    } catch (Exception e) {
+      throw new DaoException("Exception Occurred : " + e.getMessage());
+    } finally {
+      entityManager.close();
+      entityManagerFactory.close();
     }
 
-    public User getUserByCode(long userCode) throws DaoException {
+    return userList;
+  }
 
-        User user = null;
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
+  public void updateUser(User user) throws DaoException {
+    try {
+      entityManager = entityManagerFactory.createEntityManager();
+      entityManager.getTransaction().begin();
 
-            user = entityManager.find(User.class, userCode);
-
-            entityManager.getTransaction().commit();
-
-        } catch (NoResultException e) {
-            return null;
-        } catch (Exception e) {
-            logger.info("Exception Occurred : " + e.getMessage());
-            throw new DaoException("Exception Occurred : " + e.getMessage());
-        } finally {
-            entityManager.close();
-            entityManagerFactory.close();
-        }
-
-        return user;
+      entityManager.merge(user);
+    } catch (Exception e) {
+      throw new DaoException("Exception Occurred : " + e.getMessage());
+    } finally {
+      entityManager.close();
+      entityManagerFactory.close();
     }
+  }
 
-    public List<User> getAllUsers() throws DaoException {
+  public void deleteUserById(long userId) throws DaoException {
 
-        List<User> userList = null;
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
+    try {
+      entityManager = entityManagerFactory.createEntityManager();
+      entityManager.getTransaction().begin();
 
-            userList = entityManager.createNamedQuery("findAllUsers").getResultList();
-        } catch (NoResultException e) {
-            return userList;
-        } catch (Exception e) {
-            throw new DaoException("Exception Occurred : " + e.getMessage());
-        } finally {
-            entityManager.close();
-            entityManagerFactory.close();
-        }
-
-        return userList;
+      entityManager.createNamedQuery("deleteUserById").setParameter("ID", userId).executeUpdate();
+    } catch (Exception e) {
+      throw new DaoException("Exception Occurred : " + e.getMessage());
+    } finally {
+      entityManager.close();
+      entityManagerFactory.close();
     }
+  }
 
-    public void updateUser(User user) throws DaoException {
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
+  public void deleteUserByCode(String userCode) throws DaoException {
+    try {
+      entityManager = entityManagerFactory.createEntityManager();
+      entityManager.getTransaction().begin();
 
-            entityManager.merge(user);
-        } catch (Exception e) {
-            throw new DaoException("Exception Occurred : " + e.getMessage());
-        } finally {
-            entityManager.close();
-            entityManagerFactory.close();
-        }
+      entityManager
+          .createNamedQuery("deleteUserByCode")
+          .setParameter("CODE", userCode)
+          .executeUpdate();
+    } catch (Exception e) {
+      throw new DaoException("Exception Occurred : " + e.getMessage());
+    } finally {
+      entityManager.close();
+      entityManagerFactory.close();
     }
-
-    public void deleteUserById(long userId) throws DaoException {
-
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
-
-            entityManager.createNamedQuery("deleteUserById").setParameter("ID", userId).executeUpdate();
-        } catch (Exception e) {
-            throw new DaoException("Exception Occurred : " + e.getMessage());
-        } finally {
-            entityManager.close();
-            entityManagerFactory.close();
-        }
-    }
-
-    public void deleteUserByCode(String userCode) throws DaoException {
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
-
-            entityManager.createNamedQuery("deleteUserByCode").setParameter("CODE", userCode).executeUpdate();
-        } catch (Exception e) {
-            throw new DaoException("Exception Occurred : " + e.getMessage());
-        } finally {
-            entityManager.close();
-            entityManagerFactory.close();
-        }
-    }
-
+  }
 }

@@ -13,18 +13,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Employee {
 
-    private long id;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private long salary;
-    private String landLineNumber;
+  private long id;
+  private String firstName;
+  private String lastName;
+  private int age;
+  private long salary;
+  private String landLineNumber;
 
-    private String joiningDate;
+  private String joiningDate;
 
-    private Store store;
+  private Store store;
 
-    public String toString() {
-        return "Employee[id: " + id + " firstName:" + firstName + " lastName:" + lastName + " age:" + age + " salary:" + salary + " landLineNumber" + landLineNumber + "]";
-    }
+  public String toString() {
+    return "Employee[id: "
+        + id
+        + " firstName:"
+        + firstName
+        + " lastName:"
+        + lastName
+        + " age:"
+        + age
+        + " salary:"
+        + salary
+        + " landLineNumber"
+        + landLineNumber
+        + "]";
+  }
 }

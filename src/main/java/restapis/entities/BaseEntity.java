@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public interface BaseEntity<I extends Serializable> {
 
-    I getId();
+  I getId();
 
-    void setId(Long id);
+  void setId(Long id);
 }

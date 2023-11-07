@@ -4,13 +4,12 @@
 
 package MapStruct;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -18,13 +17,12 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentsEntity {
-    @Id
-    String id;
-    String name;
-    String fee;
-    byte[] phnNo;
+  @Id String id;
+  String name;
+  String fee;
+  byte[] phnNo;
 
-    public byte[] getPhnNo() {
-        return phnNo;
-    }
+  public byte[] getPhnNo() {
+    return phnNo;
+  }
 }

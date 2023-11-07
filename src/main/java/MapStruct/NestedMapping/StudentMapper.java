@@ -11,15 +11,15 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "cdi")
 public interface StudentMapper {
 
-    @Mapping(target = "className", source = "classVal")
-    @Mapping(target = "author", source = "authorEntity")
-    @Mapping(target = "subject.author", source = "subject.author")
-    Student getModelFromEntity(StudentEntity studentEntity);
+  @Mapping(target = "className", source = "classVal")
+  @Mapping(target = "author", source = "authorEntity")
+  @Mapping(target = "subject.author", source = "subject.author")
+  Student getModelFromEntity(StudentEntity studentEntity);
 
-    @Mapping(target = "classVal", source = "className")
-    @Mapping(target = "authorEntity", source = "author")
-    @Mapping(target = "subject.author", source = "subject.author")
-    StudentEntity getEntityFromModel(Student student);
+  @Mapping(target = "classVal", source = "className")
+  @Mapping(target = "authorEntity", source = "author")
+  @Mapping(target = "subject.author", source = "subject.author")
+  StudentEntity getEntityFromModel(Student student);
 
-    void merge(StudentEntity studentEntity, @MappingTarget StudentEntity studentEntity1);
+  void merge(StudentEntity studentEntity, @MappingTarget StudentEntity studentEntity1);
 }

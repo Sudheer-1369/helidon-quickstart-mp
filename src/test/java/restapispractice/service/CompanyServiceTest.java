@@ -1,6 +1,9 @@
 package restapispractice.service;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import io.helidon.microprofile.tests.junit5.HelidonTest;
+import javax.inject.Inject;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -8,85 +11,78 @@ import org.junit.jupiter.api.TestMethodOrder;
 import restapis.dto.Company;
 import restapis.implementations.services.CompanyService;
 
-import javax.inject.Inject;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 @HelidonTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CompanyServiceTest {
 
-    private CompanyService companyService;
+  private CompanyService companyService;
 
-    @Inject
-    public CompanyServiceTest(CompanyService companyService) {
-        this.companyService = companyService;
-    }
+  @Inject
+  public CompanyServiceTest(CompanyService companyService) {
+    this.companyService = companyService;
+  }
 
-    @Test
-    @Order(1)
-    void testAddCompany() {
-        Company company = new Company();
-        company.setName("Linoy Technologies");
-        company.setPhoneNumber("12345678");
+  @Test
+  @Order(1)
+  void testAddCompany() {
+    Company company = new Company();
+    company.setName("Linoy Technologies");
+    company.setPhoneNumber("12345678");
 
-        Company company1 = companyService.create(company);
+    Company company1 = companyService.create(company);
 
-        assertThat(company1).extracting("name").isEqualTo("Linoy Technologies");
+    assertThat(company1).extracting("name").isEqualTo("Linoy Technologies");
+  }
 
-    }
+  @Test
+  @Order(3)
+  void testUpdateCompany() {
+    Company company = new Company();
 
-    @Test
-    @Order(3)
-    void testUpdateCompany() {
-        Company company = new Company();
+    company.setId(10L);
+    company.setName("Linoy Technologies Pvt Ltd");
+    company.setPhoneNumber("1234567890");
 
-        company.setId(10L);
-        company.setName("Linoy Technologies Pvt Ltd");
-        company.setPhoneNumber("1234567890");
+    Company company1 = companyService.put(company);
 
-        Company company1 = companyService.put(company);
+    assertThat(company1).extracting("name").isEqualTo("Linoy Technologies Pvt Ltd");
+    assertThat(company1).extracting("phoneNumber").isEqualTo("1234567890");
+  }
 
-        assertThat(company1).extracting("name").isEqualTo("Linoy Technologies Pvt Ltd");
-        assertThat(company1).extracting("phoneNumber").isEqualTo("1234567890");
+  @Test
+  @Order(4)
+  void testPartialUpdate() {
+    Company company = new Company();
 
-    }
+    company.setId(11L);
+    company.setName("Linoy Technologies India Pvt Ltd");
 
-    @Test
-    @Order(4)
-    void testPartialUpdate() {
-        Company company = new Company();
+    Company company1 = companyService.patch(company);
 
-        company.setId(11L);
-        company.setName("Linoy Technologies India Pvt Ltd");
+    assertThat(company1).extracting("name").isEqualTo("Linoy Technologies India Pvt Ltd");
+    assertThat(company1).extracting("phoneNumber").isEqualTo("9493615809");
+  }
 
-        Company company1 = companyService.patch(company);
+  @Test
+  @Order(2)
+  void testFetchCompany() {
+    Company company = companyService.get(10L);
+    assertThat(company).extracting("name").isEqualTo("Linoy Technologies India Pvt Ltd");
+    assertThat(company).extracting("phoneNumber").isEqualTo("1234567890");
+  }
 
-        assertThat(company1).extracting("name").isEqualTo("Linoy Technologies India Pvt Ltd");
-        assertThat(company1).extracting("phoneNumber").isEqualTo("9493615809");
+  @Test
+  @Order(5)
+  void testDeleteCompany() {
+    companyService.delete(10L);
+    Company company = companyService.get(10L);
 
-    }
+    assertThat(company).isNull();
+  }
 
-    @Test
-    @Order(2)
-    void testFetchCompany() {
-        Company company = companyService.get(10L);
-        assertThat(company).extracting("name").isEqualTo("Linoy Technologies India Pvt Ltd");
-        assertThat(company).extracting("phoneNumber").isEqualTo("1234567890");
-    }
-
-    @Test
-    @Order(5)
-    void testDeleteCompany() {
-        companyService.delete(10L);
-        Company company = companyService.get(10L);
-
-        assertThat(company).isNull();
-    }
-
-    @Test
-    void testGetFew() {
-        var companies = companyService.getFew();
-        System.out.println(companies.get(0).toString());
-    }
+  @Test
+  void testGetFew() {
+    var companies = companyService.getFew();
+    System.out.println(companies.get(0).toString());
+  }
 }

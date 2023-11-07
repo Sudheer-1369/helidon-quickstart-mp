@@ -9,63 +9,66 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 class Customer {
-    private int amount;
+  private int amount;
 
-    public Customer(int amount) {
-        this.amount = amount;
+  public Customer(int amount) {
+    this.amount = amount;
+  }
+
+  public synchronized void withDraw(int amount) {
+
+    System.out.println("Ready to withDraw");
+
+    if (this.amount < amount) {
+      try {
+        wait();
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
     }
+    System.out.println("Amount withdrawn");
+  }
 
-    public synchronized void withDraw(int amount) {
+  public synchronized void deposite(int amount) {
 
-        System.out.println("Ready to withDraw");
+    System.out.println("Ready to deposit the money");
 
-        if (this.amount < amount) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        System.out.println("Amount withdrawn");
-    }
-
-    public synchronized void deposite(int amount) {
-
-        System.out.println("Ready to deposit the money");
-
-        this.amount += amount;
-        notify();
-        System.out.println("Money deposited");
-    }
-
+    this.amount += amount;
+    notify();
+    System.out.println("Money deposited");
+  }
 }
 
 public class InterThreadCommunication {
 
-    static Customer customer = new Customer(50000);
+  static Customer customer = new Customer(50000);
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        ExecutorService executor = Executors.newCachedThreadPool();
+    ExecutorService executor = Executors.newCachedThreadPool();
 
-        Thread thread1 = new Thread(() -> {
-            customer.withDraw(95000);
-        });
-        Thread thread2 = new Thread(() -> {
-            customer.deposite(20000);
-        });
-        executor.execute(thread1);
-        executor.execute(thread2);
+    Thread thread1 =
+        new Thread(
+            () -> {
+              customer.withDraw(95000);
+            });
+    Thread thread2 =
+        new Thread(
+            () -> {
+              customer.deposite(20000);
+            });
+    executor.execute(thread1);
+    executor.execute(thread2);
 
-        executor.shutdown();
+    executor.shutdown();
 
-        try {
-            if (executor.awaitTermination(10, TimeUnit.SECONDS)) {
-                executor.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            executor.shutdown();
-            Thread.currentThread().interrupt();
-        }
+    try {
+      if (executor.awaitTermination(10, TimeUnit.SECONDS)) {
+        executor.shutdownNow();
+      }
+    } catch (InterruptedException e) {
+      executor.shutdown();
+      Thread.currentThread().interrupt();
     }
+  }
 }

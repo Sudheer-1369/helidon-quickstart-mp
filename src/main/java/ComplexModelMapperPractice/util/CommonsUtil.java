@@ -4,11 +4,9 @@
 
 package ComplexModelMapperPractice.util;
 
-
 import org.modelmapper.ModelMapper;
 
 public class CommonsUtil {
 
-    private final ModelMapper mapper = new ModelMapper();
-
+  private final ModelMapper mapper = new ModelMapper();
 }

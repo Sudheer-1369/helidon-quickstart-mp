@@ -4,15 +4,13 @@
 
 package restapis.partialentities;
 
-import org.hibernate.transform.ResultTransformer;
-
 import java.util.List;
+import org.hibernate.transform.ResultTransformer;
 
 public interface ListResultTransformer extends ResultTransformer {
 
-    @Override
-    default List transformList(List tuples) {
-        return tuples;
-    }
-
+  @Override
+  default List transformList(List tuples) {
+    return tuples;
+  }
 }

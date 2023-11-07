@@ -14,13 +14,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 class Student {
-    String id;
-    String studentName;
-    String phnNo;
-    String fee;
+  String id;
+  String studentName;
+  String phnNo;
+  String fee;
 
-    public String getPhnNo() {
-        return phnNo;
-    }
+  public String getPhnNo() {
+    return phnNo;
+  }
 }
-

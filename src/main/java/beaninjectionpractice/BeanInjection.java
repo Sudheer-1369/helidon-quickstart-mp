@@ -5,7 +5,7 @@
 package beaninjectionpractice;
 
 public interface BeanInjection {
-    void addBean();
+  void addBean();
 
-    void getBean();
+  void getBean();
 }

@@ -14,18 +14,18 @@ import javax.interceptor.InvocationContext;
 @Priority(Interceptor.Priority.APPLICATION)
 public class AroundThreadInterceptor {
 
-    @AroundInvoke
-    public Object execute(InvocationContext context) {
+  @AroundInvoke
+  public Object execute(InvocationContext context) {
 
-        System.out.println("A method related to the thread is invoked");
-        try {
-            return context.proceed();
-        } catch (ArithmeticException e) {
-            System.out.println(e);
-            return 0L;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0L;
-        }
+    System.out.println("A method related to the thread is invoked");
+    try {
+      return context.proceed();
+    } catch (ArithmeticException e) {
+      System.out.println(e);
+      return 0L;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return 0L;
     }
+  }
 }

@@ -14,6 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthorEntity {
-    private String name;
-    private String phnNo;
+  private String name;
+  private String phnNo;
 }

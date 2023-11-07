@@ -3,10 +3,9 @@
  */
 
 package sample.practice.PreCon.samp;
-//Creating a new user
+// Creating a new user
 
 import com.oracle.hibernate.decs.entities.User;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,39 +13,38 @@ import javax.persistence.PersistenceContext;
 @ApplicationScoped
 public class UserDaoTest {
 
-    @PersistenceContext
-    private static EntityManager entityManager;
+  @PersistenceContext private static EntityManager entityManager;
 
-    /*
-    public static void main(String[] args) {
+  /*
+  public static void main(String[] args) {
 
-        /*
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("ORCL");
-        EntityManager entityManager = factory.createEntityManager();
-        entityManager.getTransaction().begin();
+      /*
+      EntityManagerFactory factory = Persistence.createEntityManagerFactory("ORCL");
+      EntityManager entityManager = factory.createEntityManager();
+      entityManager.getTransaction().begin();
 
-        User user = new User();
-        user.setEmail("sudheerpatnana456@gmail.com");
-        user.setFullName("Sudheer Kumar");
-        user.setPassword("Mounika patnana");
+      User user = new User();
+      user.setEmail("sudheerpatnana456@gmail.com");
+      user.setFullName("Sudheer Kumar");
+      user.setPassword("Sudheer patnana");
 
-        entityManager.persist(user);
+      entityManager.persist(user);
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        factory.close();
+      entityManager.getTransaction().commit();
+      entityManager.close();
+      factory.close();
 
-    }
-    */
+  }
+  */
 
-    public static User deleteAllUsers() {
-        System.out.println(entityManager);
-        User user = entityManager.find(User.class, 1);
-        //  System.out.println(user);
-        return user;
-    }
+  public static User deleteAllUsers() {
+    System.out.println(entityManager);
+    User user = entityManager.find(User.class, 1);
+    //  System.out.println(user);
+    return user;
+  }
 
-    public static void main(String[] args) {
-        System.out.println(deleteAllUsers());
-    }
+  public static void main(String[] args) {
+    System.out.println(deleteAllUsers());
+  }
 }

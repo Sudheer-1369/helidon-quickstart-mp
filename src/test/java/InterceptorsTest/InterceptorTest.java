@@ -2,19 +2,17 @@ package InterceptorsTest;
 
 import Interceptors.InterceptorCheck;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
-import org.junit.jupiter.api.Test;
-
 import javax.inject.Inject;
+import org.junit.jupiter.api.Test;
 
 @HelidonTest
 public class InterceptorTest {
 
-    @Inject
-    private InterceptorCheck interceptorCheck;
+  @Inject private InterceptorCheck interceptorCheck;
 
-    @Test
-    public void testInterceptor() throws Exception {
+  @Test
+  public void testInterceptor() throws Exception {
 
-        interceptorCheck.divide(1, 0);
-    }
+    interceptorCheck.divide(1, 0);
+  }
 }

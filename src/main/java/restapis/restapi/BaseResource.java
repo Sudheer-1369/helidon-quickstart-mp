@@ -8,13 +8,13 @@ import javax.ws.rs.core.Response;
 
 public interface BaseResource<D, I> {
 
-    Response post(D dto);
+  Response post(D dto);
 
-    Response get(I id);
+  Response get(I id);
 
-    Response patch(D dto);
+  Response patch(D dto);
 
-    Response put(I id, D dto);
+  Response put(I id, D dto);
 
-    Response delete(I id);
+  Response delete(I id);
 }

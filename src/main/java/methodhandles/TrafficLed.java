@@ -5,17 +5,17 @@
 package methodhandles;
 
 public enum TrafficLed implements DomainEnum {
+  BLUE("fuck"),
+  BLACK("dance");
 
-    BLUE("fuck"), BLACK("dance");
+  private final String code;
 
-    private final String code;
+  TrafficLed(String code) {
+    this.code = code;
+  }
 
-    TrafficLed(String code) {
-        this.code = code;
-    }
-
-    @Override
-    public String getAction() {
-        return null;
-    }
+  @Override
+  public String getAction() {
+    return null;
+  }
 }

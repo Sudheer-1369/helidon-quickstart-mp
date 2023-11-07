@@ -4,24 +4,22 @@
 
 package restapis.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import restapis.EnumValidator;
 import restapis.YesNo;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Company implements BaseDto<Long> {
 
-    private Long id;
-    private String name;
-    private String phoneNumber;
-    private List<Employee> employees;
-
+  private Long id;
+  private String name;
+  private String phoneNumber;
+  private List<Employee> employees;
     @EnumValidator(classType = YesNo.class, message = "Only YesNo No is allowed")
     private YesNo skipDuplicates;
 
