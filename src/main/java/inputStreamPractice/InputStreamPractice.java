@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class InputStreamPractice {
 
     public static void main(String[] args) throws IOException {
-        String payload = "Hello Mounika, Sudheer Loves you";
+        String payload = "Hello Rajnikanth, Sudheer Loves you";
 
         System.out.println(payload.length());
 

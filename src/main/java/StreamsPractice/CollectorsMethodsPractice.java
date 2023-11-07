@@ -13,7 +13,7 @@ public class CollectorsMethodsPractice {
     public static void main(String[] args) {
 
         Employee emp = new Employee("sudheer", 25, 20, "ECE");
-        Employee emp1 = new Employee("Mounika", 24, 25, "ECE");
+        Employee emp1 = new Employee("Rajnikanth", 24, 25, "ECE");
         Employee emp2 = new Employee("Venkat", 28, 30, "CSE");
         Employee emp3 = new Employee("Manoja", 22, 40, "CSE");
 

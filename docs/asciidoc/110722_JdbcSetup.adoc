@@ -53,8 +53,8 @@ ResultSet/int/boolean result = psmt.executQuery/executeUpdate/execute; <5>
 ----
 From the above example only
 1.After the execute statement the parameters are not erased so if we want to do one more update where we want only to change the second param and leave the first param as it is we just need to override/update the second param only.
-psmt.set(2,"Mounika");
-psmt.execute(); --> this will set the parameters to be 1 as 10 and 2 as Mounika.
+psmt.set(2,"Rajnikanth");
+psmt.execute(); --> this will set the parameters to be 1 as 10 and 2 as Rajnikanth.
 ----
 
 == Executing the PreparedStatement objects
