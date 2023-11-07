@@ -23,7 +23,7 @@ public class EnumPractice {
 
         WeekDays(String day) {
             this.day = day;
-            System.out.println("The invoke day is " + day);
+//            System.out.println("The invoke day is " + day);
         }
 
         public String getDay() {

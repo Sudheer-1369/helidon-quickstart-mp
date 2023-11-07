@@ -19,6 +19,7 @@ Client client = ClientBuilder.newClient();
 ----
 WebTarget webTarget = client.target("http://localhost:8082/....");
 ----
+
 * This will create a webtarget that currently pointing to the provided url.
 
 IMPORTANT: Instead of manually creating a webtarget we can actually Inject the webtarget using the Inject annotation,this will create a webTarget that will point to the place where server started i.e if the server started on http://localhost:63463 then the injected web target points to that location.

@@ -20,13 +20,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class FunctioningCompanies{
+public class FunctioningCompanies {
+    public static ListResultTransformer resultTransformer =
+            (tuples, aliases) -> new FunctioningCompanies(((Number) tuples[0]).intValue(), (String) tuples[1], (String) tuples[2]);
     private int id;
     private String phoneNumber;
     private String name;
-
-
-    public static ListResultTransformer resultTransformer =
-           (tuples, aliases) -> new FunctioningCompanies(((Number) tuples[0]).intValue(), (String) tuples[1], (String) tuples[2]);
 
 }

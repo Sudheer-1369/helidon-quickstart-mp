@@ -4,6 +4,4 @@
 
 package ComplexModelMapperPractice.util;
 
-public class SearchCriteria {
-
-}
+public class SearchCriteria {}

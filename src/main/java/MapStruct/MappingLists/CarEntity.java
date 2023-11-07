@@ -14,9 +14,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarEntity {
-    private int id;
-    private String price;
-    private String manufacturingDate;
-    private String name;
-    private String brand;
+  private int id;
+  private String price;
+  private String manufacturingDate;
+  private String name;
+  private String brand;
 }

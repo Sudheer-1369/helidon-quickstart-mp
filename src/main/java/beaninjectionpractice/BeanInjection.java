@@ -2,10 +2,10 @@
  * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
  */
 
-package BeanInjectionPractice;
+package beaninjectionpractice;
 
 public interface BeanInjection {
-    void addBean();
+  void addBean();
 
-    void getBean();
+  void getBean();
 }

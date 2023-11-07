@@ -4,17 +4,16 @@
 
 package MapStruct.MappingMapAndStream;
 
-import org.mapstruct.MapMapping;
-import org.mapstruct.Mapper;
-
 import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.stream.Stream;
+import org.mapstruct.MapMapping;
+import org.mapstruct.Mapper;
 
 @Mapper
 public interface UtilityMapper {
-    @MapMapping(valueDateFormat = "dd.MM.yyyy")
-    Map<String, String> getMap(Map<Long, GregorianCalendar> source);
+  @MapMapping(valueDateFormat = "dd.MM.yyyy")
+  Map<String, String> getMap(Map<Long, GregorianCalendar> source);
 
-    Stream<String> getStream(Stream<Integer> source);
+  Stream<String> getStream(Stream<Integer> source);
 }

@@ -9,12 +9,12 @@ import java.util.logging.Logger;
 
 public class Buildermain {
 
-    private static final Logger logger = Logger.getLogger(Buildermain.class.getName());
+  private static final Logger logger = Logger.getLogger(Buildermain.class.getName());
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        Task task = new Task.TaskBuilder().setDescription("Sudheer").setDone(true).getTask();
+    Task task = new Task.TaskBuilder().setDescription("Sudheer").setDone(true).getTask();
 
-        logger.log(Level.INFO, String.format("Printing the builder %s", task.getDueDate()));
-    }
+    logger.log(Level.INFO, String.format("Printing the builder %s", task.getDueDate()));
+  }
 }

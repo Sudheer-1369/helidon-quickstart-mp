@@ -6,8 +6,8 @@ package MapStruct;
 
 // Cannot generate mapping methods for generic types
 
-//@Mapper(componentModel = "cdi")
-//public interface DTOMapper<E, T> {
+// @Mapper(componentModel = "cdi")
+// public interface DTOMapper<E, T> {
 //
 //    T entityToDto(E entity);
 //
@@ -16,5 +16,4 @@ package MapStruct;
 //    E dtoToEntity(T dto);
 //
 //    void merge(E source, E target);
-//}
-
+// }

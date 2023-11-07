@@ -9,22 +9,22 @@ import java.util.function.Function;
 
 public class MapEntry {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        Map.Entry<Integer, String> testEntryMap = new AbstractMap.SimpleEntry<>(1, "2");
-        System.out.println(testEntryMap);
+    Map.Entry<Integer, String> testEntryMap = new AbstractMap.SimpleEntry<>(1, "2");
+    System.out.println(testEntryMap);
 
-        Function<Map.Entry<Integer, String>, String> strings = e -> e.getValue();
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1, "Sudheer");
-        map.put(2, "Mounika");
+    Function<Map.Entry<Integer, String>, String> strings = e -> e.getValue();
+    Map<Integer, String> map = new HashMap<>();
+    map.put(1, "Sudheer");
+    map.put(2, "Sudheer");
 
-        List<String> stringList = new ArrayList<>();
+    List<String> stringList = new ArrayList<>();
 
-        for (Map.Entry<Integer, String> entry : map.entrySet()) {
-            stringList.add(strings.apply(entry));
-        }
-
-        System.out.println(stringList);
+    for (Map.Entry<Integer, String> entry : map.entrySet()) {
+      stringList.add(strings.apply(entry));
     }
+
+    System.out.println(stringList);
+  }
 }

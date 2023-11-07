@@ -1,6 +1,6 @@
 package decoratorTest;
 
-import Decorators.Item;
+import decorators.Item;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import org.junit.jupiter.api.Test;
 

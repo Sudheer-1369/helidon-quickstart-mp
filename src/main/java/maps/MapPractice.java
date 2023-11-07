@@ -9,12 +9,12 @@ import java.util.Map;
 
 public class MapPractice {
 
-    public static void main(String[] args) {
-        Map<Integer, String> map = new HashMap<>();
+  public static void main(String[] args) {
+    Map<Integer, String> map = new HashMap<>();
 
-        map.put(1, "Sudheer");
-        map.put(2, "Mounika");
+    map.put(1, "Sudheer");
+    map.put(2, "Sudheer");
 
-        System.out.println(map.get(3));
-    }
+    System.out.println(map.get(3));
+  }
 }

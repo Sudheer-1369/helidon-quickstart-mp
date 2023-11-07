@@ -8,8 +8,7 @@ import java.io.Serializable;
 
 public interface BaseDto<I extends Serializable> {
 
-    I getId();
+  I getId();
 
-    void setId(I id);
-
+  void setId(I id);
 }

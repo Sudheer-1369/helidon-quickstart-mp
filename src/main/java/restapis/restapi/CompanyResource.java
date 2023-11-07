@@ -6,11 +6,13 @@ package restapis.restapi;
 
 import io.helidon.security.annotations.Authenticated;
 import io.helidon.security.annotations.Authorized;
+import oracle.jdbc.proxy.annotation.Post;
 import restapis.dto.Company;
 import restapis.implementations.services.CompanyService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -82,5 +84,15 @@ public class CompanyResource extends BaseResourceImpl<Company, Long, CompanyServ
     public Response getNewCompanies(){
 
         return null;
+    }
+
+    @Post
+    @Path("/validateCompanies")
+    public Response createValidatedCompany(@Valid Company company){
+
+        System.out.println("Inside the validate companies path");
+        System.out.println(company.toString());
+
+        return Response.ok().build();
     }
 }

@@ -4,5 +4,5 @@
 
 package constraintvalidator;
 
-public class DtoValidator extends ConsistentDateParametersConstraint<ConsistentDateParameters, Employee> {
-}
+public class DtoValidator
+    extends ConsistentDateParametersConstraint<ConsistentDateParameters, Employee> {}

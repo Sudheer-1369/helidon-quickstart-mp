@@ -13,41 +13,41 @@ import java.util.Optional;
 
 public class Utils {
 
-    private static MethodHandles.Lookup lookup = MethodHandles.lookup();
+  private static MethodHandles.Lookup lookup = MethodHandles.lookup();
 
-    private static Map<Class<?>, MethodHandle> fromActionMethodHandles = new HashMap<>();
+  private static Map<Class<?>, MethodHandle> fromActionMethodHandles = new HashMap<>();
 
-    public static DomainEnum fromMethod(Class<?> domainEnumType, String action) throws Throwable {
+  public static DomainEnum fromMethod(Class<?> domainEnumType, String action) throws Throwable {
 
-        try {
-            MethodHandle reverseLookUp = Optional.ofNullable(fromActionMethodHandles.get(domainEnumType))
-                    .orElseGet(() -> createAndStoreReverseLookUp(domainEnumType));
+    try {
+      MethodHandle reverseLookUp =
+          Optional.ofNullable(fromActionMethodHandles.get(domainEnumType))
+              .orElseGet(() -> createAndStoreReverseLookUp(domainEnumType));
 
-            return (DomainEnum) reverseLookUp.invoke(action);
-        } catch (ReverseLookUpException e) {
-            e.printStackTrace();
-            throw new Exception("Exception occurred in create and store reverlookup method");
-        }
+      return (DomainEnum) reverseLookUp.invoke(action);
+    } catch (ReverseLookUpException e) {
+      e.printStackTrace();
+      throw new Exception("Exception occurred in create and store reverlookup method");
     }
+  }
 
-    public static MethodHandle createAndStoreReverseLookUp(Class<?> domainEnumType) {
+  public static MethodHandle createAndStoreReverseLookUp(Class<?> domainEnumType) {
 
-        try {
-            MethodType mt = MethodType.methodType(domainEnumType, String.class);
-            MethodHandle fromAction = lookup.findStatic(domainEnumType, "fromAction", mt);
-            fromActionMethodHandles.put(domainEnumType, fromAction);
+    try {
+      MethodType mt = MethodType.methodType(domainEnumType, String.class);
+      MethodHandle fromAction = lookup.findStatic(domainEnumType, "fromAction", mt);
+      fromActionMethodHandles.put(domainEnumType, fromAction);
 
-            return fromAction;
-        } catch (NoSuchMethodException | IllegalAccessException e) {
-            e.printStackTrace();
-            throw new ReverseLookUpException("Exception occurred in create and store reverlookup method");
-        }
-
+      return fromAction;
+    } catch (NoSuchMethodException | IllegalAccessException e) {
+      e.printStackTrace();
+      throw new ReverseLookUpException("Exception occurred in create and store reverlookup method");
     }
+  }
 
-    static class ReverseLookUpException extends RuntimeException {
-        public ReverseLookUpException(String message) {
-            super(message);
-        }
+  static class ReverseLookUpException extends RuntimeException {
+    public ReverseLookUpException(String message) {
+      super(message);
     }
+  }
 }

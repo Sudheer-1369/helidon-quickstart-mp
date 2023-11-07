@@ -4,26 +4,24 @@
 
 package MapStruct.NestedMapping;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubjectEntity {
-    private String name;
-    private AuthorEntity author;
+  private String name;
+  private AuthorEntity author;
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 }

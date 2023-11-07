@@ -4,26 +4,24 @@
 
 package restapis.mappers;
 
+import java.util.List;
 import org.mapstruct.*;
 import restapis.dto.Company;
 import restapis.entities.CompanyEntity;
 
-import java.util.List;
-
 @Mapper(componentModel = "cdi")
 public interface CompanyMapper extends BaseMapper<CompanyEntity, Company> {
 
-    @Mapping(target = "employees[].joiningDate", ignore = true)
-    Company entityToDto(CompanyEntity entity);
+  @Mapping(target = "employees[].joiningDate", ignore = true)
+  Company entityToDto(CompanyEntity entity);
 
-    List<Company> entityListToDtoList(List<CompanyEntity> entityList);
+  List<Company> entityListToDtoList(List<CompanyEntity> entityList);
 
-    @Mapping(target = "employees[].joiningDate", ignore = true)
-    CompanyEntity dtoToEntity(Company dto);
+  @Mapping(target = "employees[].joiningDate", ignore = true)
+  CompanyEntity dtoToEntity(Company dto);
 
-    List<CompanyEntity> dtoListToEntityList(List<Company> dtoList);
+  List<CompanyEntity> dtoListToEntityList(List<Company> dtoList);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void merge(CompanyEntity source, @MappingTarget CompanyEntity target);
-
+  @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+  void merge(CompanyEntity source, @MappingTarget CompanyEntity target);
 }

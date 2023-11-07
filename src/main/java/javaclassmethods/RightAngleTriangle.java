@@ -7,5 +7,4 @@ package javaclassmethods;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class RightAngleTriangle extends Triangle {
-}
+public class RightAngleTriangle extends Triangle {}

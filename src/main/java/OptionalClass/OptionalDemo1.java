@@ -24,19 +24,19 @@ public class OptionalDemo1 {
 
         String[] str = new String[5];
 
-        str[1] = "Sudheer Loves Mounika";
+        str[1] = "Sudheer Loves Rajnikanth";
 
         Optional<String> empty = Optional.empty();
-        logger.log(Level.INFO, String.format("The Obtained Optional is %s", empty));
+        logger.log(Level.INFO, ()->String.format("The Obtained Optional is %s", empty));
 
         Optional<String> value = Optional.of(str[1]);
-        logger.log(Level.INFO, String.format("The Obtained Optional1 is %s", value));
-        logger.log(Level.INFO, String.format("The value in the option is %s", value.get()));
-        logger.log(Level.INFO, String.format("The Hashcode value is %s", value.hashCode()));
-        logger.log(Level.INFO, String.format("The existence value is %s", value.isPresent()));
-        logger.log(Level.INFO, String.format("The Check value is %s", value.isEmpty()));
+        logger.log(Level.INFO, ()->String.format("The Obtained Optional1 is %s", value));
+        logger.log(Level.INFO, ()->String.format("The value in the option is %s", value.get()));
+        logger.log(Level.INFO, ()->String.format("The Hashcode value is %s", value.hashCode()));
+        logger.log(Level.INFO, ()->String.format("The existence value is %s", value.isPresent()));
+        logger.log(Level.INFO, ()->String.format("The Check value is %s", value.isEmpty()));
 
-        String defaultValue = Optional.ofNullable("Mounika").orElse("Sudheer");
+        String defaultValue = Optional.of("Rajnikanth").orElse("Sudheer");
         logger.log(Level.INFO, String.format("The default/value1 is %s", defaultValue));
 
         defaultValue = Optional.ofNullable(str[1]).orElseGet(OptionalDemo1::getDefault);
@@ -45,13 +45,13 @@ public class OptionalDemo1 {
 
         Optional<String> op = Optional.empty();
         try {
-            logger.log(Level.INFO, String.format("The optional throws the error %s", op.orElseThrow(IllegalArgumentException::new)));
+            logger.log(Level.INFO, ()->String.format("The optional throws the error %s", op.orElseThrow(IllegalArgumentException::new)));
         } catch (Exception e) {
-            logger.log(Level.INFO, "The error/exception message is " + e.getMessage());
+            logger.log(Level.INFO, ()->"The error/exception message is " + e.getMessage());
         }
 
         Optional<String> op1 = Optional.of("Sudheer");
-        String output = op.map(s -> s + " Kumar Patnana").orElse("Patnana Sudheer Kumar And Mounika");
+        String output = op1.map(s -> s + " Kumar Patnana").orElse("Patnana Sudheer Kumar And Rajnikanth");
         logger.log(Level.INFO, output);
 
 
@@ -88,11 +88,11 @@ public class OptionalDemo1 {
         for (Integer i : integers1)
             System.out.print(" The i is " + i);
 
-        String[] str1 = new String[]{"sudheer", "Mounika"};
-        String[] str2 = new String[]{"sudheer", "Mounika"};
-        String[] str3 = new String[]{"sudheer", "Mounika"};
+        String[] str1 = new String[]{"sudheer", "Rajnikanth"};
+        String[] str2 = new String[]{"sudheer", "Rajnikanth"};
+        String[] str3 = new String[]{"sudheer", "Rajnikanth"};
         List<String[]> strings = Optional.ofNullable(Arrays.asList(str1, str2, str3)).orElse(null);
-        List<String> strings1 = strings.stream().map(d -> mapTo(d)).collect(Collectors.toList());
+        List<String> strings1 = strings.stream().map(OptionalDemo1::mapTo).collect(Collectors.toList());
 
         for (String stri : strings1) {
             System.out.println(stri);

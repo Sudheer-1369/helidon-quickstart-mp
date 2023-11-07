@@ -8,12 +8,11 @@ import java.sql.Date;
 
 public interface EmployeeCheck {
 
-    Date getJoiningDate();
+  Date getJoiningDate();
 
-    Date getDateOfBirth();
+  Date getDateOfBirth();
 
-    default boolean validateDates() {
-        return getDateOfBirth().before(getJoiningDate());
-    }
-
+  default boolean validateDates() {
+    return getDateOfBirth().before(getJoiningDate());
+  }
 }

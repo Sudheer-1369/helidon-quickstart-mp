@@ -6,21 +6,19 @@ package ComplexModelMapperPractice.dao;
 
 import ComplexModelMapperPractice.CommonExceptions.DaoException;
 import ComplexModelMapperPractice.entities.TraStore;
-
 import java.util.List;
 
 public interface StoreDao {
 
-    TraStore addStore(TraStore traStore) throws DaoException;
+  TraStore addStore(TraStore traStore) throws DaoException;
 
-    TraStore getStoreById(long id) throws DaoException;
+  TraStore getStoreById(long id) throws DaoException;
 
-    List<TraStore> getAllTraStores(int page, List<String> params) throws DaoException;
+  List<TraStore> getAllTraStores(int page, List<String> params) throws DaoException;
 
-    TraStore getStoreByCode(String code) throws DaoException;
+  TraStore getStoreByCode(String code) throws DaoException;
 
-    void updateStore(TraStore traStore) throws DaoException;
+  void updateStore(TraStore traStore) throws DaoException;
 
-    void deleteStore(long id) throws DaoException;
-
+  void deleteStore(long id) throws DaoException;
 }

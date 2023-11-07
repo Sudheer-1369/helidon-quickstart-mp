@@ -4,14 +4,13 @@
 
 package restapis.implementations.dao;
 
-import restapis.entities.EmployeeEntity;
-
 import javax.enterprise.context.ApplicationScoped;
+import restapis.entities.EmployeeEntity;
 
 @ApplicationScoped
 public class EmployeeDao extends BaseDaoImpl<Long, EmployeeEntity> {
 
-    public EmployeeDao() {
-        super(EmployeeEntity.class);
-    }
+  public EmployeeDao() {
+    super(EmployeeEntity.class);
+  }
 }

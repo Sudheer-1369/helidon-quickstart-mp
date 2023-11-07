@@ -9,14 +9,14 @@ import java.util.regex.Pattern;
 
 public class CapturingGroups {
 
-    public static void main(String[] args) {
-        Pattern pattern = Pattern.compile("(?!\\B\"[^\"])");
-        Matcher matcher = pattern.matcher("\"sudheer");
-        int matches = 0;
-        while (matcher.find()) {
-            matches++;
-            System.out.println(matcher.start() + "---" + matcher.end());
-        }
-        System.out.println(matches);
+  public static void main(String[] args) {
+    Pattern pattern = Pattern.compile("(?!\\B\"[^\"])");
+    Matcher matcher = pattern.matcher("\"sudheer");
+    int matches = 0;
+    while (matcher.find()) {
+      matches++;
+      System.out.println(matcher.start() + "---" + matcher.end());
     }
+    System.out.println(matches);
+  }
 }

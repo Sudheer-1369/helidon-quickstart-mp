@@ -12,27 +12,27 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StaticTest {
-    public static int i = 0;
-    public int j = 0;
+  public static int i = 0;
+  public int j = 0;
 
-    public static int getI() {
-        return i;
-    }
+  public static int getI() {
+    return i;
+  }
 
-    public static void setI(int i) {
-        StaticTest.i = i;
-    }
+  public static void setI(int i) {
+    StaticTest.i = i;
+  }
 
-    public static int getTheNumber() {
-        return 10;
-    }
+  public static int getTheNumber() {
+    return 10;
+  }
 
-    public int getJ() {
-        return j;
-    }
+  public int getJ() {
+    return j;
+  }
 
-    public void setJ(int j) {
-        this.j = j;
-    }
+  public void setJ(int j) {
+    this.j = j;
+  }
 }
 

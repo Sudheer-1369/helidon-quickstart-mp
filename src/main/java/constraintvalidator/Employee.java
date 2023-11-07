@@ -4,12 +4,11 @@
 
 package constraintvalidator;
 
+import java.sql.Date;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -17,11 +16,7 @@ import java.sql.Date;
 @ConsistentDateParameters
 public class Employee {
 
-    @NotNull
-    private Integer age;
-    @NotNull
-    private Date dateOfBirth;
-    @NotNull
-    private Date joiningDate;
-
+  @NotNull private Integer age;
+  @NotNull private Date dateOfBirth;
+  @NotNull private Date joiningDate;
 }

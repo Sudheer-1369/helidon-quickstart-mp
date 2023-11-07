@@ -2,7 +2,7 @@
  * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
  */
 
-package Decorators;
+package decorators;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
@@ -25,7 +25,7 @@ public interface Item {
         }
 
         public void draw(int x, int y) {
-            System.out.println("Inside ItemDecorator");
+            System.out.println("Inside ItemDecorator"+x+"--"+y);
             item.draw(x, y);
         }
 

@@ -7,6 +7,4 @@ package javaclassmethods;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class Triangle implements Shape {
-
-}
+public class Triangle implements Shape {}

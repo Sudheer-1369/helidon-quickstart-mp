@@ -4,9 +4,9 @@
 
 package Interceptors;
 
+import java.lang.annotation.*;
 import javax.enterprise.util.Nonbinding;
 import javax.interceptor.InterceptorBinding;
-import java.lang.annotation.*;
 
 @Inherited
 @InterceptorBinding
@@ -14,6 +14,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AroundDao {
 
-    @Nonbinding
-    boolean emptyResultAllowed() default false;
+  @Nonbinding
+  boolean emptyResultAllowed() default false;
 }

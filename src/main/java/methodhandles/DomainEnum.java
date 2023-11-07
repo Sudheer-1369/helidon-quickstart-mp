@@ -6,5 +6,5 @@ package methodhandles;
 
 public interface DomainEnum {
 
-    public String getAction();
+  public String getAction();
 }

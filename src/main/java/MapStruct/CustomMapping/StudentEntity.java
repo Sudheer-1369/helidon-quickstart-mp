@@ -4,13 +4,12 @@
 
 package MapStruct.CustomMapping;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -18,7 +17,6 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentEntity {
-    @Id
-    String id;
-    String name;
+  @Id String id;
+  String name;
 }

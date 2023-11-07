@@ -6,16 +6,16 @@ package restapis.implementations.services;
 
 public interface BaseService<I, D> {
 
-    D create(D dto);
+  D create(D dto);
 
-    D put(D dto);
+  D put(D dto);
 
-    D patch(D dto);
+  D patch(D dto);
 
-    D get(I id);
+  D get(I id);
 
-    void delete(I id);
+  void delete(I id);
 
-//    List<D> getAll();
+  //    List<D> getAll();
 
 }

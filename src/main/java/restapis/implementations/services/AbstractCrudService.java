@@ -4,80 +4,73 @@
 
 package restapis.implementations.services;
 
+import java.io.Serializable;
+import javax.transaction.Transactional;
 import restapis.dto.BaseDto;
 import restapis.entities.BaseEntity;
 import restapis.implementations.dao.BaseDao;
 import restapis.mappers.BaseMapper;
 
-import javax.transaction.Transactional;
-import java.io.Serializable;
+public abstract class AbstractCrudService<
+        I extends Serializable,
+        E extends BaseEntity<I>,
+        D extends BaseDto<I>,
+        M extends BaseMapper<E, D>,
+        T extends BaseDao<I, E>>
+    implements BaseService<I, D> {
 
+  protected final M mapper;
+  protected final T dao;
 
-public abstract class AbstractCrudService
-        <I extends Serializable,
-                E extends BaseEntity<I>,
-                D extends BaseDto<I>,
-                M extends BaseMapper<E, D>,
-                T extends BaseDao<I, E>>
-        implements BaseService<I, D> {
+  protected AbstractCrudService(M mapper, T dao) {
+    this.dao = dao;
+    this.mapper = mapper;
+  }
 
-    protected final M mapper;
-    protected final T dao;
+  @Transactional
+  public D create(D dto) {
 
-    protected AbstractCrudService(M mapper, T dao) {
-        this.dao = dao;
-        this.mapper = mapper;
-    }
+    E entity = mapper.dtoToEntity(dto);
+    E persistedEntity = dao.create(entity);
 
-    @Transactional
-    public D create(D dto) {
+    return mapper.entityToDto(persistedEntity);
+  }
 
-        E entity = mapper.dtoToEntity(dto);
-        E persistedEntity = dao.create(entity);
+  @Transactional
+  public D put(D dto) {
 
-        return mapper.entityToDto(persistedEntity);
-    }
+    E entity = mapper.dtoToEntity(dto);
+    E updatedEntity = dao.update(entity);
 
-    @Transactional
-    public D put(D dto) {
+    return mapper.entityToDto(updatedEntity);
+  }
 
-        E entity = mapper.dtoToEntity(dto);
-        E updatedEntity = dao.update(entity);
+  @Transactional
+  public D patch(D dto) {
 
-        return mapper.entityToDto(updatedEntity);
+    I id = dto.getId();
+    E sourceEntity = mapper.dtoToEntity(dto);
+    E targetEntity = dao.findById(id);
 
-    }
+    if (targetEntity == null) return null;
 
-    @Transactional
-    public D patch(D dto) {
+    mapper.merge(sourceEntity, targetEntity);
 
-        I id = dto.getId();
-        E sourceEntity = mapper.dtoToEntity(dto);
-        E targetEntity = dao.findById(id);
+    return mapper.entityToDto(dao.update(targetEntity));
+  }
 
-        if (targetEntity == null)
-            return null;
+  public D get(I id) {
 
-        mapper.merge(sourceEntity, targetEntity);
+    E entity = dao.findById(id);
 
-        return mapper.entityToDto(dao.update(targetEntity));
-    }
+    if (entity == null) return null;
 
-    public D get(I id) {
+    return mapper.entityToDto(entity);
+  }
 
-        E entity = dao.findById(id);
+  @Transactional
+  public void delete(I id) {
 
-        if (entity == null)
-            return null;
-
-        return mapper.entityToDto(entity);
-
-    }
-
-    @Transactional
-    public void delete(I id) {
-
-        dao.deleteById(id);
-    }
-
+    dao.deleteById(id);
+  }
 }

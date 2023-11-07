@@ -10,11 +10,11 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface DeliveryAddressMapper {
 
-    @Mapping(target = "houseNumber", source = "addressEntity.houseNo")
-    @Mapping(target = "studentName", source = "studentEntity.name")
-    DeliveryAddress deliveryAddressFromAddressAndStudent(AddressEntity addressEntity, StudentEntity studentEntity);
+  @Mapping(target = "houseNumber", source = "addressEntity.houseNo")
+  @Mapping(target = "studentName", source = "studentEntity.name")
+  DeliveryAddress deliveryAddressFromAddressAndStudent(
+      AddressEntity addressEntity, StudentEntity studentEntity);
 
-    @Mapping(target = "name", source = "studentName")
-    StudentEntity studentFromDeliveryAddress(DeliveryAddress deliveryAddress);
-
+  @Mapping(target = "name", source = "studentName")
+  StudentEntity studentFromDeliveryAddress(DeliveryAddress deliveryAddress);
 }

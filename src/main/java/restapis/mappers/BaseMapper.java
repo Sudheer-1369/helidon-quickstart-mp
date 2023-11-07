@@ -4,21 +4,19 @@
 
 package restapis.mappers;
 
+import java.util.List;
 import restapis.dto.BaseDto;
 import restapis.entities.BaseEntity;
 
-import java.util.List;
-
 public interface BaseMapper<E extends BaseEntity<?>, D extends BaseDto<?>> {
 
-    D entityToDto(E dto);
+  D entityToDto(E dto);
 
-    List<D> entityListToDtoList(List<E> entityList);
+  List<D> entityListToDtoList(List<E> entityList);
 
-    E dtoToEntity(D entity);
+  E dtoToEntity(D entity);
 
-    List<E> dtoListToEntityList(List<D> dtoList);
+  List<E> dtoListToEntityList(List<D> dtoList);
 
-    void merge(E source, E target);
-
+  void merge(E source, E target);
 }
