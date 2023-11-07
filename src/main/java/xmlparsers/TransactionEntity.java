@@ -4,19 +4,18 @@
 
 package xmlparsers;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class TransactionEntity {
 
-    private String lastName;
-    private String gender;
-    private String dob;
-    private Date dateOfBirth;
+  private String lastName;
+  private String gender;
+  private String dob;
+  private Date dateOfBirth;
 }

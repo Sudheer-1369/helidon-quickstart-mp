@@ -9,15 +9,15 @@ import javax.inject.Named;
 
 @ApplicationScoped
 @Named("Instance2")
-public class Instance22 implements BaseInstance{
-    @Override
-    public void baseTest() {
+public class Instance22 implements BaseInstance {
+  @Override
+  public void baseTest() {
 
-        System.out.println("Inside instance 2");
-    }
+    System.out.println("Inside instance 2");
+  }
 
-    @Override
-    public String getType() {
-        return "Instance2";
-    }
+  @Override
+  public String getType() {
+    return "Instance2";
+  }
 }

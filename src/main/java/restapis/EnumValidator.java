@@ -4,14 +4,14 @@
 
 package restapis;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import static java.lang.annotation.ElementType.*;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.*;
+import javax.validation.Constraint;
+import javax.validation.Payload;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -19,11 +19,11 @@ import static java.lang.annotation.ElementType.*;
 @Constraint(validatedBy = MainValidator.class)
 public @interface EnumValidator {
 
-    Class<? extends YesNo> classType();
+  Class<? extends YesNo> classType();
 
-    String message() default "It should be part of {allowedValues}";
+  String message() default "It should be part of {allowedValues}";
 
-    Class<?>[] groups() default {};
+  Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+  Class<? extends Payload>[] payload() default {};
 }

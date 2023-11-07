@@ -25,8 +25,8 @@ public class AssertIterables {
             "Sudheerp",
             "Venkatp",
             "Manojap"); // The arraylist/collection should only contain the values mentioned in the
-                        // method in any order and nothings else,the imp point is the duplicates are
-                        // ignored(i.e if the value is found the fuplicates are also found)
+    // method in any order and nothings else,the imp point is the duplicates are
+    // ignored(i.e if the value is found the fuplicates are also found)
     assertThat(arrayList)
         .containsExactly(
             "Sudheerp",
@@ -34,7 +34,7 @@ public class AssertIterables {
             "Manojap",
             "Venkatp",
             "Sudheerp"); // The arrayList/Collection should exactly contain the values mentiioned in
-                         // the method in the same order and the duplicates are not ignored
+    // the method in the same order and the duplicates are not ignored
     // The other assertion methods are 1.containsExactlyInAnyOrder 2.containsSequence
     // 3.containsSubSequence 4.containsOnlyOnce 5.containsAnyOf
 

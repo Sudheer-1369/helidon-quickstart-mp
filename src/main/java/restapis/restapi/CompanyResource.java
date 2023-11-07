@@ -4,21 +4,19 @@
 
 package restapis.restapi;
 
+import static restapis.restapi.CompanyResource.PATH;
+
 import io.helidon.security.annotations.Authenticated;
 import io.helidon.security.annotations.Authorized;
-import oracle.jdbc.proxy.annotation.Post;
-import restapis.dto.Company;
-import restapis.implementations.services.CompanyService;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import static restapis.restapi.CompanyResource.PATH;
-
+import oracle.jdbc.proxy.annotation.Post;
+import restapis.dto.Company;
+import restapis.implementations.services.CompanyService;
 
 @RequestScoped
 @Authenticated(value = false)
@@ -28,71 +26,69 @@ import static restapis.restapi.CompanyResource.PATH;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CompanyResource extends BaseResourceImpl<Company, Long, CompanyService> {
 
-    public static final String PATH = "company";
+  public static final String PATH = "company";
 
-    @Inject
-    public CompanyResource(CompanyService service) {
-        super(service);
-    }
+  @Inject
+  public CompanyResource(CompanyService service) {
+    super(service);
+  }
 
+  @POST
+  public Response createCompany(Company company) {
 
-    @POST
-    public Response createCompany(Company company) {
+    return post(company);
+  }
 
-        return post(company);
-    }
+  @GET
+  @Path("{id}")
+  public Response getById(@PathParam("id") Long id) {
 
+    return get(id);
+  }
 
-    @GET
-    @Path("{id}")
-    public Response getById(@PathParam("id") Long id) {
+  @PATCH
+  public Response update(Company company) {
 
-        return get(id);
-    }
+    return patch(company);
+  }
 
-    @PATCH
-    public Response update(Company company) {
+  @PUT
+  @Path("{id}")
+  public Response replace(@PathParam("id") Long id, Company company) {
 
-        return patch(company);
-    }
+    return put(id, company);
+  }
 
-    @PUT
-    @Path("{id}")
-    public Response replace(@PathParam("id") Long id, Company company) {
+  @DELETE
+  @Path("{id}")
+  public Response deleteById(@PathParam("id") Long id) {
 
-        return put(id, company);
-    }
+    return delete(id);
+  }
 
-    @DELETE
-    @Path("{id}")
-    public Response deleteById(@PathParam("id") Long id) {
+  @GET
+  @Path("/functioningCompanies")
+  public Response getFew() {
 
-        return delete(id);
-    }
+    var objects = service.getFew();
 
-    @GET
-    @Path("/functioningCompanies")
-    public Response getFew() {
+    return objects.isEmpty() ? Response.noContent().build() : Response.ok(objects).build();
+  }
 
-        var objects = service.getFew();
+  @GET
+  @Path("/recentCompanies")
+  public Response getNewCompanies() {
 
-        return objects.isEmpty() ? Response.noContent().build() : Response.ok(objects).build();
-    }
+    return null;
+  }
 
-    @GET
-    @Path("/recentCompanies")
-    public Response getNewCompanies(){
+  @Post
+  @Path("/validateCompanies")
+  public Response createValidatedCompany(@Valid Company company) {
 
-        return null;
-    }
+    System.out.println("Inside the validate companies path");
+    System.out.println(company.toString());
 
-    @Post
-    @Path("/validateCompanies")
-    public Response createValidatedCompany(@Valid Company company){
-
-        System.out.println("Inside the validate companies path");
-        System.out.println(company.toString());
-
-        return Response.ok().build();
-    }
+    return Response.ok().build();
+  }
 }

@@ -4,31 +4,27 @@
 
 package restapis.restapi.jersey;
 
+import javax.ws.rs.container.ResourceContext;
+import javax.ws.rs.core.Context;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.jersey.server.ContainerRequest;
 
-import javax.ws.rs.container.ResourceContext;
-import javax.ws.rs.core.Context;
-
 public class OptionsValueFactory implements Factory<Options> {
 
-    @Context
-    private ResourceContext resourceContext;
+  @Context private ResourceContext resourceContext;
 
-    @Override
-    public Options provide() {
+  @Override
+  public Options provide() {
 
-        var request = resourceContext.getResource(ContainerRequest.class);
-        var options  = new Options(request);
+    var request = resourceContext.getResource(ContainerRequest.class);
+    var options = new Options(request);
 
-        // This might be used somewhere else may be due to provide the next link
-        request.setProperty(Options.class.getName(), options);
+    // This might be used somewhere else may be due to provide the next link
+    request.setProperty(Options.class.getName(), options);
 
-        return options;
-    }
+    return options;
+  }
 
-    @Override
-    public void dispose(Options options) {
-
-    }
+  @Override
+  public void dispose(Options options) {}
 }

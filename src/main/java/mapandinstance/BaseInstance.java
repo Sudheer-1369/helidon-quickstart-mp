@@ -6,7 +6,7 @@ package mapandinstance;
 
 public interface BaseInstance {
 
-    void baseTest();
+  void baseTest();
 
-    String getType();
+  String getType();
 }

@@ -1,23 +1,23 @@
-///*
+/// *
 // * Copyright (C) 2021 - 2022, Sudheer Kumar Patnana, All rights reserved.
 // */
-//package decskafka;
+// package decskafka;
 //
-//import io.helidon.config.mp.MpConfigSources;
-//import io.helidon.messaging.connectors.kafka.KafkaConnector;
-//import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
-//import org.junit.jupiter.api.extension.BeforeAllCallback;
-//import org.junit.jupiter.api.extension.ExtensionContext;
-//import org.testcontainers.containers.KafkaContainer;
-//import org.testcontainers.utility.DockerImageName;
-//import org.testcontainers.utility.MountableFile;
+// import io.helidon.config.mp.MpConfigSources;
+// import io.helidon.messaging.connectors.kafka.KafkaConnector;
+// import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
+// import org.junit.jupiter.api.extension.BeforeAllCallback;
+// import org.junit.jupiter.api.extension.ExtensionContext;
+// import org.testcontainers.containers.KafkaContainer;
+// import org.testcontainers.utility.DockerImageName;
+// import org.testcontainers.utility.MountableFile;
 //
-//import java.util.Map;
+// import java.util.Map;
 //
-///**
+/// **
 // * A Kafka Container for integration testing purposes.
 // */
-//public class KafkaContainerExtension implements BeforeAllCallback {
+// public class KafkaContainerExtension implements BeforeAllCallback {
 //
 //    private static final System.Logger logger =
 //            System.getLogger(KafkaContainerExtension.class.getSimpleName());
@@ -53,7 +53,8 @@
 //                    new KafkaContainer(DockerImageName.parse(DOCKER_IMAGE_NAME))
 //                            .withEnv("delete.topic.enable", "true")
 //                            .withCopyFileToContainer(
-//                                    MountableFile.forClasspathResource("/decs_kafka.sh"), "/bin/decs_kafka.sh")
+//                                    MountableFile.forClasspathResource("/decs_kafka.sh"),
+// "/bin/decs_kafka.sh")
 //                            .withReuse(reuse);
 //
 //            kafkaContainer.start();
@@ -62,7 +63,8 @@
 //            if (execResult.getExitCode() != 0) {
 //                throw new RuntimeException(
 //                        String.format(
-//                                "Kafka Testcontainer failed to initialize properly: %n%s", execResult.getStderr()));
+//                                "Kafka Testcontainer failed to initialize properly: %n%s",
+// execResult.getStderr()));
 //            }
 //
 //            var dynamicConfiguration =
@@ -73,11 +75,13 @@
 //                                            // @formatter:off
 //                                            Map.of(
 //                                                    "mp.initializer.allow", "true",
-//                                                    p("bootstrap.servers"), kafkaContainer.getBootstrapServers(),
+//                                                    p("bootstrap.servers"),
+// kafkaContainer.getBootstrapServers(),
 //                                                    p("key.serializer"), STRING_SERIALIZER,
 //                                                    p("value.serializer"), STRING_SERIALIZER,
 //                                                    p("key.deserializer"), STRING_DESERIALIZER,
-//                                                    p("value.deserializer"), STRING_DESERIALIZER)),
+//                                                    p("value.deserializer"),
+// STRING_DESERIALIZER)),
 //                                    // @formatter:on
 //                                    IntegrationTestConfig.intTestConfigSource())
 //                            .build();
@@ -85,4 +89,4 @@
 //            IntegrationTestConfig.registerDynamicConfig(dynamicConfiguration);
 //        }
 //    }
-//}
+// }

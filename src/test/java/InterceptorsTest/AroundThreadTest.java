@@ -1,6 +1,6 @@
 package InterceptorsTest;
 
-import InterceptorForThreads.InterceptorChecking;
+import interceptorforthreads.InterceptorChecking;
 import io.helidon.microprofile.tests.junit5.HelidonTest;
 import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
